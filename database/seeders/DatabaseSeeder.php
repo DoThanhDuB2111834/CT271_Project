@@ -22,10 +22,14 @@ class DatabaseSeeder extends Seeder
         //     'password' => '123456789',
         // ]);
 
+        $this->call([
+            CategorySeeder::class,
+        ]);
+
         $user1 = User::create([
             'name' => 'Du do',
             'gender' => 'male',
-            'birth_date' => Carbon::createFromDate(2003,11,11),
+            'birth_date' => Carbon::createFromDate(2003, 11, 11),
             'phone_number' => '0357663765',
             'email' => 'test@example.com',
             'password' => '123456789',
@@ -36,7 +40,7 @@ class DatabaseSeeder extends Seeder
         $user2 = User::create([
             'name' => 'IU - lee ji eun',
             'gender' => 'female',
-            'birth_date' => Carbon::createFromDate(1993,5,16),
+            'birth_date' => Carbon::createFromDate(1993, 5, 16),
             'phone_number' => '0357663765',
             'email' => 'IU@queen.com',
             'password' => '123456789',

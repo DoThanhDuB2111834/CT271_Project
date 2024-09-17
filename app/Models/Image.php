@@ -9,12 +9,13 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 class Image extends Model
 {
     use HasFactory;
+    protected $table = 'image';
 
     protected $fillable = [
         'url',
     ];
 
-    public function Imageable() : MorphTo
+    public function Imageable(): MorphTo
     {
         return $this->morphTo();
     }

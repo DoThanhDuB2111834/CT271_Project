@@ -11,7 +11,10 @@
 <body class="bg-[#7781a1]">
   <div class="mt-36">
     <div class="m-auto max-w-md">
-      <form class="" action="/login" method="post">
+      @if (session('message'))
+      <h1 class="text-red-50">{{session('message')}}</h1>
+    @endif
+      <form class="" action="/admin/login" method="post">
         @csrf
         <h1 class="text-center text-3xl">Admin</h1>
         <label class="block mb-4">
@@ -36,7 +39,8 @@
     " />
         </label>
         <!-- ... -->
-         <input type="submit" value="Đăng nhập" class="block w-full h-9 bg-[#171b2a] cursor-pointer rounded-lg mt-6 text-white">
+        <input type="submit" value="Đăng nhập"
+          class="block w-full h-9 bg-[#171b2a] cursor-pointer rounded-lg mt-6 text-white">
       </form>
     </div>
   </div>

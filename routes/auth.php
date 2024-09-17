@@ -11,12 +11,11 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::post('logout', [LoginController::class, 'logout'])
-                ->name('logout');
+        ->name('logout');
 });
 
 //end customer
 
 //admin 
-Route::get('/admin/login', function (){
-    return view('admin.auth.login');
-});
+Route::get('/admin/login', [LoginController::class, 'create'])->name('admin_login_create');
+Route::post('/admin/login', [LoginController::class, 'store'])->name('admin_login_store');

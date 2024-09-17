@@ -2,21 +2,26 @@
 
 namespace App\Models;
 
+use App\Traits\HandleImageTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
-    use HasFactory;
-
+    use HasFactory, SoftDeletes, HandleImageTrait;
+    protected $table = 'product';
     protected $fillable = [
         'name',
         'description',
+        'size',
+        'color',
+        'quantity',
+        'price',
     ];
 
-    public function Details() : HasMany
+    public function Images()
     {
-        return $this->hasMany(ProductDetail::class);
+        return $this->morphMany(Image::class, 'Imageable');
     }
 }

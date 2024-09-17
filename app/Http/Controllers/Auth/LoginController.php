@@ -12,8 +12,11 @@ use Illuminate\View\View;
 class LoginController extends Controller
 {
 
-    public function create()
+    public function create(Request $request)
     {
+        if ($request->is('admin/login')) {
+            return View('admin/auth/login');
+        }
         return View('Auth/Login');
     }
 
@@ -24,16 +27,21 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
-        $isRemember = $request->boolean('remember'); 
- 
-        if (Auth::attempt($credentials, $isRemember)) {
-            $request->session()->regenerate();
+        $isRemember = $request->boolean('remember');
 
-            if($request->user()->isAdmin()){
-                return redirect('/admin/dashboard');
+        if (Auth::attempt($credentials, $isRemember)) {
+            // If user try to move to any admin page
+            if ($request->is('admin/*')) {
+                if ($request->user()->isAdmin()) {
+                    $request->session()->regenerate();
+                    return redirect('/admin/dashboard');
+                } else {
+                    return back()->with(['message' => 'You are not admin']);
+                }
+            } else {
+                $request->session()->regenerate();
+                return redirect()->intended('/');
             }
- 
-            return redirect()->intended('/');
         }
 
         return back()->withErrors([

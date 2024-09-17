@@ -15,12 +15,13 @@ class EnsureUserIsAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if($request->user()){
-            if(!$request->user()?->isAdmin()){
+        if ($request->user()) {
+            if (!$request->user()?->isAdmin()) {
                 return redirect()->intended('/')->with('message', 'You are not allowed to view this');
             }
         } else {
-            return redirect()->intended('/admin/login');
+            // return redirect()->intended('/admin/login');
+            return redirect('admin/login');
         }
 
         return $next($request);

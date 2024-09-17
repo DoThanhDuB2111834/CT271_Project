@@ -46,6 +46,14 @@
                     <h4 class="text-section">Components</h4>
                 </li>
                 <li class="nav-item">
+                    <a href="{{route('product.index')}}">
+                        <i class="fa fa-product-hunt" aria-hidden="true"></i>
+                        <p>Products</p>
+                    </a>
+                    <a href="{{route('category.index')}}">
+                        <i class="fas fa-layer-group"></i>
+                        <p>Category</p>
+                    </a>
                     <a data-bs-toggle="collapse" href="#base">
                         <i class="fas fa-layer-group"></i>
                         <p>Base</p>
