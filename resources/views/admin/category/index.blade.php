@@ -16,10 +16,12 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table id="basic-datatables" class="display table table-striped table-hover">
+                    <table id="basic-datatables" class="display table table-striped table-hover dataTable"
+                        aria-describedby="basic-datatables_info" role="grid">
                         <thead>
                             <tr>
-                                <th>Name</th>
+                                <th class="sorting_asc" aria-controls="basic-datatables" aria-sort="ascending"
+                                    aria-label="Name: activate to sort column descending" tabindex="0">Name</th>
                                 <th>Created at</th>
                                 <th>Updated at</th>
                                 <th colspan="2" class="text-center">Action</th>
@@ -61,6 +63,8 @@
 </div>
 @endsection
 @section('scripts')
+
+<!-- Confirm deleted selection -->
 <script>
     function confirmDelete(event) {
         event.preventDefault();
@@ -99,6 +103,8 @@
         });
     }
 </script>
+
+<!-- Notificate message -->
 @if (session('message'))
     <script>
         console.log('confirmDeleteMessage');
@@ -131,6 +137,6 @@
     <?php
         session()->forget('state');
         session()->forget('message');
-                            ?>
+                                                                            ?>
 @endif
 @endsection

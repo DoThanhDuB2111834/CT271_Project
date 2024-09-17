@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/dashboard', function () {
     return view('admin.dashboard.index');
-});
+})->name('dashboard.index');
 
 Route::resource('product', ProductController::class);
 Route::resource('category', CategoryController::class);

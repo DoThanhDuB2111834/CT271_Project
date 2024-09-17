@@ -20,7 +20,8 @@ class ProductController extends Controller
     }
     public function index()
     {
-        return view('admin.product.index');
+        $products = $this->product->latest('id');
+        return view('admin.product.index', compact('products'));
     }
 
     /**
