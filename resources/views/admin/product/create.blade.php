@@ -24,9 +24,6 @@
                                     <label for="product_name">Name:</label>
                                     <input type="text" class="form-control" id="product_name" name="name"
                                         placeholder="Enter product name" />
-                                    <!-- <small id="emailHelp2" class="form-text text-muted">We'll never share your email with
-                                                                anyone
-                                                                else.</small> -->
                                     @error('name')
                                         <span class="text-danger"> {{ $message }}</span>
                                     @enderror
@@ -35,9 +32,6 @@
                                     <label for="product_name">Size:</label>
                                     <input type="text" class="form-control" id="product_name" name="size"
                                         placeholder="Enter product size" />
-                                    <!-- <small id="emailHelp2" class="form-text text-muted">We'll never share your email with
-                                                                                            anyone
-                                                                                            else.</small> -->
                                     @error('size')
                                         <span class="text-danger"> {{ $message }}</span>
                                     @enderror
@@ -46,9 +40,6 @@
                                     <label for="product_name">Color:</label>
                                     <input type="text" class="form-control" id="product_name" name="color"
                                         placeholder="Enter product Color" />
-                                    <!-- <small id="emailHelp2" class="form-text text-muted">We'll never share your email with
-                                                                                                                        anyone
-                                                                                                                        else.</small> -->
                                     @error('color')
                                         <span class="text-danger"> {{ $message }}</span>
                                     @enderror
@@ -57,9 +48,6 @@
                                     <label for="product_name">Price:</label>
                                     <input type="number" class="form-control" id="product_name" name="price"
                                         placeholder="Enter product Price" />
-                                    <!-- <small id="emailHelp2" class="form-text text-muted">We'll never share your email with
-                                                                                            anyone
-                                                                                            else.</small> -->
                                     @error('price')
                                         <span class="text-danger"> {{ $message }}</span>
                                     @enderror
@@ -73,8 +61,6 @@
                                 </div>
                                 <div id="show-image"
                                     style="max-width: 100%; height: 350px; background-size: cover; background-repeat: no-repeat;background-position: center;">
-                                    <!-- <img src="" id="" alt=""
-                                        style="max-width: 100%; height: 350px; display: block;"> -->
                                 </div>
                                 @error('image')
                                     <span class="text-danger"> {{ $message }}</span>

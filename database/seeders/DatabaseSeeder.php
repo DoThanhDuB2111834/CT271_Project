@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
         ]);
 
-        $user1 = User::create([
+        $user1 = User::updateOrCreate([
             'name' => 'Du do',
             'gender' => 'male',
             'birth_date' => Carbon::createFromDate(2003, 11, 11),
@@ -35,9 +35,9 @@ class DatabaseSeeder extends Seeder
             'password' => '123456789',
         ]);
 
-        $user1->admin()->create(['role' => 'Director']);
+        $user1->admin()->updateOrCreate(['role' => 'Director']);
 
-        $user2 = User::create([
+        $user2 = User::updateOrCreate([
             'name' => 'IU - lee ji eun',
             'gender' => 'female',
             'birth_date' => Carbon::createFromDate(1993, 5, 16),
@@ -46,7 +46,7 @@ class DatabaseSeeder extends Seeder
             'password' => '123456789',
         ]);
 
-        $user2->customer()->create([
+        $user2->customer()->updateOrCreate([
             'address' => 'seoul'
         ]);
     }

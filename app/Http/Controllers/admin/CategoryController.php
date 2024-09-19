@@ -29,8 +29,13 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $categories = $this->category->all();
-        return view('admin.category.create', compact('categories'));
+        $hightestParent = $this->category->getHighestParent();
+        return view('admin.category.create', compact('hightestParent'));
+        // $category = $this->category->getHighestParent();
+
+        // foreach ($hightParent as $item) {
+        //     echo ($item . '\n');
+        // }
     }
 
     /**
@@ -40,8 +45,8 @@ class CategoryController extends Controller
     {
         $dataCreate = $request->all();
         $category = $this->category->create($dataCreate);
-        $category->parent()->attach($dataCreate['parentCategorys'] ?? []);
-        $category->children()->attach($dataCreate['chidrenCategorys'] ?? []);
+        $category->parent()->sync($dataCreate['parentCategorys'] ?? []);
+        $category->children()->sync($dataCreate['chidrenCategorys'] ?? []);
 
         return redirect()->route('category.index')->with(['message' => 'Create successfully', 'state' => 'success']);
     }
@@ -60,8 +65,8 @@ class CategoryController extends Controller
     public function edit(string $id)
     {
         $category = $this->category->find($id);
-        $categories = $this->category->all();
-        return view('admin.category.edit', compact('category', 'categories'));
+        $hightestParent = $this->category->getHighestParent();
+        return view('admin.category.edit', compact('category', 'hightestParent'));
     }
 
     /**

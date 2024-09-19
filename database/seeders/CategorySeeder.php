@@ -28,6 +28,7 @@ class CategorySeeder extends Seeder
             ['name' => 'Bàn ăn'],
             ['name' => 'Ghế ăn'],
             ['name' => 'Bàn làm việc'],
+            ['name' => 'Bàn'],
         ];
         foreach ($categories as $category) {
             category::updateOrCreate($category);

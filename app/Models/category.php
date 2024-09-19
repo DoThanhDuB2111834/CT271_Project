@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use function PHPUnit\Framework\isEmpty;
+
 class category extends Model
 {
     use HasFactory, SoftDeletes;
@@ -37,5 +39,18 @@ class category extends Model
     public function isChildOf($category)
     {
         return $this->parent()->where(['parent_id' => $category->id])->exists();
+    }
+
+    public function getHighestParent()
+    {
+        $category = $this->all();
+        $parentCategories = $category->filter(function ($category, $index) {
+            return $category->children()->count() > 0;
+        });
+
+        $result = $parentCategories->filter(function ($category, $index) {
+            return $category->parent()->count() == 0;
+        });
+        return $result;
     }
 }

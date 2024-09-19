@@ -1,5 +1,17 @@
 @extends('admin.layouts.app')
 @section('content')
+@use('App\Models\category')
+@php
+    function printListCategory($categories, $editCategory, $type, $indent)
+    {
+        foreach ($categories as $item) {
+            echo ("<option value=\"$item->id\"" . ($item->id == $editCategory->id ? 'hidden' : '') . str_repeat(" &ensp;", $indent) . (($type ? $item->isParentOf($editCategory) : $item->isChildOf($editCategory)) ? 'selected>' : '>') . "&#8226; $item->name</option>");
+            if ($item->children()->count() > 0) {
+                printListCategory($item->children()->get(), $editCategory, $type, $indent + 2);
+            }
+        }
+    }
+@endphp
 <div class="container">
     <div class="page-inner">
         <div class="page-header">
@@ -37,12 +49,9 @@
                                     <select multiple="" class="form-select form-control-lg" id="parentCategorys"
                                         onchange="checkContrainOfParentAndChild()" fdprocessedid="qcw846"
                                         name="parentCategorys[]">
-                                        @foreach  ($categories as $item)
-                                            <option value="{{$item->id}}" {{$item->id == $category->id ? 'hidden' : ''}}
-                                                {{$item->isParentOf($category) ? 'selected' : ''}}>
-                                                {{$item->name}}
-                                            </option>
-                                        @endforeach
+                                        @php
+                                            printListCategory($hightestParent, $category, true, 0);
+                                        @endphp
                                     </select>
                                 </div>
                             </div>
@@ -52,12 +61,9 @@
                                     <select multiple="" class="form-select form-control-lg" id="chidrenCategorys"
                                         onchange="checkContrainOfParentAndChild()" fdprocessedid="qcw846"
                                         name="chidrenCategorys[]">
-                                        @foreach  ($categories as $item)
-                                            <option value="{{$item->id}}" {{$item->id == $category->id ? 'hidden' : ''}}
-                                                {{$item->isChildOf($category) ? 'selected' : ''}}>
-                                                {{$item->name}}
-                                            </option>
-                                        @endforeach
+                                        @php
+                                            printListCategory($hightestParent, $category, false, 0);
+                                        @endphp
                                     </select>
                                 </div>
                             </div>

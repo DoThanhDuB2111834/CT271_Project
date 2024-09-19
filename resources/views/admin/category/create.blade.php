@@ -1,5 +1,17 @@
 @extends('admin.layouts.app')
 @section('content')
+@use('App\Models\category')
+@php
+    function printListCategory($categories, $indent)
+    {
+        foreach ($categories as $category) {
+            echo ("<option value=\"$category->id\">" . str_repeat("&ensp;", $indent) . "&#8226; $category->name</option>");
+            if ($category->children()->count() > 0) {
+                printListCategory($category->children()->get(), $indent + 2);
+            }
+        }
+    }
+@endphp
 <div class="container">
     <div class="page-inner">
         <div class="page-header">
@@ -9,6 +21,7 @@
                 </div>
             </div>
         </div>
+
         <div class="row">
             <div class="col-md-12">
                 <form class="card" id="created_category_form" action="{{route('category.store')}}" method="post">
@@ -34,9 +47,9 @@
                                     <select multiple="" class="form-select form-control-lg" id="parentCategorys"
                                         onchange="checkContrainOfParentAndChild()" fdprocessedid="qcw846"
                                         name="parentCategorys[]">
-                                        @foreach  ($categories as $item)
-                                            <option value="{{$item->id}}">{{$item->name}}</option>
-                                        @endforeach
+                                        @php
+                                            printListCategory($hightestParent, 0);
+                                        @endphp
                                     </select>
                                 </div>
                             </div>
@@ -46,9 +59,9 @@
                                     <select multiple="" class="form-select form-control-lg" id="chidrenCategorys"
                                         onchange="checkContrainOfParentAndChild()" fdprocessedid="qcw846"
                                         name="chidrenCategorys[]">
-                                        @foreach  ($categories as $item)
-                                            <option value="{{$item->id}}">{{$item->name}}</option>
-                                        @endforeach
+                                        @php
+                                            printListCategory($hightestParent, 0);
+                                        @endphp
                                     </select>
                                 </div>
                             </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\product\CreateProduct;
+use App\Models\category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -13,10 +14,12 @@ class ProductController extends Controller
      * Display a listing of the resource.
      */
     protected $product;
+    protected $category;
 
-    public function __construct(Product $product)
+    public function __construct(Product $product, category $category)
     {
         $this->product = $product;
+        $this->category = $category;
     }
     public function index()
     {
@@ -29,7 +32,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin.product.create');
+        $categories = $this->category->all();
+        return view('admin.product.create', compact('categories'));
     }
 
     /**
