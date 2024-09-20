@@ -8,6 +8,8 @@ use App\Models\category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
+use function PHPUnit\Framework\isFalse;
+
 class ProductController extends Controller
 {
     /**
@@ -23,7 +25,7 @@ class ProductController extends Controller
     }
     public function index()
     {
-        $products = $this->product->latest('id');
+        $products = $this->product->all();
         return view('admin.product.index', compact('products'));
     }
 
@@ -32,8 +34,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $categories = $this->category->all();
-        return view('admin.product.create', compact('categories'));
+        $highestCategories = $this->category->getHighestParent();
+        return view('admin.product.create', compact('highestCategories'));
     }
 
     /**
@@ -42,9 +44,11 @@ class ProductController extends Controller
     public function store(CreateProduct $request)
     {
         $dataCreate = $request->all();
+
         $dataCreate['image'] = $this->product->saveImage($request);
         $product = $this->product->create($dataCreate);
         $product->Images()->create(['url' => $dataCreate['image']]);
+        $product->categories()->attach($dataCreate['categories'] ?? []);
 
         return redirect()->route('product.index');
     }

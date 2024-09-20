@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\product;
 
+use App\Models\category;
+use Closure;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateProduct extends FormRequest
@@ -27,6 +29,23 @@ class CreateProduct extends FormRequest
             'price' => 'required',
             'size' => 'required',
             'color' => 'required',
+            'categories' => [
+                'required',
+                function (string $attribute, mixed $value, Closure $fail) {
+                    $Categories = $value ?? [];
+                    $checkContraintCategory = true;
+
+                    foreach ($Categories as $item) {
+                        $category = category::find($item);
+                        if (count(array_intersect($category->children()->pluck('category.id')->toArray(), $Categories)) > 0) {
+                            $checkContraintCategory = false;
+                        }
+                    }
+                    if (!$checkContraintCategory) {
+                        $fail("Violate contraint category.");
+                    }
+                },
+            ]
         ];
     }
 }

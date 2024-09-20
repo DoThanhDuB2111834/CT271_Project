@@ -20,12 +20,11 @@
                         <table id="basic-datatables" class="display table table-striped table-hover dataTable">
                             <thead>
                                 <tr>
-                                    <th class="sorting_asc" aria-controls="basic-datatables" aria-sort="ascending"
-                                        aria-label="Name: activate to sort column descending">Name
+                                    <th>Name
                                     </th>
                                     <th>Quantity</th>
                                     <th>Price</th>
-                                    <th>Action</th>
+                                    <th colspan="3">Action</th>
                                 </tr>
                             </thead>
                             <tfoot>
@@ -33,24 +32,31 @@
                                     <th>Name</th>
                                     <th>Quantity</th>
                                     <th>Price</th>
-                                    <th>Action</th>
+                                    <th colspan="3">Action</th>
                                 </tr>
                             </tfoot>
                             <tbody>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><a data-bs-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg"
-                                            data-original-title="Edit Task" href="">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
-                                        <a data-bs-toggle="tooltip" title="" class="btn btn-link btn-danger"
-                                            data-original-title="Remove">
-                                            <i class="fa fa-times"></i>
-                                        </a>
-                                    </td>
-                                </tr>
+                                @foreach ($products as $item)
+                                    <tr>
+                                        <td>{{$item->name}}</td>
+                                        <td>{{$item->quantity}}</td>
+                                        <td>{{$item->price}}</td>
+                                        <td><a href="{{route('product.edit', $item->id)}}" class="btn btn-warning">Edit</a>
+                                        </td>
+                                        <td>
+                                            <form action="{{route('product.destroy', $item->id)}}" method="post"
+                                                onsubmit="confirmDelete(event);" id="form-delete{{$item->id}}">
+                                                @csrf
+                                                @method('delete')
+                                                <button class="btn btn-danger" id="btn-delete" data-id="{{$item->id}}"
+                                                    type="submit">delete</button>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-info">Info</button>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -59,4 +65,20 @@
         </div>
     </div>
 </div>
+@endsection
+@section('scripts')
+<script src="{{asset('admin/base/base.js')}}"></script>
+
+<!-- Notificate message -->
+@if (session('message'))
+    <script>
+        var state = <?php    echo "'" . session()->pull('state') . "'"?>;
+        var message = <?php    echo "'" . session()->pull('message') . "'"?>;
+        notificate(state, message);
+    </script>
+    <?php
+        session()->forget('state');
+        session()->forget('message');
+                                                                                                            ?>
+@endif
 @endsection

@@ -1,5 +1,18 @@
 @extends('admin.layouts.app')
 @section('content')
+@use('App\Models\category')
+@php
+    function printListCategory($categories, $indent)
+    {
+        foreach ($categories as $category) {
+            $isSelected = in_array($category->id, old('categories') ?? []);
+            echo ("<option value=\"$category->id\"" . ($isSelected ? 'selected>' : '>') . str_repeat("&ensp;", $indent) . "&#8226; $category->name</option>");
+            if ($category->children()->count() > 0) {
+                printListCategory($category->children()->get(), $indent + 2);
+            }
+        }
+    }
+@endphp
 <div class="container">
     <div class="page-inner">
         <div class="page-header">
@@ -23,7 +36,7 @@
                                 <div class="form-group">
                                     <label for="product_name">Name:</label>
                                     <input type="text" class="form-control" id="product_name" name="name"
-                                        placeholder="Enter product name" />
+                                        placeholder="Enter product name" value="{{old('name') ?? ''}}" />
                                     @error('name')
                                         <span class="text-danger"> {{ $message }}</span>
                                     @enderror
@@ -31,7 +44,7 @@
                                 <div class="form-group">
                                     <label for="product_name">Size:</label>
                                     <input type="text" class="form-control" id="product_name" name="size"
-                                        placeholder="Enter product size" />
+                                        placeholder="Enter product size" value="{{old('size') ?? ''}}" />
                                     @error('size')
                                         <span class="text-danger"> {{ $message }}</span>
                                     @enderror
@@ -39,7 +52,7 @@
                                 <div class="form-group">
                                     <label for="product_name">Color:</label>
                                     <input type="text" class="form-control" id="product_name" name="color"
-                                        placeholder="Enter product Color" />
+                                        placeholder="Enter product Color" value="{{old('color') ?? ''}}" />
                                     @error('color')
                                         <span class="text-danger"> {{ $message }}</span>
                                     @enderror
@@ -47,7 +60,7 @@
                                 <div class="form-group">
                                     <label for="product_name">Price:</label>
                                     <input type="number" class="form-control" id="product_name" name="price"
-                                        placeholder="Enter product Price" />
+                                        placeholder="Enter product Price" value="{{old('price') ?? ''}}" />
                                     @error('price')
                                         <span class="text-danger"> {{ $message }}</span>
                                     @enderror
@@ -71,6 +84,18 @@
                                     <label for="Description">Description</label>
                                     <textarea class="form-control" id="Description" name="description" rows="5">
                                                           </textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="chidrenCategorys">Categories: </label>
+                                    <select multiple="" class="form-select form-control-lg" id="chidrenCategorys"
+                                        name="categories[]">
+                                        @php
+                                            printListCategory($highestCategories, 0);
+                                        @endphp
+                                    </select>
+                                    @error('categories')
+                                        <span class="text-danger"> {{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>

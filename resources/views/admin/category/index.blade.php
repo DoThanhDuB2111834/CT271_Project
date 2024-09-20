@@ -64,79 +64,18 @@
 @endsection
 @section('scripts')
 
-<!-- Confirm deleted selection -->
-<script>
-    function confirmDelete(event) {
-        event.preventDefault();
-        console.log(1);
-        swal({
-            title: "Are you sure?",
-            // text: "You won't be able to revert this!",
-            type: "warning",
-            buttons: {
-                confirm: {
-                    text: "Yes, delete it!",
-                    className: "btn btn-success",
-                },
-                cancel: {
-                    visible: true,
-                    className: "btn btn-danger",
-                },
-            },
-        }).then((Delete) => {
-            if (Delete) {
-                swal({
-                    title: "Deleted!",
-                    text: "Category has been deleted!",
-                    type: "success",
-                    buttons: {
-                        confirm: {
-                            className: "btn btn-success",
-                        },
-                    },
-                }).then(() => {
-                    event.target.submit();
-                });
-            } else {
-                swal.close();
-            }
-        });
-    }
-</script>
+<script src="{{asset('admin/base/base.js')}}"></script>
 
 <!-- Notificate message -->
 @if (session('message'))
     <script>
-        console.log('confirmDeleteMessage');
-        var placementFrom = 'top';
-        var placementAlign = 'right';
         var state = <?php    echo "'" . session()->pull('state') . "'"?>;
-        var style = 'withicon';
-        var content = {};
-
-        content.message = <?php    echo "'" . session()->pull('message') . "'"?>;
-        content.title = "Thông báo";
-        if (style == "withicon") {
-            content.icon = "fa fa-bell";
-        } else {
-            content.icon = "none";
-        }
-        content.url = "index.html";
-        content.target = "_blank";
-
-        $.notify(content, {
-            type: state,
-            placement: {
-                from: placementFrom,
-                align: placementAlign,
-            },
-            time: 1000,
-            delay: 3000,
-        });
+        var message = <?php    echo "'" . session()->pull('message') . "'"?>;
+        notificate(state, message);
     </script>
     <?php
         session()->forget('state');
         session()->forget('message');
-                                                                            ?>
+                                                                                                    ?>
 @endif
 @endsection
