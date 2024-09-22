@@ -1,14 +1,31 @@
 @extends('admin.layouts.app')
 @section('content')
 @use('App\Models\category')
+@use('Illuminate\Support\Collection')
 @php
-    function printListCategory($categories, $editCategory, $type, $indent)
+    // Hàm hiển thị những phần tử đã có cha hoặc con
+    function printListCategory($categories, $editCategory, $type, $indent, Collection $isPrintedCategories)
     {
         foreach ($categories as $item) {
-            echo ("<option value=\"$item->id\"" . ($item->id == $editCategory->id ? 'hidden' : '') . str_repeat(" &ensp;", $indent) . (($type ? $item->isParentOf($editCategory) : $item->isChildOf($editCategory)) ? 'selected>' : '>') . "&#8226; $item->name</option>");
+            $isOldSubmit = in_array($item->id, old($type ? 'parentCategorys' : 'chidrenCategorys') ?? []);
+            $isParentOrChild = ($type ? $item->isParentOf($editCategory) : $item->isChildOf($editCategory));
+            // Khi lần đầu tải trang edit thì hiển thị những danh mục cha hoặc con đang được lưu
+            // Nếu người dùng đã submit nhưng bị lỗi trả về thì hiển thị những gì đã submit trước đó để người dùng tiếp tục chỉnh sửa
+
+            $isSelected = old($type ? 'parentCategorys' : 'chidrenCategorys') ? $isOldSubmit : $isParentOrChild;
+            echo ("<option value=\"$item->id\"" . ($item->id == $editCategory->id ? 'hidden' : '') . ($isSelected ? 'selected>' : '>') . str_repeat(" &ensp;", $indent) . "&#8226; $item->name</option>");
+            $isPrintedCategories->push($item);
             if ($item->children()->count() > 0) {
-                printListCategory($item->children()->get(), $editCategory, $type, $indent + 2);
+                printListCategory($item->children()->get(), $editCategory, $type, $indent + 2, $isPrintedCategories);
             }
+        }
+    }
+    // Hàm hiển thị những phần tử còn lại
+    function printTest($categories, $editCategory, $type)
+    {
+        foreach ($categories as $item) {
+            $isSelected = in_array($item->id, old($type ? 'parentCategorys' : 'chidrenCategorys') ?? []);
+            echo ("<option value=\"$item->id\"" . ($item->id == $editCategory->id ? 'hidden' : '') . ($isSelected ? 'selected>' : '>') . "&#8226; $item->name</option>");
         }
     }
 @endphp
@@ -49,9 +66,16 @@
                                     <select multiple="" class="form-select form-control-lg" id="parentCategorys"
                                         onchange="checkContrainOfParentAndChild()" name="parentCategorys[]">
                                         @php
-                                            printListCategory($hightestParent, $category, true, 0);
+                                            $isPrintedCategories = collect([]);
+                                            printListCategory($hightestParent, $category, true, 0, $isPrintedCategories);
+                                            $allCategories = category::all();
+                                            $isNotPrintedCategories = $allCategories->diff($isPrintedCategories);
+                                            printTest($isNotPrintedCategories, $category, true);
                                         @endphp
                                     </select>
+                                    @error('parentCategorys')
+                                        <span class="text-danger"> {{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6 col-lg-4">
@@ -60,9 +84,17 @@
                                     <select multiple="" class="form-select form-control-lg" id="chidrenCategorys"
                                         onchange="checkContrainOfParentAndChild()" name="chidrenCategorys[]">
                                         @php
-                                            printListCategory($hightestParent, $category, false, 0);
+                                            $isPrintedCategories = collect([]);
+                                            printListCategory($hightestParent, $category, false, 0, $isPrintedCategories);
+                                            $allCategories = category::all();
+                                            $isNotPrintedCategories = $allCategories->diff($isPrintedCategories);
+                                            printTest($isNotPrintedCategories, $category, false);
                                         @endphp
+
                                     </select>
+                                    @error('chidrenCategorys')
+                                        <span class="text-danger"> {{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>

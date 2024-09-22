@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\category\CreateCategory;
+use App\Http\Requests\category\UpdateCategory;
 use App\Models\category;
 use Illuminate\Http\Request;
 
@@ -41,7 +43,7 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateCategory $request)
     {
         $dataCreate = $request->all();
         $category = $this->category->create($dataCreate);
@@ -72,7 +74,7 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateCategory $request, string $id)
     {
         $dataUpdate = $request->all();
         $category = $this->category->find($id);

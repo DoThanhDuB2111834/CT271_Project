@@ -1,14 +1,28 @@
 @extends('admin.layouts.app')
 @section('content')
 @use('App\Models\category')
+@use('Illuminate\Support\Collection')
 @php
-    function printListCategory($categories, $indent)
+    // Hàm hiển thị những phần tử đã có cha hoặc con
+    function printListCategory($categories, $type, $indent, Collection $isPrintedCategories)
     {
-        foreach ($categories as $category) {
-            echo ("<option value=\"$category->id\">" . str_repeat("&ensp;", $indent) . "&#8226; $category->name</option>");
-            if ($category->children()->count() > 0) {
-                printListCategory($category->children()->get(), $indent + 2);
+        foreach ($categories as $item) {
+            // Nếu người dùng đã submit nhưng bị lỗi trả về thì hiển thị những gì đã submit trước đó để người dùng tiếp tục chỉnh sửa
+
+            $isSelected = in_array($item->id, old($type ? 'parentCategorys' : 'chidrenCategorys') ?? []);
+            echo ("<option value=\"$item->id\"" . ($isSelected ? 'selected>' : '>') . str_repeat(" &ensp;", $indent) . "&#8226; $item->name</option>");
+            $isPrintedCategories->push($item);
+            if ($item->children()->count() > 0) {
+                printListCategory($item->children()->get(), $type, $indent + 2, $isPrintedCategories);
             }
+        }
+    }
+    // Hàm hiển thị những phần tử còn lại
+    function printTest($categories, $type)
+    {
+        foreach ($categories as $item) {
+            $isSelected = in_array($item->id, old($type ? 'parentCategorys' : 'chidrenCategorys') ?? []);
+            echo ("<option value=\"$item->id\"" . ($isSelected ? 'selected>' : '>') . "&#8226; $item->name</option>");
         }
     }
 @endphp
@@ -47,9 +61,16 @@
                                     <select multiple="" class="form-select form-control-lg" id="parentCategorys"
                                         onchange="checkContrainOfParentAndChild()" name="parentCategorys[]">
                                         @php
-                                            printListCategory($hightestParent, 0);
+                                            $isPrintedCategories = collect([]);
+                                            printListCategory($hightestParent, true, 0, $isPrintedCategories);
+                                            $allCategories = category::all();
+                                            $isNotPrintedCategories = $allCategories->diff($isPrintedCategories);
+                                            printTest($isNotPrintedCategories, true);
                                         @endphp
                                     </select>
+                                    @error('parentCategorys')
+                                        <span class="text-danger"> {{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6 col-lg-4">
@@ -58,9 +79,16 @@
                                     <select multiple="" class="form-select form-control-lg" id="chidrenCategorys"
                                         onchange="checkContrainOfParentAndChild()" name="chidrenCategorys[]">
                                         @php
-                                            printListCategory($hightestParent, 0);
+                                            $isPrintedCategories = collect([]);
+                                            printListCategory($hightestParent, false, 0, $isPrintedCategories);
+                                            $allCategories = category::all();
+                                            $isNotPrintedCategories = $allCategories->diff($isPrintedCategories);
+                                            printTest($isNotPrintedCategories, false);
                                         @endphp
                                     </select>
+                                    @error('chidrenCategorys')
+                                        <span class="text-danger"> {{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>

@@ -6,7 +6,7 @@ use App\Models\category;
 use Closure;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateProduct extends FormRequest
+class UpdateProduct extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -44,7 +44,7 @@ class CreateProduct extends FormRequest
                         $fail("Violate contraint category.");
                     }
                 },
-            ]
+            ],
         ];
     }
 }

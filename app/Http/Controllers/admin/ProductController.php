@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\product\CreateProduct;
+use App\Http\Requests\product\UpdateProduct;
 use App\Models\category;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -78,7 +79,7 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateProduct $request, string $id)
     {
         $product = $this->product->find($id);
         $dataUpdate = $request->all();

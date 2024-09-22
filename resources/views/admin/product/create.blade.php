@@ -2,14 +2,23 @@
 @section('content')
 @use('App\Models\category')
 @php
-    function printListCategory($categories, $indent)
+    function printListCategory($categories, $indent, $isPrintedCategories)
     {
         foreach ($categories as $category) {
             $isSelected = in_array($category->id, old('categories') ?? []);
             echo ("<option value=\"$category->id\"" . ($isSelected ? 'selected>' : '>') . str_repeat("&ensp;", $indent) . "&#8226; $category->name</option>");
+            $isPrintedCategories->push($category);
             if ($category->children()->count() > 0) {
-                printListCategory($category->children()->get(), $indent + 2);
+                printListCategory($category->children()->get(), $indent + 2, $isPrintedCategories);
             }
+        }
+    }
+
+    function printTest($categories)
+    {
+        foreach ($categories as $item) {
+            $isSelected = in_array($item->id, old('categories') ?? []);
+            echo ("<option value=\"$item->id\"" . ($isSelected ? 'selected>' : '>') . "&#8226; $item->name</option>");
         }
     }
 @endphp
@@ -71,7 +80,7 @@
                                     <div class="form-group">
                                         <label for="Description">Description</label>
                                         <textarea class="form-control" id="Description" name="description" rows="5">
-                                                                                          </textarea>
+                                                                                          {{old('description') ?? ''}}</textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-lg-6">
@@ -80,7 +89,11 @@
                                         <select multiple="" class="form-select form-control-lg" id="chidrenCategorys"
                                             name="categories[]">
                                             @php
-                                                printListCategory($highestCategories, 0);
+                                                $isPrintedCategories = collect([]);
+                                                printListCategory($highestCategories, 0, $isPrintedCategories);
+                                                $allCategories = category::all();
+                                                $isNotPrintedCategories = $allCategories->diff($isPrintedCategories);
+                                                printTest($isNotPrintedCategories);
                                             @endphp
                                         </select>
                                         @error('categories')

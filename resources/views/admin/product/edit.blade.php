@@ -72,7 +72,7 @@
                                 <div class="col-md-6 col-lg-6">
                                     <div class="form-group">
                                         <label for="Description">Description</label>
-                                        <textarea class="form-control" id="description" name="description" rows="5">{{old('description' ?? $product->description)}}
+                                        <textarea class="form-control" id="description" name="description" rows="5">{{old('description') ?? $product->description}}
                                                                                           </textarea>
                                     </div>
                                 </div>
