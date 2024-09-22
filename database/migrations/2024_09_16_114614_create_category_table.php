@@ -11,7 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('category', function (Blueprint $table) {
-            $table->id();
+            $table->ulid('id')->primary();
             $table->string('name');
             $table->timestamps();
             $table->softDeletes();
@@ -19,8 +19,8 @@ return new class extends Migration {
 
         Schema::create('has_children_category', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('parent_id');
-            $table->unsignedBigInteger('child_id');
+            $table->string('parent_id');
+            $table->string('child_id');
 
             $table->foreign('parent_id')->references('id')->on('category')->onDelete('cascade');
             $table->foreign('child_id')->references('id')->on('category')->onDelete('cascade');
@@ -28,8 +28,8 @@ return new class extends Migration {
 
         Schema::create('category_product', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('product_id');
-            $table->unsignedBigInteger('category_id');
+            $table->string('product_id');
+            $table->string('category_id');
 
             $table->foreign('product_id')->references('id')->on('product')->onDelete('cascade');
             $table->foreign('category_id')->references('id')->on('category')->onDelete('cascade');

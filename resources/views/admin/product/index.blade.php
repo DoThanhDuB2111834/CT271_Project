@@ -20,6 +20,7 @@
                         <table id="basic-datatables" class="display table table-striped table-hover dataTable">
                             <thead>
                                 <tr>
+                                    <th>id</th>
                                     <th>Name
                                     </th>
                                     <th>Quantity</th>
@@ -29,6 +30,7 @@
                             </thead>
                             <tfoot>
                                 <tr>
+                                    <th>id</th>
                                     <th>Name</th>
                                     <th>Quantity</th>
                                     <th>Price</th>
@@ -38,6 +40,7 @@
                             <tbody>
                                 @foreach ($products as $item)
                                     <tr>
+                                        <td>{{$item->id}}</td>
                                         <td>{{$item->name}}</td>
                                         <td>{{$item->quantity}}</td>
                                         <td>{{$item->price}}</td>
@@ -79,6 +82,6 @@
     <?php
         session()->forget('state');
         session()->forget('message');
-                                                                                                            ?>
+                                                                                                                ?>
 @endif
 @endsection
