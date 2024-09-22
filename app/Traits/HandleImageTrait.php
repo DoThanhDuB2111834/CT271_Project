@@ -8,27 +8,9 @@ use Intervention\Image\Laravel\Facades\Image;
 trait HandleImageTrait
 {
     protected $path;
-
-    public function veryfy($request)
+    public function setPath($folder)
     {
-        $typeImage = $request->input('type_image');
-        if ($typeImage == "product") {
-            return $request->hasFile('images') || !empty($request->input('old-images'));
-        } else {
-            return $request->hasFile('image');
-        }
-    }
-
-    // public function saveProductImage(Request $request)
-    // {
-    //     if($request->hasFile('images') || !empty($request->input('old-images'))){
-    //         foreach
-    //     }
-    // }
-
-    public function setPath($request)
-    {
-        switch ($request->input('type_image')) {
+        switch ($folder) {
             case "product":
                 $this->path = 'Image/product/';
                 break;
@@ -37,50 +19,41 @@ trait HandleImageTrait
         }
     }
 
-    public function saveImage($request)
+    public function saveProductImage(Request $request)
     {
-        if ($this->veryfy($request)) {
-            $this->setPath($request);
-            $imageType = $request->input('type_image');
-            if ($imageType == 'product') {
-                $images = $request->file('images');
-                $names = [];
-                foreach ($images as $image) {
-                    $name = time() . uniqid() . '.' . $image->getClientOriginalExtension();
-                    Image::read($image)->save($this->path . $name);
-                    array_push($names, $this->path . $name);
-                }
-                return $names;
-            } else {
-                $image = $request->file('image');
-                $name = time() . '.' . $image->getClientOriginalExtension();
-                Image::read($image)->save($this->path . $name);
-                return $name;
+        if ($request->hasFile('images')) {
+            $this->setPath('product');
+            $imageUrls = [];
+            foreach ($request->file('images') as $image) {
+                $imageUrls[] = $this->processImage($image);
             }
+            return $imageUrls;
         }
+        return [];
     }
 
-    public function updateImage($request, $currentImages, $deletedImages = null)
+    public function updateProductImage($request, $oldImageUrls, $deletedImageUrls)
     {
-        if ($this->veryfy($request)) {
-            $imageType = $request->input('type_image');
-            switch ($imageType) {
-                case 'product':
-                    foreach ($deletedImages as $item) {
-                        $this->deleteImage($item);
-                    }
-                    $newImages = $this->saveImage($request);
-                    $images = array_merge($newImages, $currentImages);
-                    return $images;
-                // break;
-                default:
-                    $this->deleteImage($currentImages);
-                    return $this->saveImage($request);
+        if ($request->hasFile('images') || !empty($request->input('old-images'))) {
+            foreach ($deletedImageUrls as $imageUrl) {
+                $this->deleteImage($imageUrl);
             }
-            // $image = $this->saveImage($request);
-        }
 
-        return $currentImages;
+            $newImageUrls = $this->saveProductImage($request);
+            $imageUrls = array_merge($oldImageUrls, $newImageUrls);
+
+            return $imageUrls;
+        }
+        return [];
+    }
+
+    public function processImage($image)
+    {
+        $name = time() . uniqid() . '.' . $image->getClientOriginalExtension();
+        Image::read($image)->save($this->path . $name);
+        $imageUrl = $this->path . $name;
+
+        return $imageUrl;
     }
 
     public function deleteImage($imageName)

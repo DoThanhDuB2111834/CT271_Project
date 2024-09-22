@@ -46,12 +46,11 @@ class ProductController extends Controller
     {
         $dataCreate = $request->all();
 
-        $dataCreate['images'] = $this->product->saveImage($request);
+        $dataCreate['imageUrls'] = $this->product->saveProductImage($request);
         $product = $this->product->create($dataCreate);
-        foreach ($dataCreate['images'] as $image) {
-            $product->Images()->create(['url' => $image]);
+        foreach ($dataCreate['imageUrls'] as $imageUrl) {
+            $product->Images()->create(['url' => $imageUrl]);
         }
-        // $product->Images()->create(['url' => $dataCreate['image']]);
         $product->categories()->attach($dataCreate['categories'] ?? []);
 
         return redirect()->route('product.index')->with(['message' => 'Create successfully', 'state' => 'success']);
@@ -83,20 +82,28 @@ class ProductController extends Controller
     {
         $product = $this->product->find($id);
         $dataUpdate = $request->all();
-        $oldImages = $request->input('old-images');
-        $deletedImages = array_diff($product->Images()->pluck('url')->toArray(), $oldImages);
-        // foreach ($deletedImages as $item) {
-        //     echo $item . '<br />';
-        // }
-        // echo gettype($product->Images()->get()->toArray());
-        $dataUpdate['images'] = $this->product->updateImage($request, $oldImages, $deletedImages);
+        $oldImageUrls = $request->input('old-images') ?? [];
+        $deletedImageUrls = array_diff($product->Images()->pluck('url')->toArray(), $oldImageUrls);
+        $dataUpdate['imageUrls'] = $this->product->updateProductImage($request, $oldImageUrls, $deletedImageUrls);
+        $product->update($dataUpdate);
+        // Xóa tất cả ảnh cũ
+        $product->Images()->delete();
+        $product->categories()->sync($dataUpdate['categories'] ?? []);
+        foreach ($dataUpdate['imageUrls'] as $imageUrl) {
+            $product->Images()->create(['url' => $imageUrl]);
+        }
+
+        return redirect()->route('product.index')->with(['message' => "Update product $id successfully", 'state' => 'success']);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * SOFT remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+        $product = $this->product->find($id);
+        $product->delete();
+
+        return redirect()->route('product.index')->with(['message' => "Delete product $id successfully", 'state' => 'success']);
     }
 }
