@@ -19,4 +19,9 @@ class Image extends Model
     {
         return $this->morphTo();
     }
+
+    public function getName()
+    {
+        return substr($this->url, strrpos($this->url, '/') + 1);
+    }
 }

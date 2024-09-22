@@ -35,6 +35,7 @@ class ProductController extends Controller
     public function create()
     {
         $highestCategories = $this->category->getHighestParent();
+
         return view('admin.product.create', compact('highestCategories'));
     }
 
@@ -45,12 +46,15 @@ class ProductController extends Controller
     {
         $dataCreate = $request->all();
 
-        $dataCreate['image'] = $this->product->saveImage($request);
+        $dataCreate['images'] = $this->product->saveImage($request);
         $product = $this->product->create($dataCreate);
-        $product->Images()->create(['url' => $dataCreate['image']]);
+        foreach ($dataCreate['images'] as $image) {
+            $product->Images()->create(['url' => $image]);
+        }
+        // $product->Images()->create(['url' => $dataCreate['image']]);
         $product->categories()->attach($dataCreate['categories'] ?? []);
 
-        return redirect()->route('product.index');
+        return redirect()->route('product.index')->with(['message' => 'Create successfully', 'state' => 'success']);
     }
 
     /**
@@ -66,7 +70,10 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $product = $this->product->find($id);
+        $highestCategories = $this->category->getHighestParent();
+
+        return view('admin.product.edit', compact('id', 'product', 'highestCategories'));
     }
 
     /**
@@ -74,7 +81,15 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $product = $this->product->find($id);
+        $dataUpdate = $request->all();
+        $oldImages = $request->input('old-images');
+        $deletedImages = array_diff($product->Images()->pluck('url')->toArray(), $oldImages);
+        // foreach ($deletedImages as $item) {
+        //     echo $item . '<br />';
+        // }
+        // echo gettype($product->Images()->get()->toArray());
+        $dataUpdate['images'] = $this->product->updateImage($request, $oldImages, $deletedImages);
     }
 
     /**

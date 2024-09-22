@@ -47,8 +47,7 @@
                                 <div class="form-group">
                                     <label for="parentCategorys">Parent category: </label>
                                     <select multiple="" class="form-select form-control-lg" id="parentCategorys"
-                                        onchange="checkContrainOfParentAndChild()" fdprocessedid="qcw846"
-                                        name="parentCategorys[]">
+                                        onchange="checkContrainOfParentAndChild()" name="parentCategorys[]">
                                         @php
                                             printListCategory($hightestParent, $category, true, 0);
                                         @endphp
@@ -59,8 +58,7 @@
                                 <div class="form-group">
                                     <label for="chidrenCategorys">Chidren category: </label>
                                     <select multiple="" class="form-select form-control-lg" id="chidrenCategorys"
-                                        onchange="checkContrainOfParentAndChild()" fdprocessedid="qcw846"
-                                        name="chidrenCategorys[]">
+                                        onchange="checkContrainOfParentAndChild()" name="chidrenCategorys[]">
                                         @php
                                             printListCategory($hightestParent, $category, false, 0);
                                         @endphp

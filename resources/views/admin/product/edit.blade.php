@@ -2,13 +2,13 @@
 @section('content')
 @use('App\Models\category')
 @php
-    function printListCategory($categories, $indent)
+    function printListCategory($categories, $product, $indent)
     {
         foreach ($categories as $category) {
-            $isSelected = in_array($category->id, old('categories') ?? []);
+            $isSelected = in_array($category->id, old('categories') ?? $product->categories()->pluck('category.id')->toArray());
             echo ("<option value=\"$category->id\"" . ($isSelected ? 'selected>' : '>') . str_repeat("&ensp;", $indent) . "&#8226; $category->name</option>");
             if ($category->children()->count() > 0) {
-                printListCategory($category->children()->get(), $indent + 2);
+                printListCategory($category->children()->get(), $product, $indent + 2);
             }
         }
     }
@@ -24,8 +24,10 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <form class="card" action="{{route('product.store')}}" method="post" enctype="multipart/form-data">
+                <form class="card" action="{{route('product.update', $product->id)}}" method="post"
+                    enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
                     <input type="hidden" name="type_image" value="product">
                     <div class="card-header">
                         <div class="card-title">Form Elements</div>
@@ -36,7 +38,7 @@
                                 <div class="form-group">
                                     <label for="product_name">Name:</label>
                                     <input type="text" class="form-control" id="product_name" name="name"
-                                        placeholder="Enter product name" value="{{old('name') ?? ''}}" />
+                                        placeholder="Enter product name" value="{{old('name') ?? $product->name}}" />
                                     @error('name')
                                         <span class="text-danger"> {{ $message }}</span>
                                     @enderror
@@ -44,7 +46,7 @@
                                 <div class="form-group">
                                     <label for="product_name">Size:</label>
                                     <input type="text" class="form-control" id="product_name" name="size"
-                                        placeholder="Enter product size" value="{{old('size') ?? ''}}" />
+                                        placeholder="Enter product size" value="{{old('size') ?? $product->size}}" />
                                     @error('size')
                                         <span class="text-danger"> {{ $message }}</span>
                                     @enderror
@@ -52,7 +54,7 @@
                                 <div class="form-group">
                                     <label for="product_name">Color:</label>
                                     <input type="text" class="form-control" id="product_name" name="color"
-                                        placeholder="Enter product Color" value="{{old('color') ?? ''}}" />
+                                        placeholder="Enter product Color" value="{{old('color') ?? $product->color}}" />
                                     @error('color')
                                         <span class="text-danger"> {{ $message }}</span>
                                     @enderror
@@ -60,7 +62,7 @@
                                 <div class="form-group">
                                     <label for="product_name">Price:</label>
                                     <input type="number" class="form-control" id="product_name" name="price"
-                                        placeholder="Enter product Price" value="{{old('price') ?? ''}}" />
+                                        placeholder="Enter product Price" value="{{old('price') ?? $product->price}}" />
                                     @error('price')
                                         <span class="text-danger"> {{ $message }}</span>
                                     @enderror
@@ -70,7 +72,7 @@
                                 <div class="col-md-6 col-lg-6">
                                     <div class="form-group">
                                         <label for="Description">Description</label>
-                                        <textarea class="form-control" id="Description" name="description" rows="5">
+                                        <textarea class="form-control" id="description" name="description" rows="5">{{old('description' ?? $product->description)}}
                                                                                           </textarea>
                                     </div>
                                 </div>
@@ -80,7 +82,7 @@
                                         <select multiple="" class="form-select form-control-lg" id="chidrenCategorys"
                                             name="categories[]">
                                             @php
-                                                printListCategory($highestCategories, 0);
+                                                printListCategory($highestCategories, $product, 0);
                                             @endphp
                                         </select>
                                         @error('categories')
@@ -88,12 +90,27 @@
                                         @enderror
                                     </div>
                                 </div>
+                                <div id="show-old-image overflow-hidden" class="row" style="max-width: 100%;">
+                                    <div class="col-2">Image:</div>
+                                    @foreach ($product->Images()->get() as $item)
+                                        <div class="col-md-4 old-image overflow-hidden" onclick="showOldImage(event);">
+                                            <div class="demo-icon">
+                                                <div class="icon-preview"><i class="fa fa-file-image"></i></div>
+                                                <div class="icon-class"
+                                                    style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+                                                    {{$item->getName()}}
+                                                </div>
+                                            </div>
+                                            <input type="hidden" name="old-images[]" value="{{$item->url}}">
+                                        </div>
+                                    @endforeach
+                                </div>
                                 <div class="form-group">
-                                    <label for="exampleFormControlFile1">Image</label>
+                                    <label for="exampleFormControlFile1">New image</label>
                                     <input type="file" class="form-control-file" id="image-input" accept="image/*"
                                         multiple name="images[]" />
                                 </div>
-                                <div id="show-image" class="row" style="max-width: 100%; height: 300px;">
+                                <div id="show-image" class="row" style="max-width: 100%; height: 75px;">
 
                                 </div>
                                 @error('image')
@@ -131,8 +148,6 @@
         </div>
     </div>
 </div>
-
-
 @endsection
 
 @section('scripts')
@@ -140,11 +155,11 @@
     integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"
-                integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ=="
-                crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+                    integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ=="
+                    crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
 <script src="
-        https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js
-        "></script>
+            https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js
+            "></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ckeditor5/43.0.0/ckeditor.min.js"
     integrity="sha512-UzvuFtD3EPN++CAS7K8gRpp+UrNZWUV94LW3I+1r4hyWQT6gelrcL1XdXPt0i5h6eI/Ry1WNno5eQl4fcrOjAw=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -223,5 +238,24 @@
             readURL(this);
         });
     });
+</script>
+
+<!-- Xử lý cho thao tác cập nhật -->
+<script>
+
+    function showOldImage(e) {
+        const oldImage = e.currentTarget;
+        const url = <?php echo "'" . asset('') . "'" ?> + oldImage.querySelector('input').value;
+        $('#image-detail').css('background-image', `url("${url}")`);
+
+        var buttonRemoveImage = document.getElementById('button-remove-image-modal');
+        buttonRemoveImage.onclick = function () {
+            console.log(oldImage);
+            oldImage.remove();
+            $('#exampleModal').modal('hide');
+        };
+        var myModal = new bootstrap.Modal(document.getElementById('exampleModal'));
+        myModal.show();
+    }
 </script>
 @endsection

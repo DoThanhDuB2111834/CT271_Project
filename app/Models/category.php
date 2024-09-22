@@ -56,6 +56,6 @@ class category extends Model
         $result = $parentCategories->filter(function ($category, $index) {
             return $category->parent()->count() == 0;
         });
-        return $result;
+        return $result->isNotEmpty() ? $result : $this->all();
     }
 }

@@ -30,7 +30,6 @@ class CreateProduct extends FormRequest
             'size' => 'required',
             'color' => 'required',
             'categories' => [
-                'required',
                 function (string $attribute, mixed $value, Closure $fail) {
                     $Categories = $value ?? [];
                     $checkContraintCategory = true;

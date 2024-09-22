@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use Illuminate\Http\Request;
 use Intervention\Image\Laravel\Facades\Image;
 
 trait HandleImageTrait
@@ -10,8 +11,20 @@ trait HandleImageTrait
 
     public function veryfy($request)
     {
-        return $request->hasFile('image');
+        $typeImage = $request->input('type_image');
+        if ($typeImage == "product") {
+            return $request->hasFile('images') || !empty($request->input('old-images'));
+        } else {
+            return $request->hasFile('image');
+        }
     }
+
+    // public function saveProductImage(Request $request)
+    // {
+    //     if($request->hasFile('images') || !empty($request->input('old-images'))){
+    //         foreach
+    //     }
+    // }
 
     public function setPath($request)
     {
@@ -28,30 +41,52 @@ trait HandleImageTrait
     {
         if ($this->veryfy($request)) {
             $this->setPath($request);
-            $image = $request->file('image');
-            $name = time() . '.' . $image->getClientOriginalExtension();
-            Image::read($image)->save($this->path . $name);
-
-            return $name;
+            $imageType = $request->input('type_image');
+            if ($imageType == 'product') {
+                $images = $request->file('images');
+                $names = [];
+                foreach ($images as $image) {
+                    $name = time() . uniqid() . '.' . $image->getClientOriginalExtension();
+                    Image::read($image)->save($this->path . $name);
+                    array_push($names, $this->path . $name);
+                }
+                return $names;
+            } else {
+                $image = $request->file('image');
+                $name = time() . '.' . $image->getClientOriginalExtension();
+                Image::read($image)->save($this->path . $name);
+                return $name;
+            }
         }
-        return 'No';
     }
 
-    public function updateImage($request, $currentImage)
+    public function updateImage($request, $currentImages, $deletedImages = null)
     {
         if ($this->veryfy($request)) {
-            $this->deleteImage($currentImage);
-
-            return $this->saveImage($request);
+            $imageType = $request->input('type_image');
+            switch ($imageType) {
+                case 'product':
+                    foreach ($deletedImages as $item) {
+                        $this->deleteImage($item);
+                    }
+                    $newImages = $this->saveImage($request);
+                    $images = array_merge($newImages, $currentImages);
+                    return $images;
+                // break;
+                default:
+                    $this->deleteImage($currentImages);
+                    return $this->saveImage($request);
+            }
+            // $image = $this->saveImage($request);
         }
 
-        return $currentImage;
+        return $currentImages;
     }
 
     public function deleteImage($imageName)
     {
-        if ($imageName && file_exists($this->path . $imageName)) {
-            unlink($this->path . $imageName);
+        if ($imageName && file_exists($imageName)) {
+            unlink($imageName);
         }
     }
 }
