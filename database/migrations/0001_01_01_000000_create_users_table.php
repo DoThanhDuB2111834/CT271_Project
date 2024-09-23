@@ -14,8 +14,9 @@ return new class extends Migration {
             $table->id();
             $table->string('name');
             $table->string('gender');
-            $table->string('phone_number');
-            $table->time('birth_date');
+            $table->string('address')->nullable();
+            $table->string('phone_number')->nullable();
+            $table->time('birth_date')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
@@ -38,23 +39,23 @@ return new class extends Migration {
             $table->integer('last_activity')->index();
         });
 
-        Schema::create('customer', function (Blueprint $table) {
-            $table->id();
-            $table->string('address');
-            $table->unsignedBigInteger('user_id');
-            $table->timestamps();
+        // Schema::create('customer', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->string('address');
+        //     $table->unsignedBigInteger('user_id');
+        //     $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-        });
+        //     $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        // });
 
-        Schema::create('admin', function (Blueprint $table) {
-            $table->id();
-            $table->string('role');
-            $table->unsignedBigInteger('user_id');
-            $table->timestamps();
+        // Schema::create('admin', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->string('role');
+        //     $table->unsignedBigInteger('user_id');
+        //     $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-        });
+        //     $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        // });
     }
 
     /**
@@ -62,8 +63,8 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('customer');
-        Schema::dropIfExists('admin');
+        // Schema::dropIfExists('customer');
+        // Schema::dropIfExists('admin');
         Schema::dropIfExists('users');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');

@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
+    use HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -46,18 +48,9 @@ class User extends Authenticatable
         ];
     }
 
-    public function admin(): HasOne
-    {
-        return $this->hasOne(admin::class);
-    }
-
-    public function customer(): HasOne
-    {
-        return $this->hasOne(customer::class);
-    }
-
     public function isAdmin()
     {
-        return $this->admin;
+        $adminRoles = Role::where('group', 'admin')->pluck('name')->toArray();
+        return $this->hasAnyRole($adminRoles);
     }
 }
