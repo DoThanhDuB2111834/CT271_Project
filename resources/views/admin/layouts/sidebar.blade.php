@@ -34,6 +34,14 @@
                         <i class="fa fa-ellipsis-h"></i>
                     </span>
                 </li>
+                @hasrole('superadmin')
+                <li class="nav-item {{request()->url() == route('role.index') ? 'active' : ''}}">
+                    <a href="{{route('role.index')}}">
+                        <i class="fas fa-user-shield"></i>
+                        <p>Role</p>
+                    </a>
+                </li>
+                @endhasrole
                 <li class="nav-item {{request()->url() == route('product.index') ? 'active' : ''}}">
                     <a href="{{route('product.index')}}">
                         <i class="fab fa-product-hunt"></i>

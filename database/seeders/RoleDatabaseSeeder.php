@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Role as ModelsRole;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
@@ -51,8 +52,10 @@ class RoleDatabaseSeeder extends Seeder
             ['name' => 'delete-coupon', 'group' => 'coupon'],
         ];
 
+        $superAdmin = ModelsRole::find(2);
         foreach ($permissions as $permission) {
             Permission::updateOrCreate($permission);
+            $superAdmin->givePermissionTo($permission['name']);
         }
     }
 }
