@@ -8,6 +8,7 @@ use App\Http\Requests\product\UpdateProduct;
 use App\Models\category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 use function PHPUnit\Framework\isFalse;
 
@@ -106,5 +107,16 @@ class ProductController extends Controller
         $product->delete();
 
         return redirect()->route('product.index')->with(['message' => "Delete product $id successfully", 'state' => 'success']);
+    }
+
+    public function find(string $productName)
+    {
+        $products = $this->product->where('name', 'like', "%$productName%")->get(['id', 'name', 'size', 'color']);
+        $products->transform(function ($product) {
+            $product->imageUrl = $product->getFirstImageUrl()->url; // Giả sử giảm giá 10%
+            return $product;
+        });
+
+        return response()->json(['products' => $products, 'oke' => !$products->isEmpty()], Response::HTTP_OK);
     }
 }

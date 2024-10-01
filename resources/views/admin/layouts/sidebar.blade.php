@@ -54,6 +54,18 @@
                         <p>Category</p>
                     </a>
                 </li>
+                <li class="nav-item {{request()->url() == route('supplier.index') ? 'active' : ''}}">
+                    <a href="{{route('supplier.index')}}">
+                        <i class="fas fa-industry"></i>
+                        <p>Supplier</p>
+                    </a>
+                </li>
+                <li class="nav-item {{request()->url() == route('goods_receipt.index') ? 'active' : ''}}">
+                    <a href="{{route('goods_receipt.index')}}">
+                        <i class="fas fa-receipt"></i>
+                        <p>Receipt</p>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

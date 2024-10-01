@@ -18,6 +18,9 @@ return Application::configure(basePath: dirname(__DIR__))
             Route::middleware(['web', 'admin360Store',])
                 ->prefix('admin')
                 ->group(base_path('routes/admin.php'));
+
+            Route::middleware('web')
+                ->group(base_path('routes/api.php'));
         },
     )
     ->withMiddleware(function (Middleware $middleware) {

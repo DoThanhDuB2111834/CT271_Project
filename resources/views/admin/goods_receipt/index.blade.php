@@ -5,7 +5,7 @@
         <div class="page-header">
             <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
                 <div>
-                    <h3 class="fw-bold mb-3">Products</h3>
+                    <h3 class="fw-bold mb-3">goods_receipts</h3>
                 </div>
             </div>
         </div>
@@ -13,41 +13,44 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <h4 class="card-title">Basic</h4>
-                    <a href="{{route('role.create')}}" class="btn btn-success">Create</a>
+                    <a href="{{route('goods_receipt.create')}}" class="btn btn-success">Create</a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table id="basic-datatables" class="display table table-striped table-hover dataTable">
                             <thead>
                                 <tr>
-                                    <th>Name
-                                    </th>
-                                    <th>group</th>
-                                    <th colspan="2">Action</th>
+                                    <th>id</th>
+                                    <th>total_price</th>
+                                    <th colspan="3">Action</th>
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>group</th>
-                                    <th colspan="2">Action</th>
+                                    <th>id</th>
+                                    <th>total_price</th>
+                                    <th colspan="3">Action</th>
                                 </tr>
                             </tfoot>
                             <tbody>
-                                @foreach ($roles as $item)
+                                @foreach ($goods_receipts as $item)
                                     <tr>
-                                        <td>{{$item->name}}</td>
-                                        <td>{{$item->group}}</td>
-                                        <td><a href="{{route('role.edit', $item->id)}}" class="btn btn-warning">Edit</a>
+                                        <td>{{$item->id}}</td>
+                                        <td>{{$item->total_price}}</td>
+                                        <td><a href="{{route('goods_receipt.edit', $item->id)}}"
+                                                class="btn btn-warning">Edit</a>
                                         </td>
                                         <td>
-                                            <form action="{{route('role.destroy', $item->id)}}" method="post"
+                                            <form action="{{route('goods_receipt.destroy', $item->id)}}" method="post"
                                                 onsubmit="confirmDelete(event);" id="form-delete{{$item->id}}">
                                                 @csrf
                                                 @method('delete')
                                                 <button class="btn btn-danger" id="btn-delete" data-id="{{$item->id}}"
                                                     type="submit">delete</button>
                                             </form>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-info">Info</button>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -60,7 +63,6 @@
     </div>
 </div>
 @endsection
-
 @section('scripts')
 <script src="{{asset('admin/base/js/base.js')}}"></script>
 
@@ -74,6 +76,6 @@
     <?php
         session()->forget('state');
         session()->forget('message');
-                                                                                                                                    ?>
+                                                                                                                ?>
 @endif
 @endsection

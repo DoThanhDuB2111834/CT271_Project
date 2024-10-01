@@ -70,7 +70,7 @@
 </div>
 @endsection
 @section('scripts')
-<script src="{{asset('admin/base/base.js')}}"></script>
+<script src="{{asset('admin/base/js/base.js')}}"></script>
 
 <!-- Notificate message -->
 @if (session('message'))
@@ -82,6 +82,6 @@
     <?php
         session()->forget('state');
         session()->forget('message');
-                                                                                                                ?>
+                                                                                                                    ?>
 @endif
 @endsection

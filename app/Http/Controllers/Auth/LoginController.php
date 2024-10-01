@@ -34,7 +34,7 @@ class LoginController extends Controller
             if ($request->is('admin/*')) {
                 if ($request->user()->isAdmin()) {
                     $request->session()->regenerate();
-                    return redirect('/admin/dashboard');
+                    return redirect()->intended('/admin/dashboard/');
                 } else {
                     return back()->with(['message' => 'You are not admin']);
                 }

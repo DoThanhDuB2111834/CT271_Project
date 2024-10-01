@@ -1,0 +1,81 @@
+#search_panel {
+    position: relative;
+    opacity: 0.9;
+}
+
+#panel_show_search_result {
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 10px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    width: 100%;
+    /* height: 100%; */
+}
+
+.search_result_item_title {
+    height: 30px;
+    background-color: #2a2f5b;
+    color: white;
+    padding-left: 20px;
+    margin-bottom: 10px;
+}
+
+.search_result_item {
+    background-clip: content-box;
+    background-color: #f5f5f5;
+    padding-left: 20px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    transition: background-color 0.7s;
+}
+
+.search_result_item:hover {
+    background-color: #b3b9e9;
+}
+
+.search_result_item_image {
+    position: relative;
+    height: 100px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 0 !important;
+}
+
+.has_space:after {
+    content: "";
+    display: block;
+    position: absolute;
+    background-color: white;
+    right: 0;
+    width: 3px;
+    height: 100%;
+}
+
+.search_result_item_text {
+    position: relative;
+    padding: 0 !important;
+    font-size: 1.1rem !important;
+    display: flex;
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    align-items: center; /* Căn giữa theo chiều dọc */
+}
+
+/* #panel_show_search_result:before {
+    content: "";
+    display: block;
+    position: absolute;
+
+    left: 0;
+    width: 10px;
+    height: 100%;
+    margin-left: -28px;
+    background-color: #2a2f5b;
+} */
+.modal-backdrop {
+    z-index: 1010 !important;
+}
+.modal {
+    z-index: 1015 !important;
+}

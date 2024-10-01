@@ -28,8 +28,18 @@ class Product extends Model
         return $this->morphMany(Image::class, 'Imageable');
     }
 
+    public function getFirstImageUrl()
+    {
+        return $this->Images()->first('url');
+    }
+
     public function categories()
     {
         return $this->BelongsToMany(category::class);
+    }
+
+    public function goods_recepits()
+    {
+        return $this->BelongsToMany(goods_receipt::class, 'Goods_receipt_detail', 'product_id', 'Goods_receipt_id');
     }
 }
