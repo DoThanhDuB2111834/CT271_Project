@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\admin\CategoryController;
+use App\Http\Controllers\admin\DiscountController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ReceiptController;
 use App\Http\Controllers\admin\RoleController;
 use App\Http\Controllers\admin\SupplierController;
+use App\Models\discount;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/dashboard', function () {
@@ -51,4 +53,14 @@ Route::prefix('goods_receipt')->controller(ReceiptController::class)->name('good
     Route::put('/{goods_receipt}', 'update')->name('update')->middleware('permission:update-goods_receipt');
     Route::delete('/{goods_receipt}', 'destroy')->name('destroy')->middleware('permission:delete-goods_receipt');
     Route::get('/{goods_receipt}/edit', 'edit')->name('edit')->middleware('permission:update-goods_receipt');
+});
+
+Route::prefix('discount')->controller(DiscountController::class)->name('discount.')->group(function () {
+    Route::get('/', 'index')->name('index')->middleware('permission:show-discount');
+    Route::post('/', 'store')->name('store')->middleware('permission:create-discount');
+    Route::get('/create', 'create')->name('create')->middleware('permission:create-discount');
+    Route::get('/{discount}', 'show')->name('show')->middleware('permission:show-discount');
+    Route::put('/{discount}', 'update')->name('update')->middleware('permission:update-discount');
+    Route::delete('/{discount}', 'destroy')->name('destroy')->middleware('permission:delete-discount');
+    Route::get('/{discount}/edit', 'edit')->name('edit')->middleware('permission:show-discount');
 });

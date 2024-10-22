@@ -111,7 +111,7 @@ class ProductController extends Controller
 
     public function find(string $productName)
     {
-        $products = $this->product->where('name', 'like', "%$productName%")->get(['id', 'name', 'size', 'color']);
+        $products = $this->product->where('name', 'like', "%$productName%")->get(['id', 'name', 'size', 'color', 'price']);
         $products->transform(function ($product) {
             $product->imageUrl = $product->getFirstImageUrl()->url; // Giả sử giảm giá 10%
             return $product;

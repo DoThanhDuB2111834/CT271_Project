@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             RoleDatabaseSeeder::class,
             UserDatabaseSeeder::class,
+            DiscountSeeder::class,
         ]);
     }
 }

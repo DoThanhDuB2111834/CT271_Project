@@ -83,6 +83,13 @@ export class searchBarHandler {
         let panel_show_search_result = document.querySelector(
             "#panel_show_search_result"
         );
+
+        panel_show_search_result
+            .querySelectorAll('[field="price"]')
+            .forEach((Element) => {
+                Element.classList.add("d-none");
+            });
+
         panel_show_search_result
             .querySelectorAll('[field="id"]')
             .forEach((Element) => {

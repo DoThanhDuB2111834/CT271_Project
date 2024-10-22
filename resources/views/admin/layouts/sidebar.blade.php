@@ -66,6 +66,12 @@
                         <p>Receipt</p>
                     </a>
                 </li>
+                <li class="nav-item {{request()->url() == route('discount.index') ? 'active' : ''}}">
+                    <a href="{{route('discount.index')}}">
+                        <i class="fas fa-arrow-alt-circle-down"></i>
+                        <p>discount</p>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
