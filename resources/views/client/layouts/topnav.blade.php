@@ -8,9 +8,9 @@
             echo "<ul class=\"w-full\">";
 
         foreach ($categories as $category) {
-            echo ("<li class=\"mb-3 flex justify-between flex-wrap " . "\"><a href=\" \" class=\"basis-3/4 " . ($indent == 0 ? "text-2xl" : "") . "\">" . str_repeat("&ensp;", $indent) . "$category->name</a>");
+            echo ("<li class=\"mb-3 flex justify-between flex-wrap " . "\"><a " . ($indent > 0 ? "href=\"" . route('showCategoryDetail', $category->name) . "\"" : "") . " class=\"basis-3/4 " . ($indent == 0 ? "text-2xl" : "") . "\">" . str_repeat("&ensp;", $indent) . "$category->name</a>");
             if ($indent == 0)
-                echo "<label for=\"expand-categories-child\" class=\"basis-1/4 text-center text-[#666666d9]\"><i class=\"fa-solid fa-chevron-down\"></i> </label> <input class=\"hidden\" type=\"checkbox\" id=\"expand-categories-child\">";
+                echo "<label for=\"expand-categories-child\" class=\"basis-1/4 text-center cursor-pointer text-[#666666d9]\"><i class=\"fa-solid fa-chevron-down\"></i> </label> <input class=\"hidden\" type=\"checkbox\" id=\"expand-categories-child\">";
             $isPrintedCategories->push($category);
             if ($category->children()->count() > 0) {
                 printListCategory($category->children()->get(), $indent + 2, $isPrintedCategories);
@@ -42,7 +42,8 @@
         </label>
     </div>
     <nav class="uppercase hidden basis-0/12 lg:basis-9/12 lg:flex lg:justify-start items-center">
-        <a href="" class="mr-3 hover:lg:transition-all hover:lg:text-[#dd9933] hover:lg:duration-300">Trang
+        <a href="{{route('index')}}"
+            class="mr-3 hover:lg:transition-all hover:lg:text-[#dd9933] hover:lg:duration-300">Trang
             chủ</a>
         <a href="" class="mr-3 hover:lg:transition-all hover:lg:text-[#dd9933] hover:lg:duration-300">Sản
             phẩm</a>
@@ -53,19 +54,19 @@
                 <ul>
                     <li
                         class="py-2 text-[#666666d9] border-b-[#666666d9] border-b-[1px] hover:lg:transition-all hover:lg:text-black hover:lg:duration-300 ">
-                        <a href="">Phòng khách</a>
+                        <a href="{{route('showCategoryDetail', 'Phòng khách')}}">Phòng khách</a>
                     </li>
                     <li
                         class="py-2 text-[#666666d9] border-b-[#666666d9] border-b-[1px] hover:lg:transition-all hover:lg:text-black hover:lg:duration-300">
-                        <a href="">Phòng ăn</a>
+                        <a href="{{route('showCategoryDetail', 'Phòng Ăn')}}">Phòng ăn</a>
                     </li>
                     <li
                         class="py-2 text-[#666666d9] border-b-[#666666d9] border-b-[1px] hover:lg:transition-all hover:lg:text-black hover:lg:duration-300">
-                        <a href="">Phòng ngủ</a>
+                        <a href="{{route('showCategoryDetail', 'Phòng ngủ')}}">Phòng ngủ</a>
                     </li>
                     <li
                         class="py-2 text-[#666666d9] border-b-[#666666d9] hover:lg:transition-all hover:lg:text-black hover:lg:duration-300">
-                        <a href="">Phòng làm việc</a>
+                        <a href="{{route('showCategoryDetail', 'Phòng làm việc')}}">Phòng làm việc</a>
                     </li>
                 </ul>
             </div>
@@ -88,7 +89,3 @@
         <a class="ml-4 cursor-pointer"><i class="fa-solid fa-user"></i></a>
     </div>
 </div>
-<!-- <div class="slider w-full h-[500px] bg-cover bg-no-repeat bg-center mt-4"
-            style="background-image: url(<?php echo asset('Image/slider/banner-trang-chu-san-pham.jpg')?>);">
-            <div class="bg-black opacity-20 h-full"></div>
-        </div> -->

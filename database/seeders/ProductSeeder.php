@@ -15,10 +15,10 @@ class ProductSeeder extends Seeder
     public function run(): void
     {
         $armcharAndSofaCategory = category::updateOrCreate(['name' => 'armchair và sofa']);
-        $armchairCategory = category::updateOrCreate(['name' => 'armchair']);
-        $livingRoom = category::updateOrCreate(['name' => 'Phòng khách']);
-        $sofaCategory = category::updateOrCreate(['name' => 'Sofa']);
-        $sofaGocCategory = category::updateOrCreate(['name' => 'Sofa góc']);
+        $armchairCategory = category::updateOrCreate(['name' => 'armchair', 'urlImageSlider' => 'Image/slider/banner-trang-armchair.jpg']);
+        $livingRoom = category::updateOrCreate(['name' => 'Phòng khách', 'urlImageSlider' => 'Image/slider/banner-trang-phong-khach.jpg']);
+        $sofaCategory = category::updateOrCreate(['name' => 'Sofa', 'urlImageSlider' => 'Image/slider/banner-trang-sofa.jpg']);
+        $sofaGocCategory = category::updateOrCreate(['name' => 'Sofa góc', 'urlImageSlider' => 'Image/slider/banner-trang-sofaGoc.jpg']);
         $armcharAndSofaCategory->children()->attach(['id' => $armchairCategory->id]);
         $armcharAndSofaCategory->children()->attach(['id' => $sofaCategory->id]);
         $armcharAndSofaCategory->children()->attach(['id' => $sofaGocCategory->id]);

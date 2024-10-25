@@ -4,32 +4,37 @@
 @endsection
 @section('slider')
 <div class="slider-categories flex flex-col lg:flex-row gap-4 mt-5 p-3">
-    <a href="" class="slider lg:basis-1/2 h-[500px] bg-cover bg-no-repeat bg-center flex justify-center items-center"
+    <a href="{{route('showCategoryDetail', 'Sofa')}}"
+        class="slider lg:basis-1/2 h-[500px] bg-cover bg-no-repeat bg-center flex justify-center items-center"
         style="background-image: url(<?php echo asset('Image/slider/BST-COASTAL-SOFA-VANG-2.jpg') ?>);">
         <div class="uppercase text-white text-4xl font-bold">
             sofa
         </div>
     </a>
     <div class="lg:basis-1/2 grid grid-rows-4 grid-cols-1 lg:grid-rows-2 lg:grid-cols-2 gap-4">
-        <a href="" class="slider h-[230px] bg-cover bg-no-repeat bg-center flex justify-center items-center"
+        <a href="{{route('showCategoryDetail', 'Bàn ăn')}}"
+            class="slider h-[230px] bg-cover bg-no-repeat bg-center flex justify-center items-center"
             style="background-image: url(<?php echo asset('Image/slider/nha-xinh-banner-ban-an-vuong-24423.jpg') ?>);">
             <div class="uppercase text-white text-2xl font-bold">
                 Bàn ăn
             </div>
         </a>
-        <a href="" class="slider h-[230px] bg-cover bg-no-repeat bg-center flex justify-center items-center"
+        <a href="{{route('showCategoryDetail', 'Giường')}}"
+            class="slider h-[230px] bg-cover bg-no-repeat bg-center flex justify-center items-center"
             style="background-image: url(<?php echo asset('Image/slider/giuong-ngu-pio-1.jpg') ?>);">
             <div class="uppercase text-white text-2xl font-bold">
                 Giường
             </div>
         </a>
-        <a href="" class="slider h-[230px] bg-cover bg-no-repeat bg-center flex justify-center items-center"
+        <a href="{{route('showCategoryDetail', 'Armchair')}}"
+            class="slider h-[230px] bg-cover bg-no-repeat bg-center flex justify-center items-center"
             style="background-image: url(<?php echo asset('Image/slider/banner-armchair-nhaxinh-31-1-24.jpg') ?>);">
             <div class="uppercase text-white text-2xl font-bold">
                 Armchair
             </div>
         </a>
-        <a href="" class="slider h-[230px] bg-cover bg-no-repeat bg-center flex justify-center items-center"
+        <a href="{{route('showCategoryDetail', ' Ghế ăn')}}"
+            class="slider h-[230px] bg-cover bg-no-repeat bg-center flex justify-center items-center"
             style="background-image: url(<?php echo asset('Image/slider/nha-xinh-ghe-an-phong-an-749x800.jpg') ?>);">
             <div class="uppercase text-white text-2xl font-bold">
                 Ghế ăn
@@ -88,103 +93,6 @@
         </div>
         <hr>
         <div class="content flex flex-col flex-wrap lg:flex-row mt-5">
-            <!-- <div class="basis-1/4 product-cell p-2 h-[330px]">
-                <a href="" class="block h-[200px] w-full bg-cover bg-no-repeat bg-center"
-                    style="background-image: url(<?php echo asset('Image/test/armchair-may-moi-mau-xanh-300x200.jpg') ?>);"></a>
-                <a>Armchair mây mới</a>
-                <p>13,900,000đ</p>
-                <div class="product-actions flex-row hidden justify-center mt-3 gap-4">
-                    <a class="basis-1/2 py-2 block uppercase text-center text-[#0A0A0B] border-[1px] border-[#0A0A0B]">Thêm
-                        vào
-                        giỏ</a>
-                    <a class="basis-1/2 py-2 block uppercase text-center text-white bg-[#0A0A0B] ">Xem thêm</a>
-                </div>
-            </div>
-            <div class="basis-1/4 product-cell p-2 h-[330px]">
-                <a href="" class="block h-[200px] w-full bg-cover bg-no-repeat bg-center"
-                    style="background-image: url(<?php echo asset('Image/test/armchair-may-moi-mau-xanh-300x200.jpg') ?>);"></a>
-                <a>Armchair mây mới</a>
-                <p>13,900,000đ</p>
-                <div class="product-actions flex-row hidden justify-center mt-3 gap-4">
-                    <a class="basis-1/2 py-2 block uppercase text-center text-[#0A0A0B] border-[1px] border-[#0A0A0B]">Thêm
-                        vào
-                        giỏ</a>
-                    <a class="basis-1/2 py-2 block uppercase text-center text-white bg-[#0A0A0B] ">Xem thêm</a>
-                </div>
-            </div>
-            <div class="basis-1/4 product-cell p-2 h-[330px]">
-                <a href="" class="block h-[200px] w-full bg-cover bg-no-repeat bg-center"
-                    style="background-image: url(<?php echo asset('Image/test/armchair-may-moi-mau-xanh-300x200.jpg') ?>);"></a>
-                <a>Armchair mây mới</a>
-                <p>13,900,000đ</p>
-                <div class="product-actions flex-row hidden justify-center mt-3 gap-4">
-                    <a class="basis-1/2 py-2 block uppercase text-center text-[#0A0A0B] border-[1px] border-[#0A0A0B]">Thêm
-                        vào
-                        giỏ</a>
-                    <a class="basis-1/2 py-2 block uppercase text-center text-white bg-[#0A0A0B] ">Xem thêm</a>
-                </div>
-            </div>
-            <div class="basis-1/4 product-cell p-2 h-[330px]">
-                <a href="" class="block h-[200px] w-full bg-cover bg-no-repeat bg-center"
-                    style="background-image: url(<?php echo asset('Image/test/armchair-may-moi-mau-xanh-300x200.jpg') ?>);"></a>
-                <a>Armchair mây mới</a>
-                <p>13,900,000đ</p>
-                <div class="product-actions flex-row hidden justify-center mt-3 gap-4">
-                    <a class="basis-1/2 py-2 block uppercase text-center text-[#0A0A0B] border-[1px] border-[#0A0A0B]">Thêm
-                        vào
-                        giỏ</a>
-                    <a class="basis-1/2 py-2 block uppercase text-center text-white bg-[#0A0A0B] ">Xem thêm</a>
-                </div>
-            </div>
-            <div class="basis-1/4 product-cell p-2 h-[330px]">
-                <a href="" class="block h-[200px] w-full bg-cover bg-no-repeat bg-center"
-                    style="background-image: url(<?php echo asset('Image/test/armchair-may-moi-mau-xanh-300x200.jpg') ?>);"></a>
-                <a>Armchair mây mới</a>
-                <p>13,900,000đ</p>
-                <div class="product-actions flex-row hidden justify-center mt-3 gap-4">
-                    <a class="basis-1/2 py-2 block uppercase text-center text-[#0A0A0B] border-[1px] border-[#0A0A0B]">Thêm
-                        vào
-                        giỏ</a>
-                    <a class="basis-1/2 py-2 block uppercase text-center text-white bg-[#0A0A0B] ">Xem thêm</a>
-                </div>
-            </div>
-            <div class="basis-1/4 product-cell p-2 h-[330px]">
-                <a href="" class="block h-[200px] w-full bg-cover bg-no-repeat bg-center"
-                    style="background-image: url(<?php echo asset('Image/test/armchair-may-moi-mau-xanh-300x200.jpg') ?>);"></a>
-                <a>Armchair mây mới</a>
-                <p>13,900,000đ</p>
-                <div class="product-actions flex-row hidden justify-center mt-3 gap-4">
-                    <a class="basis-1/2 py-2 block uppercase text-center text-[#0A0A0B] border-[1px] border-[#0A0A0B]">Thêm
-                        vào
-                        giỏ</a>
-                    <a class="basis-1/2 py-2 block uppercase text-center text-white bg-[#0A0A0B] ">Xem thêm</a>
-                </div>
-            </div>
-            <div class="basis-1/4 product-cell p-2 h-[330px]">
-                <a href="" class="block h-[200px] w-full bg-cover bg-no-repeat bg-center"
-                    style="background-image: url(<?php echo asset('Image/test/armchair-may-moi-mau-xanh-300x200.jpg') ?>);"></a>
-                <a>Armchair mây mới</a>
-                <p>13,900,000đ</p>
-                <div class="product-actions flex-row hidden justify-center mt-3 gap-4">
-                    <a class="basis-1/2 py-2 block uppercase text-center text-[#0A0A0B] border-[1px] border-[#0A0A0B]">Thêm
-                        vào
-                        giỏ</a>
-                    <a class="basis-1/2 py-2 block uppercase text-center text-white bg-[#0A0A0B] ">Xem thêm</a>
-                </div>
-            </div>
-            <div class="basis-1/4 product-cell p-2 h-[330px]">
-                <a href="" class="block h-[200px] w-full bg-cover bg-no-repeat bg-center"
-                    style="background-image: url(<?php echo asset('Image/test/armchair-may-moi-mau-xanh-300x200.jpg') ?>);"></a>
-                <a>Armchair mây mới</a>
-                <p>13,900,000đ</p>
-                <div class="product-actions flex-row hidden justify-center mt-3 gap-4">
-                    <a class="basis-1/2 py-2 block uppercase text-center text-[#0A0A0B] border-[1px] border-[#0A0A0B]">Thêm
-                        vào
-                        giỏ</a>
-                    <a class="basis-1/2 py-2 block uppercase text-center text-white bg-[#0A0A0B] ">Xem thêm</a>
-                </div>
-            </div> -->
-
             @foreach ($products as $item)
                 <div class="basis-1/4 product-cell p-2 h-[330px]">
                     <a href="" class="block h-[200px] w-full bg-cover bg-no-repeat bg-center"

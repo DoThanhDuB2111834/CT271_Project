@@ -13,6 +13,7 @@ return new class extends Migration {
         Schema::create('category', function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->string('name');
+            $table->string('urlImageSlider')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

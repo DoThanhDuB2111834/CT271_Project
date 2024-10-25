@@ -21,17 +21,17 @@ class HomePageController extends Controller
     public function index()
     {
         $newProducts = $this->product->orderBy('created_at', 'desc')->take(4)->get();
-        $products = $this->product->paginate(6);
+        $products = $this->product->paginate(8);
 
         return view('client.HomePage', compact('newProducts', 'products'));
     }
 
     public function showCategoryDetailPage(string $categoryName)
     {
-        $category = $this->category->where('name', 'like', "%$categoryName%")->first();
+        $category = $this->category->where('name', '=', "$categoryName")->first();
 
         $products = $category->products()->paginate(6);
 
-        return view('client.ProductCategoryPage');
+        return view('client.ProductCategoryPage', compact('products', 'category'));
     }
 }

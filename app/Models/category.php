@@ -10,8 +10,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-use function PHPUnit\Framework\isEmpty;
-
 class category extends Model
 {
     use HasFactory, HasUlids, SoftDeletes;
