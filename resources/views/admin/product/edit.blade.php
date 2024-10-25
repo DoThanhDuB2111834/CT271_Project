@@ -1,15 +1,26 @@
 @extends('admin.layouts.app')
 @section('content')
 @use('App\Models\category')
+@use('Illuminate\Support\Collection')
 @php
-    function printListCategory($categories, $product, $indent)
+    function printListCategory($categories, $product, $indent, Collection $isPrintedCategories)
     {
         foreach ($categories as $category) {
             $isSelected = in_array($category->id, old('categories') ?? $product->categories()->pluck('category.id')->toArray());
             echo ("<option value=\"$category->id\"" . ($isSelected ? 'selected>' : '>') . str_repeat("&ensp;", $indent) . "&#8226; $category->name</option>");
+            $isPrintedCategories->push($category);
             if ($category->children()->count() > 0) {
-                printListCategory($category->children()->get(), $product, $indent + 2);
+                printListCategory($category->children()->get(), $product, $indent + 2, $isPrintedCategories);
             }
+        }
+    }
+
+    // Hàm hiển thị những phần tử còn lại
+    function printTest($categories, $product)
+    {
+        foreach ($categories as $item) {
+            $isSelected = in_array($item->id, old('categories') ?? $product->categories()->pluck('category.id')->toArray());
+            echo ("<option value=\"$item->id\"" . ($isSelected ? 'selected>' : '>') . "&#8226; $item->name</option>");
         }
     }
 @endphp
@@ -82,7 +93,11 @@
                                         <select multiple="" class="form-select form-control-lg" id="chidrenCategorys"
                                             name="categories[]">
                                             @php
-                                                printListCategory($highestCategories, $product, 0);
+                                                $isPrintedCategories = collect([]);
+                                                printListCategory($highestCategories, $product, 0, $isPrintedCategories);
+                                                $allCategories = category::all();
+                                                $isNotPrintedCategories = $allCategories->diff($isPrintedCategories);
+                                                printTest($isNotPrintedCategories, $product);
                                             @endphp
                                         </select>
                                         @error('categories')

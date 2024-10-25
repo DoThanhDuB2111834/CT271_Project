@@ -1,6 +1,6 @@
 @extends('client.layouts.app')
 @section('css')
-<link rel="stylesheet" href="{{asset('client/assets/base/homepage.css')}}">
+
 @endsection
 @section('slider')
 <div class="slider-categories flex flex-col lg:flex-row gap-4 mt-5 p-3">
@@ -64,54 +64,20 @@
         </div>
         <hr>
         <div class="content flex flex-col lg:flex-row mt-5">
-            <div class="basis-1/4 product-cell p-2 h-[330px]">
-                <a href="" class="block h-[200px] w-full bg-cover bg-no-repeat bg-center"
-                    style="background-image: url(<?php echo asset('Image/test/armchair-may-moi-mau-xanh-300x200.jpg') ?>);"></a>
-                <a>Armchair mây mới</a>
-                <p>13,900,000đ</p>
-                <div class="product-actions flex-row hidden justify-center mt-3 gap-4">
-                    <a class="basis-1/2 py-2 block uppercase text-center text-[#0A0A0B] border-[1px] border-[#0A0A0B]">Thêm
-                        vào
-                        giỏ</a>
-                    <a class="basis-1/2 py-2 block uppercase text-center text-white bg-[#0A0A0B] ">Xem thêm</a>
+            @foreach ($newProducts as $item)
+                <div class="basis-1/4 product-cell p-2 h-[330px]">
+                    <a href="" class="block h-[200px] w-full bg-cover bg-no-repeat bg-center"
+                        style="background-image: url(<?php    echo asset($item->getFirstImageUrl()->url) ?>);"></a>
+                    <a>{{$item->name}}</a>
+                    <p>{{$item->formatedPrice()}}</p>
+                    <div class="product-actions flex-row hidden justify-center mt-3 gap-4">
+                        <a class="basis-1/2 py-2 block uppercase text-center text-[#0A0A0B] border-[1px] border-[#0A0A0B]">Thêm
+                            vào
+                            giỏ</a>
+                        <a class="basis-1/2 py-2 block uppercase text-center text-white bg-[#0A0A0B] ">Xem thêm</a>
+                    </div>
                 </div>
-            </div>
-            <div class="basis-1/4 product-cell p-2 h-[330px]">
-                <a href="" class="block h-[200px] w-full bg-cover bg-no-repeat bg-center"
-                    style="background-image: url(<?php echo asset('Image/test/armchair-may-moi-mau-xanh-300x200.jpg') ?>);"></a>
-                <a>Armchair mây mới</a>
-                <p>13,900,000đ</p>
-                <div class="product-actions flex-row hidden justify-center mt-3 gap-4">
-                    <a class="basis-1/2 py-2 block uppercase text-center text-[#0A0A0B] border-[1px] border-[#0A0A0B]">Thêm
-                        vào
-                        giỏ</a>
-                    <a class="basis-1/2 py-2 block uppercase text-center text-white bg-[#0A0A0B] ">Xem thêm</a>
-                </div>
-            </div>
-            <div class="basis-1/4 product-cell p-2 h-[330px]">
-                <a href="" class="block h-[200px] w-full bg-cover bg-no-repeat bg-center"
-                    style="background-image: url(<?php echo asset('Image/test/armchair-may-moi-mau-xanh-300x200.jpg') ?>);"></a>
-                <a>Armchair mây mới</a>
-                <p>13,900,000đ</p>
-                <div class="product-actions flex-row hidden justify-center mt-3 gap-4">
-                    <a class="basis-1/2 py-2 block uppercase text-center text-[#0A0A0B] border-[1px] border-[#0A0A0B]">Thêm
-                        vào
-                        giỏ</a>
-                    <a class="basis-1/2 py-2 block uppercase text-center text-white bg-[#0A0A0B] ">Xem thêm</a>
-                </div>
-            </div>
-            <div class="basis-1/4 product-cell p-2 h-[330px]">
-                <a href="" class="block h-[200px] w-full bg-cover bg-no-repeat bg-center"
-                    style="background-image: url(<?php echo asset('Image/test/armchair-may-moi-mau-xanh-300x200.jpg') ?>);"></a>
-                <a>Armchair mây mới</a>
-                <p>13,900,000đ</p>
-                <div class="product-actions flex-row hidden justify-center mt-3 gap-4">
-                    <a class="basis-1/2 py-2 block uppercase text-center text-[#0A0A0B] border-[1px] border-[#0A0A0B]">Thêm
-                        vào
-                        giỏ</a>
-                    <a class="basis-1/2 py-2 block uppercase text-center text-white bg-[#0A0A0B] ">Xem thêm</a>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 
@@ -122,7 +88,7 @@
         </div>
         <hr>
         <div class="content flex flex-col flex-wrap lg:flex-row mt-5">
-            <div class="basis-1/4 product-cell p-2 h-[330px]">
+            <!-- <div class="basis-1/4 product-cell p-2 h-[330px]">
                 <a href="" class="block h-[200px] w-full bg-cover bg-no-repeat bg-center"
                     style="background-image: url(<?php echo asset('Image/test/armchair-may-moi-mau-xanh-300x200.jpg') ?>);"></a>
                 <a>Armchair mây mới</a>
@@ -217,7 +183,24 @@
                         giỏ</a>
                     <a class="basis-1/2 py-2 block uppercase text-center text-white bg-[#0A0A0B] ">Xem thêm</a>
                 </div>
-            </div>
+            </div> -->
+
+            @foreach ($products as $item)
+                <div class="basis-1/4 product-cell p-2 h-[330px]">
+                    <a href="" class="block h-[200px] w-full bg-cover bg-no-repeat bg-center"
+                        style="background-image: url(<?php    echo asset($item->getFirstImageUrl()->url) ?>);"></a>
+                    <a>{{$item->name}}</a>
+                    <p>{{$item->formatedPrice()}}</p>
+                    <div class="product-actions flex-row hidden justify-center mt-3 gap-4">
+                        <a class="basis-1/2 py-2 block uppercase text-center text-[#0A0A0B] border-[1px] border-[#0A0A0B]">Thêm
+                            vào
+                            giỏ</a>
+                        <a class="basis-1/2 py-2 block uppercase text-center text-white bg-[#0A0A0B] ">Xem thêm</a>
+                    </div>
+                </div>
+
+            @endforeach
+            <div class="w-full">{{$products->links()}}</div>
         </div>
     </div>
 </main>

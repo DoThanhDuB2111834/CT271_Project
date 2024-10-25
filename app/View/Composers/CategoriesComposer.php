@@ -20,6 +20,6 @@ class CategoriesComposer
      */
     public function compose(View $view): void
     {
-        $view->with('categories', $this->category->all());
+        $view->with('highestCategories', $this->category->getHighestParent());
     }
 }

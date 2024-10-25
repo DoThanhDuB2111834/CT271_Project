@@ -1,3 +1,28 @@
+@use('Illuminate\Support\Collection')
+@php
+    function printListCategory($categories, $indent, Collection $isPrintedCategories)
+    {
+        if ($indent > 0)
+            echo "<ul class=\"hidden w-full mt-3 transition-all duration-300\">";
+        else
+            echo "<ul class=\"w-full\">";
+
+        foreach ($categories as $category) {
+            echo ("<li class=\"mb-3 flex justify-between flex-wrap " . "\"><a href=\" \" class=\"basis-3/4 " . ($indent == 0 ? "text-2xl" : "") . "\">" . str_repeat("&ensp;", $indent) . "$category->name</a>");
+            if ($indent == 0)
+                echo "<label for=\"expand-categories-child\" class=\"basis-1/4 text-center text-[#666666d9]\"><i class=\"fa-solid fa-chevron-down\"></i> </label> <input class=\"hidden\" type=\"checkbox\" id=\"expand-categories-child\">";
+            $isPrintedCategories->push($category);
+            if ($category->children()->count() > 0) {
+                printListCategory($category->children()->get(), $indent + 2, $isPrintedCategories);
+            }
+            echo "</li>";
+            if ($indent == 0) {
+                echo "</hr>";
+            }
+        }
+        echo "</ul>";
+    }
+@endphp
 <div class="max-w-screen-xl w-full mx-auto flex flex-row mt-3">
     <label for="toogle-product-categories"
         class="cartegories-bar mr-3 basis-1/12 lg:basis-1/12 text-3xl flex justify-center lg:justify-start text-[#666666d9] cursor-pointer">
@@ -7,8 +32,11 @@
 
     </div>
     <div
-        class="product-categories z-50 fixed top-0 h-[100vh] left-[-66.666667%] w-2/3 lg:left-[-25%] lg:w-1/4 bg-white transition-transform duration-300">
-
+        class="product-categories z-50 px-4 py-8 fixed top-0 h-[100vh] left-[-66.666667%] w-2/3 lg:left-[-25%] lg:w-1/4 bg-white transition-transform duration-300">
+        @php
+            $isPrintedCategories = collect([]);
+            printListCategory($highestCategories, 0, $isPrintedCategories);
+        @endphp
         <label for="toogle-product-categories" class="absolute right-[10px] top-0 cursor-pointer">
             <i class="fa-solid fa-xmark"></i>
         </label>

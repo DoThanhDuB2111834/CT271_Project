@@ -23,6 +23,11 @@ class Product extends Model
         'price',
     ];
 
+    function formatedPrice()
+    {
+        return number_format($this->price, 0, ',', '.') . '₫';
+    }
+
     public function Images()
     {
         return $this->morphMany(Image::class, 'Imageable');
