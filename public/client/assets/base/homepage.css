@@ -1,8 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* .room-toogle:hover .room-categories {
+.room-toogle:hover .room-categories {
     display: block;
 }
 
@@ -47,4 +43,16 @@
     margin: 1em 0;
     max-width: 30px;
     width: 100%;
-} */
+}
+
+#toogle-product-categories:checked ~ .product-categories-blurring {
+    display: block;
+}
+
+#toogle-product-categories:checked ~ .product-categories {
+    transform: translateX(100%);
+}
+
+.product-categories {
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+}
