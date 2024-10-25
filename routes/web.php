@@ -3,8 +3,8 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('test');
-})->middleware('auth');
+    return view('client.HomePage');
+});
 
 Route::get('/Shop', function () {
     return view('client.HomePage');
