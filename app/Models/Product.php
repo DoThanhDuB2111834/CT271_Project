@@ -40,7 +40,7 @@ class Product extends Model
 
     public function categories()
     {
-        return $this->BelongsToMany(category::class);
+        return $this->BelongsToMany(category::class, 'category_product');
     }
 
     public function goods_recepits()

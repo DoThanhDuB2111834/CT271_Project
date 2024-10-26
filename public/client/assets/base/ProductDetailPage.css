@@ -1,0 +1,123 @@
+.carousel {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    overflow: hidden;
+    margin: auto;
+}
+
+.carousel-inner {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-item {
+    min-width: 100%;
+    box-sizing: border-box;
+}
+
+.carousel-controls {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.thumbnails {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.thumbnail {
+    width: 50px;
+    height: 50px;
+    margin: 5px;
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.active {
+    opacity: 1;
+    border: 2px solid #000;
+}
+
+.thumbnail-controls {
+    cursor: pointer;
+    padding: 10px;
+}
+
+.tab {
+    display: inline-block;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #f1f1f1;
+    border-bottom: none;
+    transition: background-color 0.3s, border-bottom 0.3s;
+}
+
+.tab-content {
+    display: none;
+    padding: 10px;
+    background-color: #fff;
+}
+
+.active-tab {
+    background-color: #fff;
+    border-bottom: 1px solid #dd9933;
+    color: #0a0a0b;
+}
+
+.show {
+    display: block;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-control button {
+    width: 40px; /* Điều chỉnh kích thước nút */
+    height: 40px;
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.quantity-control input {
+    width: 40px; /* Điều chỉnh kích thước input */
+    height: 40px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-left: none;
+    border-right: none;
+    -moz-appearance: textfield; /* Firefox */
+}
+
+.quantity-control input::-webkit-outer-spin-button,
+.quantity-control input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0; /* Safari and Chrome */
+}
+
+.quantity-control input:focus {
+    outline: none; /* Bỏ outline */
+}

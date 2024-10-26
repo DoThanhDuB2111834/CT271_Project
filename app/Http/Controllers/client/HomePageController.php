@@ -34,4 +34,20 @@ class HomePageController extends Controller
 
         return view('client.ProductCategoryPage', compact('products', 'category'));
     }
+
+    public function showProductDetailPage(string $id)
+    {
+        $product = $this->product->findOrFail($id);
+        $categories = $product->categories;
+        $recommendedProducts = [];
+        foreach ($categories as $category) {
+            foreach ($category->products as $recommendedProduct) {
+                if (count($recommendedProducts) >= 4 || $recommendedProduct->id == $product->id)
+                    break;
+                array_push($recommendedProducts, $recommendedProduct);
+            }
+        }
+
+        return view('client.ProductDetailPage', compact('product', 'recommendedProducts'));
+    }
 }
