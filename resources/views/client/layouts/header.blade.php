@@ -3,7 +3,37 @@
         Chào mừng bạn đến với hệ thống siêu thị nội thất 360!
     </div>
     <div class="header-nav hidden lg:flex text-[#666666d9] text-sm">
-        <a class="cursor-pointer"><i class="fa-solid fa-cart-shopping"></i></a>
+        <button class="toogle-cart-button relative"><i class="fa-solid fa-cart-shopping "></i><span id=""
+                class="cart-amount-label absolute top-[-1px] right-[-6px] px-1 bg-red-500 leading-[14px] text-[10px] text-white rounded-full"></span></button>
         <a class="ml-4 cursor-pointer">Đăng nhập <i class="fa-solid fa-user"></i></a>
     </div>
 </header>
+<div id="cart-blurring" class=" z-40 hidden fixed left-0 top-0 bg-black opacity-40 w-[100vw] h-[100%]">
+
+</div>
+<div id="cart-right-modal"
+    class=" z-50 px-4 py-8 fixed top-0 h-[100%] right-0 translate-x-[100%] w-2/3 lg:w-1/4 bg-white transition-transform duration-300">
+    <button class="toogle-cart-button absolute left-2 top-2">
+        <i class="fa-solid fa-xmark"></i>
+
+    </button>
+    <h1 class="uppercase text-xl text-[#0a0a0b] text-center font-semibold w-full">Cart</h1>
+    <div class="divider mx-auto"></div>
+    <div class="cart-right-modal-body h-[70%] overflow-auto">
+
+
+    </div>
+    <div class="cart-right-modal-footer h-[30%]">
+        <hr>
+        <div class="flex flex-row justify-between mt-2">
+            <p>Thành tiền:</p>
+            <p id="cart-right-modal-footer-total-price">10000000d</p>
+        </div>
+        <a href="{{route('cart.index')}}"
+            class="block mt-4 p-2 uppercase bg-[#0a0a0b] text-white text-lg text-center font-semibold">Xem giỏ
+            hàng</a>
+        <a href=""
+            class="block mt-4 p-2 uppercase border-[1px] border-[#0a0a0b] text-[#0a0a0b] text-lg text-center font-semibold">Check
+            out</a>
+    </div>
+</div>

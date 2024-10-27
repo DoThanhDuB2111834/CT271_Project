@@ -47,7 +47,7 @@
 @section('content')
 <main>
     <div class="slider-service flex flex-col lg:flex-row mt-4 bg-[#ebebeb]">
-        <div class="basis-1/2 px-40 py-20">
+        <div class="basis-1/2 px-4 lg:px-40 py-20">
             <h1 class="uppercase font-semibold text-4xl text-center">Nội thất tinh tế</h1>
             <p class="mt-4 text-xl font-light text-center">Với kinh nghiệm hơn 24 năm trong hoàn thiện nội thất,
                 Nhà Xinh
@@ -77,9 +77,12 @@
                     <a href="{{route('showProductDetail', $item->id)}}" class="overflow-hidden">{{$item->name}}</a>
                     <p>{{$item->formatedPrice()}}</p>
                     <div class="product-actions flex-row hidden justify-center mt-3 gap-4">
-                        <a class="basis-1/2 py-2 block uppercase text-center text-[#0A0A0B] border-[1px] border-[#0A0A0B]">Thêm
+                        <button
+                            class="btn-add-cart basis-1/2 py-2 block uppercase text-center text-[#0A0A0B] border-[1px] border-[#0A0A0B]"
+                            data-id="{{$item->id}}" data-price="{{$item->price}}" data-name="{{$item->name}}"
+                            data-imageUrl="{{$item->getFirstImageUrl()->url}}" data-size="{{$item->size}}">Thêm
                             vào
-                            giỏ</a>
+                            giỏ</button>
                         <a href="{{route('showProductDetail', $item->id)}}"
                             class="basis-1/2 py-2 block uppercase text-center text-white bg-[#0A0A0B] ">Xem thêm</a>
                     </div>
@@ -103,9 +106,12 @@
                     <a href="{{route('showProductDetail', $item->id)}}" class="overflow-hidden">{{$item->name}}</a>
                     <p>{{$item->formatedPrice()}}</p>
                     <div class="product-actions flex-row hidden justify-center mt-3 gap-4">
-                        <a class="basis-1/2 py-2 block uppercase text-center text-[#0A0A0B] border-[1px] border-[#0A0A0B]">Thêm
+                        <button
+                            class="btn-add-cart basis-1/2 py-2 block uppercase text-center text-[#0A0A0B] border-[1px] border-[#0A0A0B]"
+                            data-id="{{$item->id}}" data-price="{{$item->price}}" data-name="{{$item->name}}"
+                            data-imageUrl="{{$item->getFirstImageUrl()->url}}" data-size="{{$item->size}}">Thêm
                             vào
-                            giỏ</a>
+                            giỏ</button>
                         <a href="{{route('showProductDetail', $item->id)}}"
                             class="basis-1/2 py-2 block uppercase text-center text-white bg-[#0A0A0B] ">Xem thêm</a>
                     </div>
@@ -116,4 +122,11 @@
         </div>
     </div>
 </main>
+@endsection
+@section('scripts')
+@if (auth()->check())
+
+@else
+    <script type="module" src="{{asset('client/assets/base/JS/handlerCartForGuestUser.js')}}"></script>
+@endif
 @endsection

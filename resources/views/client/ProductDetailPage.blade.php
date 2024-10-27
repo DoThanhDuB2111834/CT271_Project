@@ -1,11 +1,11 @@
 @extends('client.layouts.app')
 @section('css')
-<link rel="stylesheet" href="{{asset('client/assets/base/ProductDetailPage.css')}}">
+<link rel="stylesheet" href="{{asset('client/assets/base/CSS/ProductDetailPage.css')}}">
 @endsection
 @section('content')
 <main>
     <div class="max-w-screen-xl mx-auto mt-12 flex flex-row">
-        <div class="product-images basis-7/12">
+        <div class="product-images basis-1/2 lg:basis-7/12">
             <div class="carousel">
                 <div class="carousel-inner">
                     @foreach ($product->Images as $item)
@@ -28,7 +28,7 @@
                 <span class="thumbnail-controls" onclick="scrollThumbnails(1)">&#10095;</span>
             </div>
         </div>
-        <div class="product-detail basis-5/12">
+        <div class="product-detail basis-1/2 lg:basis-5/12">
             <h1 class="text-3xl text-[#0a0a0b] font-bold">{{$product->name}}</h1>
             <div class="divider"></div>
             <p class="flex items-center mb-3"><span class="text-xl font-semibold text-[#0a0a0b]">Mã&ensp;&ensp;</span>
@@ -43,21 +43,28 @@
             <p class="flex items-center mb-3">
                 <span class="text-xl font-semibold text-[#0a0a0b]">Danh mục&ensp;&ensp;</span>
                 @foreach ($product->categories()->pluck('category.name')->toArray() as $item)
-                    {{$item . ','}}
+                    {{$item . ($loop->index < count($product->categories) - 1 ? ',' : '.')}}
                 @endforeach
             </p>
 
             <div class="mt-8 flex flex-col lg:flex-row">
-                <div class="quantity-control">
-                    <button onclick="decreaseQuantity()">-</button>
-                    <input type="number" id="quantity" value="1" min="1">
-                    <button onclick="increaseQuantity()">+</button>
-                </div>
-                <a href=""
-                    class="uppercase block bg-[#0a0a0b] text-white text-lg text-center font-medium px-4 py-2 my-4 lg:my-0 lg:mx-4">Mua
-                    ngay</a>
-                <button class="uppercase bg-white border-[#7d7d7d] border-[1px] px-4 py-2 text-lg text-[#7d7d7d]">Thêm
-                    vào giỏ</button>
+                @if ($product->quantity > 0)
+                    <div class="quantity-control">
+                        <button class="btn-decrease" data-id="{{$product->id}}">-</button>
+                        <input type="number" id="quantityOfProduct{{$product->id}}" value="1" min="1">
+                        <button class="btn-increase" data-id="{{$product->id}}">+</button>
+                    </div>
+                    <a href=""
+                        class="uppercase block bg-[#0a0a0b] text-white text-lg text-center font-medium px-4 py-2 my-4 lg:my-0 lg:mx-4">Mua
+                        ngay</a>
+                    <button
+                        class="btn-add-cart uppercase bg-white border-[#7d7d7d] border-[1px] px-4 py-2 text-lg text-[#7d7d7d]"
+                        data-id="{{$product->id}}" data-price="{{$product->price}}" data-name="{{$product->name}}"
+                        data-imageUrl="{{$product->getFirstImageUrl()->url}}" data-size="{{$product->size}}">Thêm
+                        vào giỏ</button>
+                @else
+                    <p class="text-[#0a0a0b] text-lg font-semibold">Không có sẵn</p>
+                @endif
             </div>
 
             <div class="mt-12">
@@ -137,9 +144,12 @@
                     <a href="{{route('showProductDetail', $item->id)}}" class="overflow-hidden">{{$item->name}}</a>
                     <p>{{$item->formatedPrice()}}</p>
                     <div class="product-actions flex-row hidden justify-center mt-3 gap-4">
-                        <a class="basis-1/2 py-2 block uppercase text-center text-[#0A0A0B] border-[1px] border-[#0A0A0B]">Thêm
+                        <button
+                            class="btn-add-cart basis-1/2 py-2 block uppercase text-center text-[#0A0A0B] border-[1px] border-[#0A0A0B]"
+                            data-id="{{$item->id}}" data-price="{{$item->price}}" data-name="{{$item->name}}"
+                            data-imageUrl="{{$item->getFirstImageUrl()->url}}" data-size="{{$item->size}}">Thêm
                             vào
-                            giỏ</a>
+                            giỏ</button>
                         <a href="{{route('showProductDetail', $item->id)}}"
                             class="basis-1/2 py-2 block uppercase text-center text-white bg-[#0A0A0B] ">Xem thêm</a>
                     </div>
@@ -151,6 +161,7 @@
 </main>
 @endsection
 @section('scripts')
+
 <script>
 
     let currentIndex = 0;
@@ -207,19 +218,11 @@
         // Thêm lớp active cho tab được chọn
         event.currentTarget.classList.add('active-tab');
     }
-
-    function decreaseQuantity() {
-        var quantityInput = document.getElementById('quantity');
-        var currentQuantity = Number(quantityInput.value);
-        if (currentQuantity > 1) {
-            quantityInput.setAttribute('value', currentQuantity - 1);
-        }
-    }
-
-    function increaseQuantity() {
-        var quantityInput = document.getElementById('quantity');
-        var currentQuantity = Number(quantityInput.value);
-        quantityInput.setAttribute('value', currentQuantity + 1);
-    }
 </script>
+
+@if (auth()->check())
+
+@else
+    <script type="module" src="{{asset('client/assets/base/JS/handlerCartForGuestUser.js')}}"></script>
+@endif
 @endsection

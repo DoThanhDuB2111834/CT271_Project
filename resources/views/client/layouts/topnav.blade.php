@@ -28,11 +28,11 @@
         class="cartegories-bar mr-3 basis-1/12 lg:basis-1/12 text-3xl flex justify-center lg:justify-start text-[#666666d9] cursor-pointer">
         <i class="fa-solid fa-bars"></i></label>
     <input type="checkbox" id="toogle-product-categories" class="hidden">
-    <div class="product-categories-blurring z-40 hidden fixed left-0 top-0 bg-black opacity-40 w-[100vw] h-[100vh]">
+    <div class="product-categories-blurring z-40 hidden fixed left-0 top-0 bg-black opacity-40 w-[100%] h-[100%]">
 
     </div>
     <div
-        class="product-categories z-50 px-4 py-8 fixed top-0 h-[100vh] left-[-66.666667%] w-2/3 lg:left-[-25%] lg:w-1/4 bg-white transition-transform duration-300">
+        class="product-categories z-50 px-4 py-8 fixed top-0 h-[100%] left-[-66.666667%] w-2/3 lg:left-[-25%] lg:w-1/4 bg-white transition-transform duration-300">
         @php
             $isPrintedCategories = collect([]);
             printListCategory($highestCategories, 0, $isPrintedCategories);
@@ -85,7 +85,8 @@
     </div>
 
     <div class="basis-2/12 lg:basis-0/12 flex lg:hidden justify-center items-center text-[#666666d9] text-sm">
-        <a class="cursor-pointer"><i class="fa-solid fa-cart-shopping"></i></a>
+        <button class="toogle-cart-button cursor-pointer relative"><i class="fa-solid fa-cart-shopping"></i><span id=""
+                class="cart-amount-label absolute top-[-1px] right-[-6px] px-1 bg-red-500 leading-[14px] text-[10px] text-white rounded-full"></span></button>
         <a class="ml-4 cursor-pointer"><i class="fa-solid fa-user"></i></a>
     </div>
 </div>

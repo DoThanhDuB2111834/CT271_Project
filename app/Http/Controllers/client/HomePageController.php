@@ -42,11 +42,15 @@ class HomePageController extends Controller
         $recommendedProducts = [];
         foreach ($categories as $category) {
             foreach ($category->products as $recommendedProduct) {
-                if (count($recommendedProducts) >= 4 || $recommendedProduct->id == $product->id)
+                if (count($recommendedProducts) >= 4)
                     break;
+                if ($recommendedProduct->id == $product->id)
+                    continue;
                 array_push($recommendedProducts, $recommendedProduct);
             }
         }
+
+        $recommendedProducts = array_unique($recommendedProducts);
 
         return view('client.ProductDetailPage', compact('product', 'recommendedProducts'));
     }

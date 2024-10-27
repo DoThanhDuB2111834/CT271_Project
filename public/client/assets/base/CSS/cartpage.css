@@ -1,0 +1,32 @@
+.quantity-control {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-control button {
+    width: 40px; /* Điều chỉnh kích thước nút */
+    height: 40px;
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.quantity-control input {
+    width: 40px; /* Điều chỉnh kích thước input */
+    height: 40px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-left: none;
+    border-right: none;
+    -moz-appearance: textfield; /* Firefox */
+}
+
+.quantity-control input::-webkit-outer-spin-button,
+.quantity-control input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0; /* Safari and Chrome */
+}
+
+.quantity-control input:focus {
+    outline: none; /* Bỏ outline */
+}
