@@ -68,16 +68,30 @@
                 <p class="mb-5">
                     Thứ 7, CN: 9:30 - 16:30
                 </p>
-                <div class="flex flex-row gap-2">
-                    <a href=""
-                        class="basis-1/2 uppercase text-center text-[#0A0A0B] text-base font-semibold p-3 border-[#0A0A0B] border-[1px]"><i
-                            class="fa-solid fa-arrow-left"></i>Tiếp
-                        tục mua
-                        hàng</a>
-                    <a href="{{route('index')}}"
-                        class="basis-1/2 uppercase text-center bg-[#0A0A0B] text-white text-base font-semibold p-3">Đặt
-                        hàng</a>
-                </div>
+
+                @if (!auth()->check())
+                    <div class="flex flex-row justify-center w-full">
+                        <a href=""
+                            class=" basis-1/2 uppercase text-center bg-[#0A0A0B] text-white text-base font-semibold p-3">
+                            Đăng nhập</a>
+                    </div>
+                    <p class="mt-2 text-sm text-center w-full">Vui lòng đăng nhập trước khi đặt hàng</p>
+                    <p class=" text-sm text-center w-full">Chưa có tài khoản? <a href=""
+                            class="text-blue-500 underline">Đăng ký</a>
+                    </p>
+                @else
+                    <div class="flex flex-row gap-2">
+                        <a href="{{route('index')}}"
+                            class="basis-1/2 uppercase text-center text-[#0A0A0B] text-base font-semibold p-3 border-[#0A0A0B] border-[1px]"><i
+                                class="fa-solid fa-arrow-left"></i>Tiếp
+                            tục mua
+                            hàng</a>
+                        <a href=""
+                            class="basis-1/2 uppercase text-center bg-[#0A0A0B] text-white text-base font-semibold p-3">Đặt
+                            hàng</a>
+                    </div>
+                @endif
+
             </div>
         </div>
     </div>

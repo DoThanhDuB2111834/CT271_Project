@@ -87,6 +87,6 @@
     <div class="basis-2/12 lg:basis-0/12 flex lg:hidden justify-center items-center text-[#666666d9] text-sm">
         <button class="toogle-cart-button cursor-pointer relative"><i class="fa-solid fa-cart-shopping"></i><span id=""
                 class="cart-amount-label absolute top-[-1px] right-[-6px] px-1 bg-red-500 leading-[14px] text-[10px] text-white rounded-full"></span></button>
-        <a class="ml-4 cursor-pointer"><i class="fa-solid fa-user"></i></a>
+        <button class="ml-4 cursor-pointer toogle-auth-modal"><i class="fa-solid fa-user"></i></button>
     </div>
 </div>

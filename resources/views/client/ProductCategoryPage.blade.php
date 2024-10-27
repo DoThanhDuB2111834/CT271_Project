@@ -18,9 +18,11 @@
                     <a href="{{route('showProductDetail', $item->id)}}" class="overflow-hidden">{{$item->name}}</a>
                     <p>{{$item->formatedPrice()}}</p>
                     <div class="product-actions flex-row hidden justify-center mt-3 gap-4">
-                        <a class="basis-1/2 py-2 block uppercase text-center text-[#0A0A0B] border-[1px] border-[#0A0A0B]">Thêm
-                            vào
-                            giỏ</a>
+                        @if ($item->quantity > 0)
+                            <a class="basis-1/2 py-2 block uppercase text-center text-[#0A0A0B] border-[1px] border-[#0A0A0B]">Thêm
+                                vào
+                                giỏ</a>
+                        @endif
                         <a href="{{route('showProductDetail', $item->id)}}"
                             class="basis-1/2 py-2 block uppercase text-center text-white bg-[#0A0A0B] ">Xem thêm</a>
                     </div>

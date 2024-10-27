@@ -5,7 +5,7 @@
     <div class="header-nav hidden lg:flex text-[#666666d9] text-sm">
         <button class="toogle-cart-button relative"><i class="fa-solid fa-cart-shopping "></i><span id=""
                 class="cart-amount-label absolute top-[-1px] right-[-6px] px-1 bg-red-500 leading-[14px] text-[10px] text-white rounded-full"></span></button>
-        <a class="ml-4 cursor-pointer">Đăng nhập <i class="fa-solid fa-user"></i></a>
+        <button class="ml-4 cursor-pointer toogle-auth-modal">Đăng nhập <i class="fa-solid fa-user"></i></button>
     </div>
 </header>
 <div id="cart-blurring" class=" z-40 hidden fixed left-0 top-0 bg-black opacity-40 w-[100vw] h-[100%]">

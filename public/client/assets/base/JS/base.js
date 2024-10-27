@@ -18,6 +18,26 @@ buttonOpenCartModal.forEach((button) => {
     });
 });
 
+const buttonOpenAuthModal = document.querySelectorAll(".toogle-auth-modal");
+
+buttonOpenAuthModal.forEach((button) => {
+    button.addEventListener("click", function (event) {
+        const blurring = document.getElementById("auth-modal-blurring");
+        if (blurring.classList.contains("hidden")) {
+            blurring.classList.remove("hidden");
+        } else {
+            blurring.classList.add("hidden");
+        }
+
+        const modal = document.getElementById("auth-modal-view");
+        if (modal.classList.contains("translate-x-[100%]")) {
+            modal.classList.remove("translate-x-[100%]");
+        } else {
+            modal.classList.add("translate-x-[100%]");
+        }
+    });
+});
+
 function getBaseUrl() {
     const { protocol, hostname, port } = window.location;
     return `${protocol}//${hostname}${port ? `:${port}` : ""}/`;

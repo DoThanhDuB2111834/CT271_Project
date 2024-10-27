@@ -144,12 +144,14 @@
                     <a href="{{route('showProductDetail', $item->id)}}" class="overflow-hidden">{{$item->name}}</a>
                     <p>{{$item->formatedPrice()}}</p>
                     <div class="product-actions flex-row hidden justify-center mt-3 gap-4">
-                        <button
-                            class="btn-add-cart basis-1/2 py-2 block uppercase text-center text-[#0A0A0B] border-[1px] border-[#0A0A0B]"
-                            data-id="{{$item->id}}" data-price="{{$item->price}}" data-name="{{$item->name}}"
-                            data-imageUrl="{{$item->getFirstImageUrl()->url}}" data-size="{{$item->size}}">Thêm
-                            vào
-                            giỏ</button>
+                        @if ($item->quantity > 0)
+                            <button
+                                class="btn-add-cart basis-1/2 py-2 block uppercase text-center text-[#0A0A0B] border-[1px] border-[#0A0A0B]"
+                                data-id="{{$item->id}}" data-price="{{$item->price}}" data-name="{{$item->name}}"
+                                data-imageUrl="{{$item->getFirstImageUrl()->url}}" data-size="{{$item->size}}">Thêm
+                                vào
+                                giỏ</button>
+                        @endif
                         <a href="{{route('showProductDetail', $item->id)}}"
                             class="basis-1/2 py-2 block uppercase text-center text-white bg-[#0A0A0B] ">Xem thêm</a>
                     </div>
