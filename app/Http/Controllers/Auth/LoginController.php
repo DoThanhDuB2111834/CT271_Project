@@ -22,7 +22,7 @@ class LoginController extends Controller
 
     public function store(LoginAuthenticateRequest $request): RedirectResponse
     {
-        $credentials = $request->validate([
+        $credentials = $request->validateWithBag('login', [
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
@@ -40,7 +40,7 @@ class LoginController extends Controller
                 }
             } else {
                 $request->session()->regenerate();
-                return redirect()->intended('/');
+                return redirect()->intended('/')->with(['message' => 'Đăng nhập thành công']);
             }
         }
 

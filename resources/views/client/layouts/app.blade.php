@@ -15,7 +15,7 @@
 </head>
 
 <body>
-
+    @include('client.layouts.authModal')
     <div class="warpper">
         @include('client.layouts.header')
         <hr>
@@ -30,7 +30,17 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{asset('client/assets/base/JS/base.js')}}"></script>
+    @if (session('message'))
+        <script>
+            Swal.fire({
+                title: "Thành công!",
+                text: <?php    echo "\"" . session('message') . "\"" ?>,
+                icon: <?php    echo "\"" . session('state') . "\"" ?? "success" ?>,
+            });
+        </script>
+    @endif
     @yield('scripts')
 </body>
+
 
 </html>

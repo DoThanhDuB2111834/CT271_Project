@@ -30,10 +30,12 @@ buttonOpenAuthModal.forEach((button) => {
         }
 
         const modal = document.getElementById("auth-modal-view");
-        if (modal.classList.contains("translate-x-[100%]")) {
-            modal.classList.remove("translate-x-[100%]");
+        if (modal.classList.contains("hidden")) {
+            modal.classList.remove("hidden");
+            modal.classList.add("flex");
         } else {
-            modal.classList.add("translate-x-[100%]");
+            modal.classList.add("hidden");
+            modal.classList.remove("flex");
         }
     });
 });

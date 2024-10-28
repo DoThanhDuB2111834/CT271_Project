@@ -19,15 +19,15 @@ cart_amount_labels.forEach((button) => {
     }
 });
 cartItems.forEach((element) => {
-    var html = `<div class="flex flex-row pt-4">
-                                                                                    <div class="cart-product-image basis-1/6 block h-[50px] bg-cover bg-no-repeat bg-center"
-                                                                                        style=" background-image: url(${
+    var html = `<div class="flex flex-row pt-4 mt-4">
+                                                                                    <div class="cart-product-image basis-1/6 h-[50px] bg-cover bg-no-repeat bg-center"
+                                                                                        style="flex-basis: 16.666667%; background-image: url(${
                                                                                             baseUrl +
                                                                                             element.imageUrl
                                                                                         });">
 
                                                                                     </div>
-                                                                                    <div class="basis-5/6 flex flex-row justify-between">
+                                                                                    <div class="basis-5/6 flex flex-row justify-between" style="flex-basis: 83.333333%;">
                                                                                         <div>
                                                                                             <p>${
                                                                                                 element.productName
