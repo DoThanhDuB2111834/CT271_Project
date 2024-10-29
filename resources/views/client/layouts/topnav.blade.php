@@ -8,17 +8,18 @@
             echo "<ul class=\"w-full\">";
 
         foreach ($categories as $category) {
-            echo ("<li class=\"mb-3 flex justify-between flex-wrap " . "\"><a " . ($indent > 0 ? "href=\"" . route('showCategoryDetail', $category->name) . "\"" : "") . " class=\"basis-3/4 " . ($indent == 0 ? "text-2xl" : "") . "\">" . str_repeat("&ensp;", $indent) . "$category->name</a>");
+            echo ("<li class=\"mb-3 flex justify-between flex-wrap " . "\"><a " . ($indent > 0 ? "href=\"" . route('showCategoryDetail', $category->name) . "\"" : "") . " class=\"basis-3/4 " . ($indent == 0 ? "text-xl" : "") . "\">" . str_repeat("&ensp;", $indent) . "$category->name</a>");
             if ($indent == 0)
                 echo "<button class=\"expand-categories-child basis-1/4 text-center cursor-pointer text-[#666666d9]\"><i class=\"fa-solid fa-chevron-down\"></i> </button> ";
             $isPrintedCategories->push($category);
             if ($category->children()->count() > 0) {
                 printListCategory($category->children()->get(), $indent + 2, $isPrintedCategories);
             }
-            echo "</li>";
             if ($indent == 0) {
                 echo "</hr>";
             }
+            echo "</li>";
+
         }
         echo "</ul>";
     }
