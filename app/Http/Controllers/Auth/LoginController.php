@@ -59,6 +59,6 @@ class LoginController extends Controller
 
         $request->session()->regenerateToken();
 
-        return $isAdmin ? redirect('/admin/login') : redirect('/login');
+        return $isAdmin ? redirect('/admin/login') : redirect()->route('index');
     }
 }

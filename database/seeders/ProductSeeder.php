@@ -23,7 +23,7 @@ class ProductSeeder extends Seeder
         $armcharAndSofaCategory->children()->attach(['id' => $sofaCategory->id]);
         $armcharAndSofaCategory->children()->attach(['id' => $sofaGocCategory->id]);
 
-        $armchairMay = ['name' => 'armchair mây mới', 'description' => 'hàng mới về', 'size' => 'D670 - R760 - C700 mm', 'color' => 'green', 'price' => 13900000];
+        $armchairMay = ['name' => 'armchair mây mới', 'size' => 'D670 - R760 - C700 mm', 'color' => 'green', 'price' => 13900000];
         $model = Product::updateOrCreate($armchairMay);
         $model->Images()->create(['url' => 'Image/product/armchair-may-moi-1-768x511.jpg']);
         $model->Images()->create(['url' => 'Image/product/armchair-may-moi-4-300x200.jpg']);
@@ -32,7 +32,7 @@ class ProductSeeder extends Seeder
         $model->categories()->attach(['id' => $armchairCategory->id]);
         $model->categories()->attach(['id' => $livingRoom->id]);
 
-        $armchairDoultonvintage = ['name' => 'Armchair Doulton vintage', 'description' => 'hàng mới về', 'size' => 'D510 - R850 - C790/420 mm', 'color' => 'gray', 'price' => 28500000];
+        $armchairDoultonvintage = ['name' => 'Armchair Doulton vintage', 'size' => 'D510 - R850 - C790/420 mm', 'color' => 'gray', 'price' => 28500000];
         $model = Product::updateOrCreate($armchairDoultonvintage);
         $model->Images()->create(['url' => 'Image/product/armchair-doulton-vintage-1-300x200.jpg']);
         $model->Images()->create(['url' => 'Image/product/armchair-doulton-vintage-2-768x511.jpg']);
@@ -41,7 +41,7 @@ class ProductSeeder extends Seeder
         $model->categories()->attach(['id' => $armchairCategory->id]);
         $model->categories()->attach(['id' => $livingRoom->id]);
 
-        $armchairOgam = ['name' => 'Armchair Ogami vải vact10499', 'description' => 'hàng mới về', 'size' => 'D820 - R720 - C730 mm', 'color' => 'Orange', 'price' => 8900000];
+        $armchairOgam = ['name' => 'Armchair Ogami vải vact10499', 'size' => 'D820 - R720 - C730 mm', 'color' => 'Orange', 'price' => 8900000];
         $model = Product::updateOrCreate($armchairOgam);
         $model->Images()->create(['url' => 'Image/product/armchair-tet-vai-vact10499.jpg']);
         $model->Images()->create(['url' => 'Image/product/phong-khach-tet-hien-dai-768x511.jpg']);
@@ -49,7 +49,7 @@ class ProductSeeder extends Seeder
         $model->categories()->attach(['id' => $armchairCategory->id]);
         $model->categories()->attach(['id' => $livingRoom->id]);
 
-        $armchairOrientalvact10389 = ['name' => 'Armchair Oriental vact10389', 'description' => 'hàng mới về', 'size' => 'D800 - R815 - C1000 mm', 'color' => 'white', 'price' => 15900000];
+        $armchairOrientalvact10389 = ['name' => 'Armchair Oriental vact10389', 'size' => 'D800 - R815 - C1000 mm', 'color' => 'white', 'price' => 15900000];
         $model = Product::updateOrCreate($armchairOrientalvact10389);
         $model->Images()->create(['url' => 'Image/product/easy-chair-oriental-vact10389-1-768x511.jpg']);
         $model->Images()->create(['url' => 'Image/product/easy-chair-oriental-vact10389-2-300x200.jpg']);
@@ -58,7 +58,7 @@ class ProductSeeder extends Seeder
         $model->categories()->attach(['id' => $armchairCategory->id]);
         $model->categories()->attach(['id' => $livingRoom->id]);
 
-        $armchairSF044TER = ['name' => 'Armchair vải màu nâu đỏ SF044TER.I', 'description' => 'hàng mới về', 'size' => '800x550 mm', 'color' => 'brown', 'price' => 32900000];
+        $armchairSF044TER = ['name' => 'Armchair vải màu nâu đỏ SF044TER.I', 'size' => '800x550 mm', 'color' => 'brown', 'price' => 32900000];
         $model = Product::updateOrCreate($armchairSF044TER);
         $model->Images()->create(['url' => 'Image/product/Armchair-vai-mau-nau-do-sf044ter.i-1-300x200.jpg']);
         $model->Images()->create(['url' => 'Image/product/Armchair-vai-mau-nau-do-sf044ter.i-2-300x200.jpg']);
@@ -67,7 +67,7 @@ class ProductSeeder extends Seeder
         $model->categories()->attach(['id' => $armchairCategory->id]);
         $model->categories()->attach(['id' => $livingRoom->id]);
 
-        $sofaMay = ['name' => 'Sofa 2 chỗ Mây mới', 'description' => 'hàng mới về', 'size' => 'D1690 - R760 - C700 mm', 'color' => 'brown', 'price' => 19900000];
+        $sofaMay = ['name' => 'Sofa 2 chỗ Mây mới', 'size' => 'D1690 - R760 - C700 mm', 'color' => 'brown', 'price' => 19900000];
         $model = Product::updateOrCreate($sofaMay);
         $model->Images()->create(['url' => 'Image/product/sofa-2-cho-may-moi-1-768x511.jpg']);
         $model->Images()->create(['url' => 'Image/product/sofa-2-cho-may-moi-2-768x511.jpg']);
@@ -76,7 +76,7 @@ class ProductSeeder extends Seeder
         $model->categories()->attach(['id' => $sofaCategory->id]);
         $model->categories()->attach(['id' => $livingRoom->id]);
 
-        $sofaOgami = ['name' => 'Sofa 2 chỗ Ogami vải vact10499', 'description' => 'hàng mới về', 'size' => 'D1440 - R720 - C730 mm', 'color' => 'red rose', 'price' => 12900000];
+        $sofaOgami = ['name' => 'Sofa 2 chỗ Ogami vải vact10499', 'size' => 'D1440 - R720 - C730 mm', 'color' => 'red rose', 'price' => 12900000];
         $model = Product::updateOrCreate($sofaOgami);
         $model->Images()->create(['url' => 'Image/product/phong-khach-tet-hien-dai-1-768x511.jpg']);
         $model->Images()->create(['url' => 'Image/product/phong-khach-tet-hien-dai-768x511 (1).jpg']);
@@ -85,7 +85,7 @@ class ProductSeeder extends Seeder
         $model->categories()->attach(['id' => $sofaCategory->id]);
         $model->categories()->attach(['id' => $livingRoom->id]);
 
-        $sofaPioGoc = ['name' => 'Sofa Pio góc phải vải VACT11303/VACT10492', 'description' => 'hàng mới về', 'size' => 'D2800/1650 - R850 - C810 mm', 'color' => 'white', 'price' => 36920000];
+        $sofaPioGoc = ['name' => 'Sofa Pio góc phải vải VACT11303/VACT10492', 'description' => 'Sofa góc trái Pio với thiết kế mới lạ, điểm nhấn là phối màu vải hài hòa giữa nệm và khung ghế, dây đai phần lưng như một khuy áo nhằm gia tăng nệm lưng lên xuống tùy theo nhu cầu sử dụng của bạn. Ưu điểm lớn của Pio là bạn có thể phối màu cho bộ sofa yêu thích của mình thay vì chỉ sử dụng một màu đơn sắc thông thường. Chân sofa cũng được thiết kế nhấn nhá chi tiết bằng hai màu sắc thời thượng để tổng thể chung trở nên bắt mắt, hoàn hảo, vỏ nệm có thể tháo rời để vệ sinh. Sofa góc Pio là lựa chọn tối ưu cho không gian phòng khách Bắc Âu - hiện đại.', 'size' => 'D2800/1650 - R850 - C810 mm', 'color' => 'white', 'price' => 36920000];
         $model = Product::updateOrCreate($sofaPioGoc);
         $model->Images()->create(['url' => 'Image/product/Phong-khach-Pio-tao-nha-tinh-te-3-768x512.jpg']);
         $model->Images()->create(['url' => 'Image/product/Sofa-pio-goc-phai-vai-VACT11303-VACT10492-768x511.jpg']);
@@ -93,7 +93,7 @@ class ProductSeeder extends Seeder
         $model->categories()->attach(['id' => $sofaGocCategory->id]);
         $model->categories()->attach(['id' => $livingRoom->id]);
 
-        $sofaMorettiGoc = ['name' => 'Sofa Moretti góc phải vải vact10635/6643', 'description' => 'hàng mới về', 'size' => 'D3300/1830 - R950 - C850 mm', 'color' => 'green', 'price' => 49990000];
+        $sofaMorettiGoc = ['name' => 'Sofa Moretti góc phải vải vact10635/6643', 'size' => 'D3300/1830 - R950 - C850 mm', 'color' => 'green', 'price' => 49990000];
         $model = Product::updateOrCreate($sofaMorettiGoc);
         $model->Images()->create(['url' => 'Image/product/sofa-moretti-goc-phai-vai-vact10635.6643-768x511.jpg']);
         $model->Images()->create(['url' => 'Image/product/bo-suu-tap-Morretti-768x447.jpg']);

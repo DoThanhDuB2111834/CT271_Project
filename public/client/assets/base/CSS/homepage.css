@@ -60,3 +60,33 @@
 #expand-categories-child:checked + ul {
     display: block;
 }
+
+.account-icon:hover .account-action-list {
+    display: block;
+}
+
+.account-action-list {
+    display: none;
+    top: calc(100% + 6px);
+    box-shadow: 0 1px 3.125rem 0 rgba(0, 0, 0, 0.4);
+    right: 0;
+}
+
+.account-action-list::before {
+    content: "";
+    position: absolute;
+    border-color: transparent transparent #fff transparent;
+    border-width: 10px 10px;
+    border-style: solid;
+    top: -18px;
+    right: 30px;
+}
+
+.account-action-list::after {
+    content: "";
+    position: absolute;
+    width: 66%;
+    height: 10%;
+    top: -15px;
+    right: 0;
+}

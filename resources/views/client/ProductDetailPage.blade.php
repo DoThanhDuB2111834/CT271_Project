@@ -69,8 +69,10 @@
 
             <div class="mt-12">
                 <div class="tabs flex flex-col lg:flex-row">
-                    <div class="tab text-[#7d7d7d] mr-3 text-lg font-medium  active-tab"
-                        onclick="showTabContent(event, 'tab1')">Mô tả</div>
+                    @if ($product->description != '')
+                        <div class="tab text-[#7d7d7d] mr-3 text-lg font-medium  active-tab"
+                            onclick="showTabContent(event, 'tab1')">Mô tả</div>
+                    @endif
                     <div class="tab text-[#7d7d7d] mr-3 text-lg font-medium " onclick="showTabContent(event, 'tab2')">
                         Bảo
                         hành
@@ -81,9 +83,11 @@
                     </div>
                 </div>
 
-                <div id="tab1" class="tab-content mt-3 show">
-                    <p>{{$product->description}}</p>
-                </div>
+                @if ($product->description != '')
+                    <div id="tab1" class="tab-content mt-3 show">
+                        <p>{{$product->description}}</p>
+                    </div>
+                @endif
                 <div id="tab2" class="tab-content mt-3">
                     <ul>
                         <li class="mb-3">&ensp;&ensp;&ensp;&ensp;&ensp;Các sản phẩm nội thất tại nội thất 360 đa số đều

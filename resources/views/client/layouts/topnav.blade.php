@@ -87,6 +87,32 @@
     <div class="basis-2/12 lg:basis-0/12 flex lg:hidden justify-center items-center text-[#666666d9] text-sm">
         <button class="toogle-cart-button cursor-pointer relative"><i class="fa-solid fa-cart-shopping"></i><span id=""
                 class="cart-amount-label absolute top-[-1px] right-[-6px] px-1 bg-red-500 leading-[14px] text-[10px] text-white rounded-full"></span></button>
-        <button class="ml-4 cursor-pointer toogle-auth-modal"><i class="fa-solid fa-user"></i></button>
+        @if (auth()->check())
+            <div class="ml-4 relative account-icon">
+                <a href="{{route('profile.edit')}}" class="">
+                    <i class="fa-solid fa-user"></i>
+                </a>
+                <div class="account-action-list z-10 w-[180px] absolute p-5 bg-white text-lg transition-all duration-300">
+                    <ul>
+                        <li
+                            class="border-b-[1px] border-[#c1c1c1d9] pb-3 hover:text-[#0A0A0B] transition-colors duration-300">
+                            <a href="{{route('profile.edit')}}">Thông tin của tôi</a>
+                        </li>
+                        <li
+                            class="border-b-[1px] border-[#c1c1c1d9] py-3 hover:text-[#0A0A0B] transition-colors duration-300">
+                            <a href="">Đơn hàng</a>
+                        </li>
+                        <li class="pt-3 hover:text-[#0A0A0B] transition-colors duration-300">
+                            <form action="{{route('logout')}}" method="post">
+                                @csrf
+                                <button type="submit">Đăng xuất</button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        @else
+            <button class="ml-4 cursor-pointer toogle-auth-modal">Đăng nhập <i class="fa-solid fa-user"></i></button>
+        @endif
     </div>
 </div>
