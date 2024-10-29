@@ -100,5 +100,81 @@ class ProductSeeder extends Seeder
 
         $model->categories()->attach(['id' => $sofaGocCategory->id]);
         $model->categories()->attach(['id' => $livingRoom->id]);
+
+
+        // Fetch dữ liệu cho Phòng ăn
+        $phongAnCategory = category::updateOrCreate(['name' => 'Phòng ăn', 'urlImageSlider' => 'Image/slider/banner-trang-phong-an.jpg']);
+        $banCategory = category::updateOrCreate(['name' => 'Bàn']);
+        $gheCategory = category::updateOrCreate(['name' => 'Ghế']);
+        $banAnCategory = category::updateOrCreate(['name' => 'Bàn ăn', 'urlImageSlider' => 'Image/slider/banner-trang-ban-an.jpg']);
+        $gheAnCategory = category::updateOrCreate(['name' => 'Ghế ăn', 'urlImageSlider' => 'Image/slider/banner-trang-ghe-an.jpg']);
+        $banCategory->children()->attach(['id' => $banAnCategory->id]);
+        $gheCategory->children()->attach(['id' => $gheAnCategory->id]);
+
+
+        $banAn8ChoOrientaleWalnut = ['name' => 'Bàn ăn 8 chỗ Orientale Walnut', 'size' => 'D2300 - R900 - C750 mm', 'color' => 'brown', 'price' => 72500000];
+        $model = Product::updateOrCreate($banAn8ChoOrientaleWalnut);
+        $model->Images()->create(['url' => 'Image/product/ban-an-8-cho-orientale-walnut-768x511.jpg']);
+        $model->Images()->create(['url' => 'Image/product/phong-an-orientale-1-768x511.jpg']);
+
+        $model->categories()->attach(['id' => $phongAnCategory->id]);
+        $model->categories()->attach(['id' => $banAnCategory->id]);
+
+        $banAn6ChoCoastal = ['name' => 'Bàn ăn 6 chỗ Coastal', 'size' => 'D1600 - R800 - C755 mm', 'description' => 'Bàn ăn Coastal được làm từ gỗ Ash, theo phong cách truyền thống và mang kết cấu vững chãi. Mặt bàn bằng phẳng với các đường vân tự nhiên, bốn cạnh được bo tròn mềm mại để tránh va chạm trong lúc sử dụng. Sản phẩm có 2 kích thước là 6 chỗ và 8 chỗ cho người dùng những lựa chọn linh hoạt, phù hợp với nhiều không gian và nhu cầu sử dụng.', 'color' => 'brown', 'price' => 13900000];
+        $model = Product::updateOrCreate($banAn6ChoCoastal);
+        $model->Images()->create(['url' => 'Image/product/Ban-an-6-cho-Coastal-768x511.jpg']);
+        $model->Images()->create(['url' => 'Image/product/phong-an-coastal-768x512.jpg']);
+
+        $model->categories()->attach(['id' => $phongAnCategory->id]);
+        $model->categories()->attach(['id' => $banAnCategory->id]);
+
+        $banAnMoRongSnapBetonGray = ['name' => 'Bàn ăn mở rộng Snap beton grey', 'size' => 'D1200/1800-R800-C760 mm', 'description' => 'Bàn ăn mở rộng Snap được nhập khẩu từ thương hiệu nổi tiếng Calligaris của Ý là thiết kế bàn ăn tối giản và thanh lịch cho không gian phòng ăn của bạn. Chân bàn kim loại sơn tĩnh điện và mặt bàn melamine. Một thiết kế hoàn hảo cho không gian phòng ăn hiện đại.', 'color' => 'grey', 'price' => 27500000];
+        $model = Product::updateOrCreate($banAnMoRongSnapBetonGray);
+        $model->Images()->create(['url' => 'Image/product/ban_an_mo_rong_snap_102666-6-768x511.jpg']);
+        $model->Images()->create(['url' => 'Image/product/102666_1-3-768x511.jpg']);
+
+        $model->categories()->attach(['id' => $phongAnCategory->id]);
+        $model->categories()->attach(['id' => $banAnCategory->id]);
+
+        $banAn8ChoMay = [
+            'name' => 'Bàn ăn Mây mới 8 chỗ',
+            'size' => 'D2200 - R900 - C740 mm',
+            'color' => 'brown',
+            'price' => 16900000
+        ];
+        $model = Product::updateOrCreate($banAn8ChoMay);
+        $model->Images()->create(['url' => 'Image/product/ban-an-may-moi-8-cho-1-768x511.jpg']);
+        $model->Images()->create(['url' => 'Image/product/ban-an-may-moi-8-cho-4-768x511.jpg']);
+        $model->Images()->create(['url' => 'Image/product/ban-an-may-moi-8-cho-300x200.jpg']);
+
+        $model->categories()->attach(['id' => $phongAnCategory->id]);
+        $model->categories()->attach(['id' => $banAnCategory->id]);
+
+        // Ghế ăn
+
+        $gheAnBolero = ['name' => 'Ghế ăn Bolero ACC001 Da AB1142', 'size' => 'D470 - R570 - C860 mm', 'color' => 'grey', 'price' => 6900000];
+        $model = Product::updateOrCreate($gheAnBolero);
+        $model->Images()->create(['url' => 'Image/product/ghe-an-bolero-1.jpg']);
+        $model->Images()->create(['url' => 'Image/product/Ghe-an-Bolero-ACC001-Da-AB1142-768x511.jpg']);
+
+        $model->categories()->attach(['id' => $phongAnCategory->id]);
+        $model->categories()->attach(['id' => $gheAnCategory->id]);
+
+        $gheAnRoma = ['name' => 'Ghế ăn Roma', 'size' => 'D560 -R440 - C820 mm', 'color' => 'grey', 'price' => 3400000];
+        $model = Product::updateOrCreate($gheAnRoma);
+        $model->Images()->create(['url' => 'Image/product/1000-ghe-roma-768x511.jpg']);
+        $model->Images()->create(['url' => 'Image/product/500-roma-ban-an1.jpg']);
+
+        $model->categories()->attach(['id' => $phongAnCategory->id]);
+        $model->categories()->attach(['id' => $gheAnCategory->id]);
+
+        $gheAnKhongtayValente = ['name' => 'Ghế ăn không tay Valente', 'size' => 'D500 - R550 - C850 mm', 'color' => 'grey', 'price' => 8900000];
+        $model = Product::updateOrCreate($gheAnKhongtayValente);
+        $model->Images()->create(['url' => 'Image/product/ghe_an_valente-768x511.jpg']);
+        $model->Images()->create(['url' => 'Image/product/Ghe-an-khong-tay-Valente-1-1-768x511.jpg']);
+        $model->Images()->create(['url' => 'Image/product/Ghe-an-khong-tay-Valente-4-1-768x511.jpg']);
+
+        $model->categories()->attach(['id' => $phongAnCategory->id]);
+        $model->categories()->attach(['id' => $gheAnCategory->id]);
     }
 }

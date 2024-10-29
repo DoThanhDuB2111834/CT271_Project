@@ -54,3 +54,12 @@ function formatCurrency(amount) {
             .replace("₫", "") + "₫"
     );
 }
+
+document.querySelectorAll(".expand-categories-child").forEach((label) => {
+    label.addEventListener("click", function () {
+        const nextUl = label.nextElementSibling;
+        if (nextUl && nextUl.tagName === "UL") {
+            nextUl.classList.toggle("hidden");
+        }
+    });
+});
