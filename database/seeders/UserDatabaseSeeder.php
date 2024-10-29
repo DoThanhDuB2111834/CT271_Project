@@ -19,6 +19,7 @@ class UserDatabaseSeeder extends Seeder
             'gender' => 'male',
             'birth_date' => Carbon::createFromDate(2003, 11, 11),
             'phone_number' => '0357663765',
+            'email_verified_at' => Carbon::now(),
             'email' => 'test@example.com',
             'password' => '123456789',
         ]);
@@ -30,6 +31,7 @@ class UserDatabaseSeeder extends Seeder
             'gender' => 'female',
             'birth_date' => Carbon::createFromDate(1993, 5, 16),
             'phone_number' => '0357663765',
+            'email_verified_at' => Carbon::now(),
             'email' => 'mywife@gmail.com',
             'password' => '123456789',
         ]);
@@ -41,6 +43,7 @@ class UserDatabaseSeeder extends Seeder
             'gender' => 'male',
             'birth_date' => Carbon::createFromDate(2003, 11, 11),
             'phone_number' => '0357663765',
+            'email_verified_at' => Carbon::now(),
             'email' => 'president@example.com',
             'password' => '123456789',
         ]);

@@ -14,8 +14,8 @@
             <label for="email-signin" class="text-[#0A0A0B] font-medium mb-2">Tên đăng nhập hoặc địa chỉ email *</label>
             <input type="email" id="email-signin"
                 class="outline-none p-2 lg:w-1/2 border-[#eaeaead9] border-[1px] shadow-sm shadow-gray-400" name="email"
-                value="{{old('email') ?? ''}}">
-            <span class="text-red-400"> {{ $errors->first('email') ?? '' }}</span>
+                value="{{old('resetedemail') ?? ''}}">
+            <span class="text-red-400"> {{ $errors->resetPassword->first('email') ?? '' }}</span>
         </div>
         <button type="submit"
             class="uppercase mt-4 bg-[#0a0a0b] text-white text-base text-center font-medium px-4 py-2">Khôi phục mật

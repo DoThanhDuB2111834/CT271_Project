@@ -1,9 +1,14 @@
+@php
+    $isSignupFalse = $errors->signup->first('email') || $errors->signup->first('password');
+    $isLoginFalse = $errors->login->first('email') || $errors->login->first('password');
+@endphp
+
 <div id="auth-modal-blurring"
-    class="@if ($errors->signup->first('email') || $errors->signup->first('password') || $errors->login->first('email') || $errors->first('email') || session('type') == 'auth') test @else hidden @enderror fixed w-full h-full z-40 left-0 top-0 bg-black opacity-40">
+    class="@if ($isSignupFalse || $isLoginFalse || session('type') == 'auth') test @else hidden @endif fixed w-full h-full z-40 left-0 top-0 bg-black opacity-40">
 
 </div>
 <div id="auth-modal-view"
-    class="@if ($errors->signup->first('email') || $errors->signup->first('password') || $errors->login->first('email') || $errors->first('email') || session('type') == 'auth') flex @else hidden @enderror fixed z-50 w-[90%] lg:w-[60%] h-full lg:h-[60%] top-[5%] lg:top-[20%] left-[5%] lg:left-[20%] bg-white flex-col gap-8 lg:flex-row px-8 py-6 overflow-auto transition-all duration-300">
+    class="@if ($isSignupFalse || $isLoginFalse || session('type') == 'auth') flex @else hidden @endif fixed z-50 w-[90%] lg:w-[60%] h-full lg:h-[60%] top-[5%] lg:top-[20%] left-[5%] lg:left-[20%] bg-white flex-col gap-8 lg:flex-row px-8 py-6 overflow-auto transition-all duration-300">
     <div id="auth-modal-signin" class="basis-1/2 pr-8 border-b-[1px] border-b-[#eaeaead9] lg:border-r-[1px] lg:border-r-[#eaeaead9] border-solid">
    
     <h1 class="uppercase text-2xl font-semibold text-[#0A0A0B] mb-4">Đăng nhập</h1>
@@ -12,8 +17,8 @@
             <div class="form-control flex flex-col mb-8">
             <label for="email-signin" class="text-[#0A0A0B] font-medium mb-2">Tên đăng nhập hoặc địa chỉ email *</label>
             <input type="email" id="email-signin"
-                class="outline-none p-2 border-[#eaeaead9] border-[1px] shadow-sm shadow-gray-400" name="email" value="{{old('email') ?? ''}}">
-                <span class="text-red-400"> {{ $errors->first('email') ?? '' }}</span>
+                class="outline-none p-2 border-[#eaeaead9] border-[1px] shadow-sm shadow-gray-400" name="email" value="{{$isLoginFalse ? old('email') : ''}}">
+                <span class="text-red-400"> {{ $errors->login->first('email') ?? '' }}</span>
         </div>
         <div class="form-control flex flex-col mb-6">
             <label for="password-signin" class="text-[#0A0A0B] font-medium mb-2">Mật khẩu *</label>
@@ -37,7 +42,7 @@
             <div class="form-control flex flex-col mb-4">
                 <label for="email-signup" class="text-[#0A0A0B] font-medium mb-2">Tên đăng nhập hoặc địa chỉ email
                     *</label>
-                <input type="email" id="email-signup" value="{{ $errors->signup->first('email') ? old('email') : '' }}"
+                <input type="email" id="email-signup" value="{{ $isSignupFalse ? old('email') : '' }}"
                     class="outline-none p-2 border-[#eaeaead9] border-[1px] shadow-sm shadow-gray-400" name="email">
                     <span class="text-red-400"> {{ $errors->signup->first('email') ?? '' }}</span>
             </div>

@@ -7,6 +7,7 @@ use App\Http\Requests\LoginAuthenticateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\MessageBag;
 use Illuminate\View\View;
 
 class LoginController extends Controller
@@ -17,16 +18,17 @@ class LoginController extends Controller
         if ($request->is('admin/login')) {
             return View('admin/auth/login');
         }
-        return View('Auth/Login');
+        return redirect()->route('index')->with(['type' => 'auth']);
     }
 
-    public function store(LoginAuthenticateRequest $request): RedirectResponse
+    public function store(Request $request): RedirectResponse
     {
-        $credentials = $request->validateWithBag('login', [
+        $request->validateWithBag('login', [
             'email' => ['required', 'email'],
-            'password' => ['required'],
+            'password' => ['required', 'string'],
         ]);
 
+        $credentials = $request->only('email', 'password');
         $isRemember = $request->boolean('remember');
 
         if (Auth::attempt($credentials, $isRemember)) {
@@ -44,9 +46,10 @@ class LoginController extends Controller
             }
         }
 
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');
+        return back()->withErrors(
+            new MessageBag(['email' => 'The provided credentials do not match our records.', 'password' => 'The provided password is incorrect.']),
+            'login'
+        )->onlyInput('email');
     }
 
     public function logout(Request $request): RedirectResponse
