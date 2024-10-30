@@ -63,3 +63,27 @@ document.querySelectorAll(".expand-categories-child").forEach((label) => {
         }
     });
 });
+
+const buttonsIncrease = document.querySelectorAll(".btn-increase");
+
+buttonsIncrease.forEach((button) => {
+    button.addEventListener("click", function (event) {
+        const id = event.target.dataset.id;
+        var quantityInput = document.getElementById(`quantityOfProduct${id}`);
+        var currentQuantity = Number(quantityInput.value) + 1;
+        quantityInput.setAttribute("value", currentQuantity);
+    });
+});
+
+const buttonsDecrease = document.querySelectorAll(".btn-decrease");
+
+buttonsDecrease.forEach((button) => {
+    button.addEventListener("click", function (event) {
+        const id = event.target.dataset.id;
+        var quantityInput = document.getElementById(`quantityOfProduct${id}`);
+        var currentQuantity = Number(quantityInput.value) - 1;
+        if (currentQuantity >= 1) {
+            quantityInput.setAttribute("value", currentQuantity);
+        }
+    });
+});

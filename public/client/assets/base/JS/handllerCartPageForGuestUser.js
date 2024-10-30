@@ -1,5 +1,5 @@
 import { cartitem } from "./cartitem.js";
-import { Cart } from "./cart.js";
+import { Cart } from "./GuestCart.js";
 
 var cartList = document.getElementById("cart-list");
 
@@ -12,7 +12,7 @@ cart_totalprice.textContent = formatCurrency(cart.getTotalCartPrice());
 cartItems.forEach((element) => {
     var html = `<div class="cart-item mt-10 flex flex-row" data-id="${
         element.productId
-    }">
+    }" data-name="${element.productName}">
                     <div class="cart-item-image basis-1/4 h-[110px] bg-cover bg-no-repeat bg-center"
                         style="background-image: url(${
                             baseUrl + element.imageUrl
@@ -58,18 +58,51 @@ document
     .addEventListener("click", async function (event) {
         const cartItems = document.querySelectorAll(".cart-item");
 
-        cartItems.forEach((item) => {
+        for (const item of cartItems) {
             const productId = item.dataset.id;
+            const productName = item.dataset.name;
             const quantityInput = item.querySelector("input[type='number']");
             const quantity = Number(quantityInput.value);
-            cart.update(productId, quantity);
-        });
+
+            if ((await cart.syncItems(productId, quantity)) == false) {
+                await Swal.fire({
+                    title: "Thất bại!",
+                    text: `Số lượng sản phẩm ${productName} trong kho không đủ`,
+                    icon: "error",
+                });
+                return;
+            }
+        }
 
         await Swal.fire({
             title: "Thành công!",
-            text: "Giỏ hàng đã được cập nhật thành công",
+            text: `Cập nhật giỏ hàng thành công thành công`,
             icon: "success",
         });
 
         location.reload();
     });
+
+const buttonsIncrease = document.querySelectorAll(".btn-increase");
+
+buttonsIncrease.forEach((button) => {
+    button.addEventListener("click", function (event) {
+        const id = event.target.dataset.id;
+        var quantityInput = document.getElementById(`quantityOfProduct${id}`);
+        var currentQuantity = Number(quantityInput.value) + 1;
+        quantityInput.setAttribute("value", currentQuantity);
+    });
+});
+
+const buttonsDecrease = document.querySelectorAll(".btn-decrease");
+
+buttonsDecrease.forEach((button) => {
+    button.addEventListener("click", function (event) {
+        const id = event.target.dataset.id;
+        var quantityInput = document.getElementById(`quantityOfProduct${id}`);
+        var currentQuantity = Number(quantityInput.value) - 1;
+        if (currentQuantity >= 1) {
+            quantityInput.setAttribute("value", currentQuantity);
+        }
+    });
+});

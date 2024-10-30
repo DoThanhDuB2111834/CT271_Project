@@ -119,4 +119,11 @@ class ProductController extends Controller
 
         return response()->json(['products' => $products, 'oke' => !$products->isEmpty()], Response::HTTP_OK);
     }
+
+    public function getProductQuantity(string $id)
+    {
+        $product = $this->product->find($id);
+
+        return response()->json(['quantity' => $product->quantity], Response::HTTP_OK);
+    }
 }

@@ -1,5 +1,5 @@
 import { cartitem } from "./cartitem.js";
-import { Cart } from "./cart.js";
+import { Cart } from "./GuestCart.js";
 
 const cart = new Cart();
 var cartItems = cart.items;
@@ -46,29 +46,6 @@ cartItems.forEach((element) => {
     rightCartModalBody.innerHTML += html;
 });
 // cart.reset();
-const buttonsIncrease = document.querySelectorAll(".btn-increase");
-
-buttonsIncrease.forEach((button) => {
-    button.addEventListener("click", function (event) {
-        const id = event.target.dataset.id;
-        var quantityInput = document.getElementById(`quantityOfProduct${id}`);
-        var currentQuantity = Number(quantityInput.value) + 1;
-        if (currentQuantity > 1) {
-            quantityInput.setAttribute("value", currentQuantity);
-        }
-    });
-});
-
-const buttonsDecrease = document.querySelectorAll(".btn-decrease");
-
-buttonsDecrease.forEach((button) => {
-    button.addEventListener("click", function (event) {
-        const id = event.target.dataset.id;
-        var quantityInput = document.getElementById(`quantityOfProduct${id}`);
-        var currentQuantity = Number(quantityInput.value) - 1;
-        quantityInput.setAttribute("value", currentQuantity);
-    });
-});
 
 const buttonsAddCart = document.querySelectorAll(".btn-add-cart");
 
@@ -94,14 +71,21 @@ buttonsAddCart.forEach((button) => {
             size
         );
 
-        cart.addItem(cartItem);
+        if ((await cart.addOrUpdateItem(cartItem)) == false) {
+            await Swal.fire({
+                title: "Thất bại!",
+                text: "Số lượng sản phẩm trong kho không đủ",
+                icon: "error",
+            });
+        } else {
+            await Swal.fire({
+                title: "Thành công!",
+                text: "Sản phẩm đã được thêm vào giỏ hàng",
+                icon: "success",
+            });
+            location.reload();
+        }
         cart.displayCart();
-        await Swal.fire({
-            title: "Thành công!",
-            text: "Sản phẩm đã được thêm vào giỏ hàng",
-            icon: "success",
-        });
-        location.reload();
     });
 });
 

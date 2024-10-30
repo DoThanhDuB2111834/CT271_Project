@@ -3,10 +3,28 @@ export class Cart {
         this.items = JSON.parse(localStorage.getItem("cartItems")) || []; // Lấy giỏ hàng từ Local Storage nếu có
     }
 
-    addItem(item) {
+    async getQuantityProduct(id) {
+        const response = await fetch(`${baseUrl}api/getQuantityProduct/${id}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+
+        const ApiData = await response.json();
+        return ApiData.quantity;
+    }
+
+    async addOrUpdateItem(item) {
         var hasAlreadyAdd = false;
         for (var i = 0; i < this.items.length; i++) {
             if (this.items[i].productId == item.productId) {
+                if (
+                    (await this.getQuantityProduct(item.productId)) <
+                    item.quantity + this.items[i].quantity
+                ) {
+                    return false;
+                }
                 this.items[i].quantity += item.quantity;
                 hasAlreadyAdd = true;
                 break;
@@ -16,21 +34,22 @@ export class Cart {
             this.items.push(item);
         }
         this.saveCart();
+        return true;
     }
 
-    update(itemId, quantity) {
-        var hasAlreadyUpdate = false;
+    async syncItems(id, quantity) {
         for (var i = 0; i < this.items.length; i++) {
-            if (this.items[i].productId == itemId) {
+            if (this.items[i].productId == id) {
+                if (
+                    (await this.getQuantityProduct(this.items[i].productId)) <
+                    quantity
+                ) {
+                    return false;
+                }
                 this.items[i].quantity = quantity;
-                hasAlreadyUpdate = true;
-                break;
+                return true;
             }
         }
-        if (!hasAlreadyUpdate) {
-            this.items.push(item);
-        }
-        this.saveCart();
     }
 
     removeItem(productId) {
