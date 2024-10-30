@@ -128,9 +128,5 @@
 </main>
 @endsection
 @section('scripts')
-@if (auth()->check())
 
-@else
-    <script type="module" src="{{asset('client/assets/base/JS/handlerCartForGuestUser.js')}}"></script>
-@endif
 @endsection

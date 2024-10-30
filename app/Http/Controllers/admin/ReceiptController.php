@@ -60,6 +60,8 @@ class ReceiptController extends Controller
         $total_price = 0;
         for ($i = 0; $i < count($products_id); $i++) {
             $product = $this->product->find($products_id[$i]);
+            $product->quantity += $products_quantity[$i];
+            $product->save();
             $goods_receipt->products()->save($product, ['quantity' => $products_quantity[$i], 'price' => $products_price[$i]]);
             $total_price += $products_price[$i] * $products_quantity[$i];
         }
@@ -105,10 +107,17 @@ class ReceiptController extends Controller
         $products_price = $request->input('product_price');
 
         // Remove all in goods_receipt_detail table
+        foreach ($goods_receipt->products as $item) {
+            $product = $this->product->find($item->id);
+            $product->quantity -= $item->pivot->quantity;
+            $product->save();
+        }
         $goods_receipt->products()->sync([]);
         $total_price = 0;
         for ($i = 0; $i < count($products_id); $i++) {
             $product = $this->product->find($products_id[$i]);
+            $product->quantity += $products_quantity[$i];
+            $product->save();
             $goods_receipt->products()->save($product, ['quantity' => $products_quantity[$i], 'price' => $products_price[$i]]);
             $total_price += $products_price[$i] * $products_quantity[$i];
         }
@@ -124,6 +133,11 @@ class ReceiptController extends Controller
     public function destroy(string $id)
     {
         $goods_receipt = $this->goods_receipt->findOrFail($id);
+        foreach ($goods_receipt->products as $item) {
+            $product = $this->product->find($item->id);
+            $product->quantity -= $item->pivot->quantity;
+            $product->save();
+        }
         $goods_receipt->delete();
 
         return redirect()->route('goods_receipt.index')->with(['message' => 'Delete successfully', 'state' => 'success']);

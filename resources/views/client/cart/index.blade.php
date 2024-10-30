@@ -102,7 +102,5 @@
 
 @else
     <script type="module" src="{{asset('client/assets/base/JS/handllerCartPageForGuestUser.js')}}"></script>
-    <script type="module" src="{{asset('client/assets/base/JS/handlerCartForGuestUser.js')}}"></script>
-
 @endif
 @endsection
