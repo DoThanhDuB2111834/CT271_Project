@@ -36,9 +36,9 @@
                             </div>
                             <div class="col-md-6 col-lg-4">
                                 <div class="form-group">
-                                    <label for="discount_percentage">percentage:</label>
+                                    <label for="discount_percentage">percentage (%):</label>
                                     <input type="number" class="form-control" id="discount_percentage" name="percentage"
-                                        placeholder="Enter percent"
+                                        placeholder="Enter percent" min="1" max="100"
                                         value="{{old('percentage') ?? $discount->percentage}}" />
                                     @error('percentage')
                                         <span class="text-danger"> {{ $message }}</span>
@@ -92,7 +92,7 @@
                                                 <span aria-hidden="true">&times;</span>
                                             </span>
                                         </div>
-                                        <div class="modal-body" style="height: 550px;">
+                                        <div class="modal-body overflow-auto" style="height: 550px;">
                                             <div class="">
                                                 <div class="input-group" id="search_panel">
                                                     <span class="input-group-text ">

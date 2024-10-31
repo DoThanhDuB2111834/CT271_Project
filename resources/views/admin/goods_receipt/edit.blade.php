@@ -87,7 +87,7 @@
                                                     <span aria-hidden="true">&times;</span>
                                                 </span>
                                             </div>
-                                            <div class="modal-body" style="height: 550px;">
+                                            <div class="modal-body overflow-auto" style="height: 550px;">
                                                 <div class="">
                                                     <div class="input-group" id="search_panel">
                                                         <span class="input-group-text ">

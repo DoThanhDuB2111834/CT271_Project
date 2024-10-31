@@ -1,4 +1,5 @@
 @use('Illuminate\Support\Collection')
+@use('App\Models\category')
 @php
     function printListCategory($categories, $indent, Collection $isPrintedCategories)
     {
@@ -23,6 +24,16 @@
         }
         echo "</ul>";
     }
+
+    function printTest($categories)
+    {
+        echo "<ul class=\"lg:hidden w-full mt-3 transition-all duration-300\">";
+        foreach ($categories as $item) {
+            $isSelected = in_array($item->id, old('categories') ?? []);
+            echo "<li class=\"mb-3 flex justify-between flex-wrap " . "\"><a " . "href=\"" . route('showCategoryDetail', $item->name) . "\"" . " class=\"basis-3/4 text-xl\">" . "$item->name</a>";
+        }
+        echo "</ul>";
+    }
 @endphp
 <div class="max-w-screen-xl w-full mx-auto flex flex-row mt-3">
     <label for="toogle-product-categories"
@@ -37,6 +48,9 @@
         @php
             $isPrintedCategories = collect([]);
             printListCategory($highestCategories, 0, $isPrintedCategories);
+            $allCategories = category::all();
+            $isNotPrintedCategories = $allCategories->diff($isPrintedCategories);
+            printTest($isNotPrintedCategories);
         @endphp
         <label for="toogle-product-categories" class="absolute right-[10px] top-0 cursor-pointer">
             <i class="fa-solid fa-xmark"></i>
@@ -44,13 +58,15 @@
     </div>
     <nav class="uppercase hidden basis-0/12 lg:basis-9/12 lg:flex lg:justify-start items-center">
         <a href="{{route('index')}}"
-            class="mr-3 hover:lg:transition-all hover:lg:text-[#dd9933] hover:lg:duration-300">Trang
+            class="mr-3 {{request()->url() == route('index') ? 'active' : ''}} hover:lg:transition-all hover:lg:text-[#dd9933] hover:lg:duration-300">Trang
             chủ</a>
         <a href="" class="mr-3 hover:lg:transition-all hover:lg:text-[#dd9933] hover:lg:duration-300">Sản
             phẩm</a>
         <div
             class="mr-3 relative room-toogle cursor-pointer hover:lg:transition-all hover:lg:text-[#dd9933] hover:lg:duration-300">
-            phòng <span class="text-[10px]"><i class="fa-solid fa-chevron-down"></i></span>
+            <span
+                class="{{strpos(request()->url(), 'http://127.0.0.1:8000/Shop/Ph%C3%B2ng') !== false ? 'active' : ''}}">Phòng</span>
+            <span class="text-[10px]"><i class="fa-solid fa-chevron-down"></i></span>
             <div class="room-categories absolute hidden z-10 bg-white w-[200px] px-5 py-5 border-[#666666d9]">
                 <ul>
                     <li

@@ -1,13 +1,17 @@
 @extends('client.layouts.app')
 @section('slider')
-<div class="slider w-full h-[500px] bg-cover bg-no-repeat bg-center mt-4"
+<div class="slider relative w-full h-[500px] bg-cover bg-no-repeat bg-center mt-4"
     style="background-image: url(<?php echo asset($category->urlImageSlider)?>);">
     <div class="bg-black opacity-20 h-full"></div>
+    <div
+        class="absolute bottom-1/4 left-1/2 -translate-x-1/4 lg:translate-x-0 lg:left-[10%] font-semibold text-5xl text-white">
+        {{$category->name}}
+    </div>
 </div>
 @endsection
 @section('content')
 <main>
-    <div class="max-w-screen-xl mx-auto mt-8 product-section">
+    <div class=" max-w-screen-xl mx-auto mt-8 product-section">
 
         <div class="content flex flex-col flex-wrap lg:flex-row mt-5">
             @foreach ($products as $item)

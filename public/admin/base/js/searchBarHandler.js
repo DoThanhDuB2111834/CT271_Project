@@ -1,5 +1,12 @@
 import { ApiHandler } from "../../../api/ApiHandler.js";
 
+function getBaseUrl() {
+    const { protocol, hostname, port } = window.location;
+    return `${protocol}//${hostname}${port ? `:${port}` : ""}/`;
+}
+
+const baseUrl = getBaseUrl();
+
 export class searchBarHandler {
     async renderTileHTML(data) {
         if (!Array.isArray(data)) {
@@ -170,7 +177,7 @@ export class searchBarHandler {
         panel_show_search_result
             .querySelectorAll('[field="imageUrl"]')
             .forEach((Element) => {
-                Element.style.backgroundImage = `url(../../${Element.getAttribute(
+                Element.style.backgroundImage = `url(${baseUrl}${Element.getAttribute(
                     "value"
                 )})`;
             });

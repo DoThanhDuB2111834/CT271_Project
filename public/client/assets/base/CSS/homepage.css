@@ -65,6 +65,10 @@
     display: block;
 }
 
+.active {
+    color: #dd9933;
+}
+
 .account-action-list {
     display: none;
     top: calc(100% + 6px);
@@ -79,7 +83,7 @@
     border-width: 10px 10px;
     border-style: solid;
     top: -18px;
-    right: 30px;
+    right: 0px;
 }
 
 .account-action-list::after {
