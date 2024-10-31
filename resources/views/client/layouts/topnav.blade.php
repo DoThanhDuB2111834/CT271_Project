@@ -45,6 +45,23 @@
     </div>
     <div
         class="product-categories z-50 px-4 py-8 fixed top-0 h-[100%] left-[-66.666667%] w-2/3 lg:left-[-25%] lg:w-1/4 bg-white transition-transform duration-300">
+        <ul class="lg:hidden w-full mt-3 transition-all duration-300">
+            <li class="mb-3 flex justify-between flex-wrap">
+                <a href="{{route('index')}}" class="basis-3/4 text-xl">
+                    Trang chủ
+                </a>
+            </li>
+            <li class="mb-3 flex justify-between flex-wrap">
+                <a href="{{route('index')}}" class="basis-3/4 text-xl">
+                    Sản phẩm
+                </a>
+            </li>
+            <li class="mb-3 flex justify-between flex-wrap">
+                <a href="{{route('index')}}" class="basis-3/4 text-xl">
+                    Hàng khuyến mãi
+                </a>
+            </li>
+        </ul>
         @php
             $isPrintedCategories = collect([]);
             printListCategory($highestCategories, 0, $isPrintedCategories);
@@ -60,7 +77,8 @@
         <a href="{{route('index')}}"
             class="mr-3 {{request()->url() == route('index') ? 'active' : ''}} hover:lg:transition-all hover:lg:text-[#dd9933] hover:lg:duration-300">Trang
             chủ</a>
-        <a href="" class="mr-3 hover:lg:transition-all hover:lg:text-[#dd9933] hover:lg:duration-300">Sản
+        <a href="{{route('productClient.index')}}"
+            class="mr-3 {{request()->url() == route('productClient.index') ? 'active' : ''}} hover:lg:transition-all hover:lg:text-[#dd9933] hover:lg:duration-300">Sản
             phẩm</a>
         <div
             class="mr-3 relative room-toogle cursor-pointer hover:lg:transition-all hover:lg:text-[#dd9933] hover:lg:duration-300">
@@ -88,9 +106,8 @@
                 </ul>
             </div>
         </div>
-        <a href="" class="mr-3 hover:lg:transition-all hover:lg:text-[#dd9933] hover:lg:duration-300">Hàng mới
-            về</a>
-        <a href="" class="mr-3 hover:lg:transition-all hover:lg:text-[#dd9933] hover:lg:duration-300">Hàng
+        <a href="{{route('showDiscountProduct')}}"
+            class="mr-3 {{request()->url() == route('showDiscountProduct') ? 'active' : ''}} hover:lg:transition-all hover:lg:text-[#dd9933] hover:lg:duration-300">Hàng
             khuyến mãi</a>
     </nav>
 

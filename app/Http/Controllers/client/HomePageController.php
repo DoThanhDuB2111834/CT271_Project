@@ -4,6 +4,7 @@ namespace App\Http\Controllers\client;
 
 use App\Http\Controllers\Controller;
 use App\Models\category;
+use App\Models\discount;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -53,5 +54,26 @@ class HomePageController extends Controller
         $recommendedProducts = array_unique($recommendedProducts);
 
         return view('client.ProductDetailPage', compact('product', 'recommendedProducts'));
+    }
+
+    public function showDiscountProduct()
+    {
+        $today = date('Y-m-d');
+        $discounts = Discount::where('startedDate', '<=', $today)->where('endeddate', '>=', $today)->get();
+        $products = [];
+        function addElementToArray(&$array, $element)
+        {
+            if (!in_array($element, $array)) {
+                $array[] = $element;
+            }
+        }
+
+        foreach ($discounts as $discount) {
+            foreach ($discount->products as $product) {
+                addElementToArray($products, $product);
+            }
+        }
+
+        return view('client.DiscountProductOverviewPage', compact('products'));
     }
 }

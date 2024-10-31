@@ -35,7 +35,13 @@
                 {{$product->id}}
             </p>
             <p class="flex items-center mb-3"><span
-                    class="text-xl font-semibold text-[#0a0a0b]">Giá&ensp;&ensp;</span>{{$product->formatedPrice()}}
+                    class="text-xl font-semibold text-[#0a0a0b]">Giá&ensp;&ensp;</span>@if($product->getDiscountAmouts() > 0)
+                        <span class="text-red-500">
+                            {{ number_format($product->price * ((100 - $product->getDiscountAmouts()) / 100), 0, ',', '.') . '₫'}}</span>
+                    @endif
+                <span class="@if ($product->getDiscountAmouts() > 0)
+                    text-[#939597] underline text-xs ml-2
+                @endif">{{$product->formatedPrice()}}</span>
             </p>
             <p class="flex items-center mb-3"><span class="text-xl font-semibold text-[#0a0a0b]">Kích
                     thước&ensp;&ensp;</span>{{$product->size}}
@@ -59,8 +65,10 @@
                         ngay</a>
                     <button
                         class="btn-add-cart uppercase bg-white border-[#7d7d7d] border-[1px] px-4 py-2 text-lg text-[#7d7d7d]"
-                        data-id="{{$product->id}}" data-price="{{$product->price}}" data-name="{{$product->name}}"
-                        data-imageUrl="{{$product->getFirstImageUrl()->url}}" data-size="{{$product->size}}">Thêm
+                        data-id="{{$product->id}}"
+                        data-price="{{$product->price * ((100 - $product->getDiscountAmouts()) / 100)}}"
+                        data-name="{{$product->name}}" data-imageUrl="{{$product->getFirstImageUrl()->url}}"
+                        data-size="{{$product->size}}">Thêm
                         vào giỏ</button>
                 @else
                     <p class="text-[#0a0a0b] text-lg font-semibold">Không có sẵn</p>

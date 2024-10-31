@@ -70,18 +70,33 @@
         <hr>
         <div class="content flex flex-col lg:flex-row mt-5">
             @foreach ($newProducts as $item)
-                <div class="basis-1/4 product-cell p-2 h-[330px]">
+                <div class="basis-1/4 product-cell p-2 h-[370px]">
                     <a href="{{route('showProductDetail', $item->id)}}"
-                        class="block h-[200px] w-full bg-cover bg-no-repeat bg-center"
-                        style="background-image: url(<?php    echo asset($item->getFirstImageUrl()->url) ?>);"></a>
+                        class="block relative h-[200px] w-full bg-cover bg-no-repeat bg-center"
+                        style="background-image: url(<?php    echo asset($item->getFirstImageUrl()->url) ?>);">
+                        @if ($item->getDiscountAmouts() > 0)
+                            <div class="discount-label absolute right-0 inline-block p-1 bg-red-600 text-white">
+                                {{ '-' . $item->getDiscountAmouts() . '%'}}
+                            </div>
+                        @endif
+                    </a>
                     <a href="{{route('showProductDetail', $item->id)}}" class="overflow-hidden">{{$item->name}}</a>
-                    <p>{{$item->formatedPrice()}}</p>
-                    <div class="product-actions flex-row hidden justify-center mt-3 gap-4">
+                    @if($item->getDiscountAmouts() > 0)
+                        <p class="text-red-500">
+                            {{ number_format($item->price * ((100 - $item->getDiscountAmouts()) / 100), 0, ',', '.') . '₫'}}
+                        </p>
+                    @endif
+                    <p class="@if ($item->getDiscountAmouts() > 0)
+                        text-[#939597] line-through
+                    @endif">{{$item->formatedPrice()}}</p>
+                    <div class="product-actions flex-row lg:hidden justify-center mt-3 gap-4">
                         @if ($item->quantity > 0)
                             <button
                                 class="btn-add-cart basis-1/2 py-2 block uppercase text-center text-[#0A0A0B] border-[1px] border-[#0A0A0B]"
-                                data-id="{{$item->id}}" data-price="{{$item->price}}" data-name="{{$item->name}}"
-                                data-imageUrl="{{$item->getFirstImageUrl()->url}}" data-size="{{$item->size}}">Thêm
+                                data-id="{{$item->id}}"
+                                data-price="{{$item->price * ((100 - $item->getDiscountAmouts()) / 100)}}"
+                                data-name="{{$item->name}}" data-imageUrl="{{$item->getFirstImageUrl()->url}}"
+                                data-size="{{$item->size}}">Thêm
                                 vào
                                 giỏ</button>
                         @endif
@@ -101,18 +116,33 @@
         <hr>
         <div class="content flex flex-col flex-wrap lg:flex-row mt-5">
             @foreach ($products as $item)
-                <div class="basis-1/4 product-cell p-2 h-[330px]">
+                <div class="basis-1/4 product-cell p-2 h-[370px]">
                     <a href="{{route('showProductDetail', $item->id)}}"
-                        class="block h-[200px] w-full bg-cover bg-no-repeat bg-center"
-                        style="background-image: url(<?php    echo asset($item->getFirstImageUrl()->url) ?>);"></a>
+                        class="block relative h-[200px] w-full bg-cover bg-no-repeat bg-center"
+                        style="background-image: url(<?php    echo asset($item->getFirstImageUrl()->url) ?>);">
+                        @if ($item->getDiscountAmouts() > 0)
+                            <div class="discount-label absolute right-0 inline-block p-1 bg-red-600 text-white">
+                                {{ '-' . $item->getDiscountAmouts() . '%'}}
+                            </div>
+                        @endif
+                    </a>
                     <a href="{{route('showProductDetail', $item->id)}}" class="overflow-hidden">{{$item->name}}</a>
-                    <p>{{$item->formatedPrice()}}</p>
-                    <div class="product-actions flex-row hidden justify-center mt-3 gap-4">
+                    @if($item->getDiscountAmouts() > 0)
+                        <p class="text-red-500">
+                            {{ number_format($item->price * ((100 - $item->getDiscountAmouts()) / 100), 0, ',', '.') . '₫'}}
+                        </p>
+                    @endif
+                    <p class="@if ($item->getDiscountAmouts() > 0)
+                        text-[#939597] line-through
+                    @endif">{{$item->formatedPrice()}}</p>
+                    <div class="product-actions flex-row lg:hidden justify-center mt-3 gap-4">
                         @if ($item->quantity > 0)
                             <button
                                 class="btn-add-cart basis-1/2 py-2 block uppercase text-center text-[#0A0A0B] border-[1px] border-[#0A0A0B]"
-                                data-id="{{$item->id}}" data-price="{{$item->price}}" data-name="{{$item->name}}"
-                                data-imageUrl="{{$item->getFirstImageUrl()->url}}" data-size="{{$item->size}}">Thêm
+                                data-id="{{$item->id}}"
+                                data-price="{{$item->price * ((100 - $item->getDiscountAmouts()) / 100)}}"
+                                data-name="{{$item->name}}" data-imageUrl="{{$item->getFirstImageUrl()->url}}"
+                                data-size="{{$item->size}}">Thêm
                                 vào
                                 giỏ</button>
                         @endif

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\HandleImageTrait;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -48,8 +49,27 @@ class Product extends Model
         return $this->BelongsToMany(goods_receipt::class, 'Goods_receipt_detail', 'product_id', 'Goods_receipt_id');
     }
 
+    public function discounts()
+    {
+        return $this->BelongsToMany(discount::class, 'product_discount', 'product_id', 'discount_id');
+    }
+
     public function items()
     {
         return $this->hasMany(item::class);
+    }
+
+    public function getDiscountAmouts()
+    {
+        $totalAmout = 0;
+        $today = date("Y-m-d");
+        foreach ($this->discounts as $discount) {
+            $isBetween = $today >= $discount->startedDate && $today <= $discount->endedDate;
+            if ($isBetween && $totalAmout < 100) {
+                $totalAmout += $discount->percentage;
+            }
+        }
+
+        return $totalAmout;
     }
 }

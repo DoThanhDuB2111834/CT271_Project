@@ -23,7 +23,7 @@ class ProductSeeder extends Seeder
         $armcharAndSofaCategory->children()->attach(['id' => $sofaCategory->id]);
         $armcharAndSofaCategory->children()->attach(['id' => $sofaGocCategory->id]);
 
-        $armchairMay = ['name' => 'armchair mây mới', 'size' => 'D670 - R760 - C700 mm', 'color' => 'green', 'price' => 13900000];
+        $armchairMay = ['name' => 'armchair mây mới', 'size' => 'D670 - R760 - C700 mm', 'quantity' => 3, 'color' => 'green', 'price' => 13900000];
         $model = Product::updateOrCreate($armchairMay);
         $model->Images()->create(['url' => 'Image/product/armchair-may-moi-1-768x511.jpg']);
         $model->Images()->create(['url' => 'Image/product/armchair-may-moi-4-300x200.jpg']);
@@ -32,7 +32,7 @@ class ProductSeeder extends Seeder
         $model->categories()->attach(['id' => $armchairCategory->id]);
         $model->categories()->attach(['id' => $livingRoom->id]);
 
-        $armchairDoultonvintage = ['name' => 'Armchair Doulton vintage', 'size' => 'D510 - R850 - C790/420 mm', 'color' => 'gray', 'price' => 28500000];
+        $armchairDoultonvintage = ['name' => 'Armchair Doulton vintage', 'size' => 'D510 - R850 - C790/420 mm', 'quantity' => 3, 'color' => 'gray', 'price' => 28500000];
         $model = Product::updateOrCreate($armchairDoultonvintage);
         $model->Images()->create(['url' => 'Image/product/armchair-doulton-vintage-1-300x200.jpg']);
         $model->Images()->create(['url' => 'Image/product/armchair-doulton-vintage-2-768x511.jpg']);
@@ -41,7 +41,7 @@ class ProductSeeder extends Seeder
         $model->categories()->attach(['id' => $armchairCategory->id]);
         $model->categories()->attach(['id' => $livingRoom->id]);
 
-        $armchairOgam = ['name' => 'Armchair Ogami vải vact10499', 'size' => 'D820 - R720 - C730 mm', 'color' => 'Orange', 'price' => 8900000];
+        $armchairOgam = ['name' => 'Armchair Ogami vải vact10499', 'size' => 'D820 - R720 - C730 mm', 'quantity' => 3, 'color' => 'Orange', 'price' => 8900000];
         $model = Product::updateOrCreate($armchairOgam);
         $model->Images()->create(['url' => 'Image/product/armchair-tet-vai-vact10499.jpg']);
         $model->Images()->create(['url' => 'Image/product/phong-khach-tet-hien-dai-768x511.jpg']);
@@ -49,7 +49,7 @@ class ProductSeeder extends Seeder
         $model->categories()->attach(['id' => $armchairCategory->id]);
         $model->categories()->attach(['id' => $livingRoom->id]);
 
-        $armchairOrientalvact10389 = ['name' => 'Armchair Oriental vact10389', 'size' => 'D800 - R815 - C1000 mm', 'color' => 'white', 'price' => 15900000];
+        $armchairOrientalvact10389 = ['name' => 'Armchair Oriental vact10389', 'size' => 'D800 - R815 - C1000 mm', 'quantity' => 3, 'color' => 'white', 'price' => 15900000];
         $model = Product::updateOrCreate($armchairOrientalvact10389);
         $model->Images()->create(['url' => 'Image/product/easy-chair-oriental-vact10389-1-768x511.jpg']);
         $model->Images()->create(['url' => 'Image/product/easy-chair-oriental-vact10389-2-300x200.jpg']);
@@ -58,7 +58,7 @@ class ProductSeeder extends Seeder
         $model->categories()->attach(['id' => $armchairCategory->id]);
         $model->categories()->attach(['id' => $livingRoom->id]);
 
-        $armchairSF044TER = ['name' => 'Armchair vải màu nâu đỏ SF044TER.I', 'size' => '800x550 mm', 'color' => 'brown', 'price' => 32900000];
+        $armchairSF044TER = ['name' => 'Armchair vải màu nâu đỏ SF044TER.I', 'size' => '800x550 mm', 'quantity' => 3, 'color' => 'brown', 'price' => 32900000];
         $model = Product::updateOrCreate($armchairSF044TER);
         $model->Images()->create(['url' => 'Image/product/Armchair-vai-mau-nau-do-sf044ter.i-1-300x200.jpg']);
         $model->Images()->create(['url' => 'Image/product/Armchair-vai-mau-nau-do-sf044ter.i-2-300x200.jpg']);
@@ -67,7 +67,7 @@ class ProductSeeder extends Seeder
         $model->categories()->attach(['id' => $armchairCategory->id]);
         $model->categories()->attach(['id' => $livingRoom->id]);
 
-        $sofaMay = ['name' => 'Sofa 2 chỗ Mây mới', 'size' => 'D1690 - R760 - C700 mm', 'color' => 'brown', 'price' => 19900000];
+        $sofaMay = ['name' => 'Sofa 2 chỗ Mây mới', 'size' => 'D1690 - R760 - C700 mm', 'color' => 'brown', 'quantity' => 3, 'price' => 19900000];
         $model = Product::updateOrCreate($sofaMay);
         $model->Images()->create(['url' => 'Image/product/sofa-2-cho-may-moi-1-768x511.jpg']);
         $model->Images()->create(['url' => 'Image/product/sofa-2-cho-may-moi-2-768x511.jpg']);
@@ -93,7 +93,7 @@ class ProductSeeder extends Seeder
         $model->categories()->attach(['id' => $sofaGocCategory->id]);
         $model->categories()->attach(['id' => $livingRoom->id]);
 
-        $sofaMorettiGoc = ['name' => 'Sofa Moretti góc phải vải vact10635/6643', 'size' => 'D3300/1830 - R950 - C850 mm', 'color' => 'green', 'price' => 49990000];
+        $sofaMorettiGoc = ['name' => 'Sofa Moretti góc phải vải vact10635/6643', 'size' => 'D3300/1830 - R950 - C850 mm', 'quantity' => 3, 'color' => 'green', 'price' => 49990000];
         $model = Product::updateOrCreate($sofaMorettiGoc);
         $model->Images()->create(['url' => 'Image/product/sofa-moretti-goc-phai-vai-vact10635.6643-768x511.jpg']);
         $model->Images()->create(['url' => 'Image/product/bo-suu-tap-Morretti-768x447.jpg']);
@@ -116,7 +116,7 @@ class ProductSeeder extends Seeder
         $gheCategory->children()->attach(['id' => $gheLamViecCategory->id]);
 
 
-        $banAn8ChoOrientaleWalnut = ['name' => 'Bàn ăn 8 chỗ Orientale Walnut', 'size' => 'D2300 - R900 - C750 mm', 'color' => 'brown', 'price' => 72500000];
+        $banAn8ChoOrientaleWalnut = ['name' => 'Bàn ăn 8 chỗ Orientale Walnut', 'size' => 'D2300 - R900 - C750 mm', 'quantity' => 3, 'color' => 'brown', 'price' => 72500000];
         $model = Product::updateOrCreate($banAn8ChoOrientaleWalnut);
         $model->Images()->create(['url' => 'Image/product/ban-an-8-cho-orientale-walnut-768x511.jpg']);
         $model->Images()->create(['url' => 'Image/product/phong-an-orientale-1-768x511.jpg']);
@@ -132,7 +132,7 @@ class ProductSeeder extends Seeder
         $model->categories()->attach(['id' => $phongAnCategory->id]);
         $model->categories()->attach(['id' => $banAnCategory->id]);
 
-        $banAnMoRongSnapBetonGray = ['name' => 'Bàn ăn mở rộng Snap beton grey', 'size' => 'D1200/1800-R800-C760 mm', 'description' => 'Bàn ăn mở rộng Snap được nhập khẩu từ thương hiệu nổi tiếng Calligaris của Ý là thiết kế bàn ăn tối giản và thanh lịch cho không gian phòng ăn của bạn. Chân bàn kim loại sơn tĩnh điện và mặt bàn melamine. Một thiết kế hoàn hảo cho không gian phòng ăn hiện đại.', 'color' => 'grey', 'price' => 27500000];
+        $banAnMoRongSnapBetonGray = ['name' => 'Bàn ăn mở rộng Snap beton grey', 'size' => 'D1200/1800-R800-C760 mm', 'quantity' => 3, 'description' => 'Bàn ăn mở rộng Snap được nhập khẩu từ thương hiệu nổi tiếng Calligaris của Ý là thiết kế bàn ăn tối giản và thanh lịch cho không gian phòng ăn của bạn. Chân bàn kim loại sơn tĩnh điện và mặt bàn melamine. Một thiết kế hoàn hảo cho không gian phòng ăn hiện đại.', 'color' => 'grey', 'price' => 27500000];
         $model = Product::updateOrCreate($banAnMoRongSnapBetonGray);
         $model->Images()->create(['url' => 'Image/product/ban_an_mo_rong_snap_102666-6-768x511.jpg']);
         $model->Images()->create(['url' => 'Image/product/102666_1-3-768x511.jpg']);
@@ -164,7 +164,7 @@ class ProductSeeder extends Seeder
         $model->categories()->attach(['id' => $phongAnCategory->id]);
         $model->categories()->attach(['id' => $gheAnCategory->id]);
 
-        $gheAnRoma = ['name' => 'Ghế ăn Roma', 'size' => 'D560 -R440 - C820 mm', 'color' => 'grey', 'price' => 3400000];
+        $gheAnRoma = ['name' => 'Ghế ăn Roma', 'size' => 'D560 -R440 - C820 mm', 'color' => 'grey', 'quantity' => 3, 'price' => 3400000];
         $model = Product::updateOrCreate($gheAnRoma);
         $model->Images()->create(['url' => 'Image/product/1000-ghe-roma-768x511.jpg']);
         $model->Images()->create(['url' => 'Image/product/500-roma-ban-an1.jpg']);
@@ -172,7 +172,7 @@ class ProductSeeder extends Seeder
         $model->categories()->attach(['id' => $phongAnCategory->id]);
         $model->categories()->attach(['id' => $gheAnCategory->id]);
 
-        $gheAnKhongtayValente = ['name' => 'Ghế ăn không tay Valente', 'size' => 'D500 - R550 - C850 mm', 'color' => 'grey', 'price' => 8900000];
+        $gheAnKhongtayValente = ['name' => 'Ghế ăn không tay Valente', 'size' => 'D500 - R550 - C850 mm', 'quantity' => 3, 'color' => 'grey', 'price' => 8900000];
         $model = Product::updateOrCreate($gheAnKhongtayValente);
         $model->Images()->create(['url' => 'Image/product/ghe_an_valente-768x511.jpg']);
         $model->Images()->create(['url' => 'Image/product/Ghe-an-khong-tay-Valente-1-1-768x511.jpg']);
@@ -192,7 +192,7 @@ class ProductSeeder extends Seeder
         $model->categories()->attach(['id' => $phongLamViecCategory->id]);
         $model->categories()->attach(['id' => $banLamViecCategory->id]);
 
-        $banLamViecSoul = ['name' => 'Bàn làm việc Soul', 'size' => 'D1300-R800-C750mm', 'description' => 'Bàn làm việc nổi bật với phần gác chân bầng kim loại thoải mái và phù hợp với mọi thành viên trong gia đình', 'color' => 'brown', 'price' => 5785000];
+        $banLamViecSoul = ['name' => 'Bàn làm việc Soul', 'size' => 'D1300-R800-C750mm', 'quantity' => 3, 'description' => 'Bàn làm việc nổi bật với phần gác chân bầng kim loại thoải mái và phù hợp với mọi thành viên trong gia đình', 'color' => 'brown', 'price' => 5785000];
         $model = Product::updateOrCreate($banLamViecSoul);
         $model->Images()->create(['url' => 'Image/product/ban-lam-viec-soul-768x511.jpg']);
         $model->Images()->create(['url' => 'Image/product/ban-lam-viec-soul2-768x511.jpg']);
@@ -208,7 +208,7 @@ class ProductSeeder extends Seeder
         $model->categories()->attach(['id' => $phongLamViecCategory->id]);
         $model->categories()->attach(['id' => $banLamViecCategory->id]);
 
-        $banLamWingTrang = ['name' => 'Bàn làm việc Wing màu trắng', 'size' => 'D1300 - R650 - C750 mm', 'color' => 'white', 'price' => 14630000];
+        $banLamWingTrang = ['name' => 'Bàn làm việc Wing màu trắng', 'size' => 'D1300 - R650 - C750 mm', 'quantity' => 3, 'color' => 'white', 'price' => 14630000];
         $model = Product::updateOrCreate($banLamWingTrang);
         $model->Images()->create(['url' => 'Image/product/ban-lam-viec-wing-mau-trang-1-768x517.jpg']);
         $model->Images()->create(['url' => 'Image/product/ban-lam-viec-wing-mau-trang-2-768x512.jpg']);
@@ -217,7 +217,7 @@ class ProductSeeder extends Seeder
         $model->categories()->attach(['id' => $phongLamViecCategory->id]);
         $model->categories()->attach(['id' => $banLamViecCategory->id]);
 
-        $banLamWingDen = ['name' => 'Bàn làm việc Wing màu đen', 'size' => 'D1300 - R650 - C750 mm', 'color' => 'black', 'price' => 14630000];
+        $banLamWingDen = ['name' => 'Bàn làm việc Wing màu đen', 'size' => 'D1300 - R650 - C750 mm', 'quantity' => 3, 'color' => 'black', 'price' => 14630000];
         $model = Product::updateOrCreate($banLamWingDen);
         $model->Images()->create(['url' => 'Image/product/BAN-LAM-VIEC-WING-MAU-DEN-1-768x511.jpg']);
         $model->Images()->create(['url' => 'Image/product/BAN-LAM-VIEC-WING-MAU-DEN-3-768x511.jpg']);
@@ -235,7 +235,7 @@ class ProductSeeder extends Seeder
         $model->categories()->attach(['id' => $phongLamViecCategory->id]);
         $model->categories()->attach(['id' => $gheLamViecCategory->id]);
 
-        $armchairXoayAbert = ['name' => 'Armchair xoay Albert Kuip Taupe', 'size' => 'D470 - R590 - C840 mm', 'color' => 'white', 'price' => 15620000];
+        $armchairXoayAbert = ['name' => 'Armchair xoay Albert Kuip Taupe', 'size' => 'D470 - R590 - C840 mm', 'quantity' => 3, 'color' => 'white', 'price' => 15620000];
         $model = Product::updateOrCreate($armchairXoayAbert);
         $model->Images()->create(['url' => 'Image/product/ARMCHAIR-XOAY-ALBERT-KUIP-TAUPE-120233Z-1-1-768x511.jpg']);
         $model->Images()->create(['url' => 'Image/product/ARMCHAIR-XOAY-ALBERT-KUIP-TAUPE-120233Z-7-1-768x511.jpg']);
@@ -244,7 +244,7 @@ class ProductSeeder extends Seeder
         $model->categories()->attach(['id' => $phongLamViecCategory->id]);
         $model->categories()->attach(['id' => $gheLamViecCategory->id]);
 
-        $Ghelamvieccheckout83959K = ['name' => 'Ghế làm việc check out 83959K', 'size' => 'D750 - R750 - C1180 mm', 'color' => 'black', 'price' => 24060000];
+        $Ghelamvieccheckout83959K = ['name' => 'Ghế làm việc check out 83959K', 'size' => 'D750 - R750 - C1180 mm', 'quantity' => 3, 'color' => 'black', 'price' => 24060000];
         $model = Product::updateOrCreate($Ghelamvieccheckout83959K);
         $model->Images()->create(['url' => 'Image/product/Ghe-Lam-Viec-Check-Out-3105575-1-768x454.jpg']);
         $model->Images()->create(['url' => 'Image/product/Ghe-Lam-Viec-Check-Out-3105575-2-768x454.jpg']);
@@ -253,7 +253,7 @@ class ProductSeeder extends Seeder
         $model->categories()->attach(['id' => $phongLamViecCategory->id]);
         $model->categories()->attach(['id' => $gheLamViecCategory->id]);
 
-        $GhelamviecLightHighBrown83959K = ['name' => 'Ghế làm việc Labora high brown 80724K', 'size' => 'D620 - R590 - C1290 mm', 'color' => 'brown', 'price' => 15290000];
+        $GhelamviecLightHighBrown83959K = ['name' => 'Ghế làm việc Labora high brown 80724K', 'size' => 'D620 - R590 - C1290 mm', 'quantity' => 3, 'color' => 'brown', 'price' => 15290000];
         $model = Product::updateOrCreate($GhelamviecLightHighBrown83959K);
         $model->Images()->create(['url' => 'Image/product/GHE-LAM-VIEC-LABORA-HIGH-BROWN-80724K-1-768x495.jpg']);
         $model->Images()->create(['url' => 'Image/product/GHE-LAM-VIEC-LABORA-HIGH-BROWN-80724K-2-768x495.jpg']);
@@ -271,7 +271,7 @@ class ProductSeeder extends Seeder
         $giuongNguCategory->children()->attach(['id' => $giuongCategory->id]);
         $giuongNguCategory->children()->attach(['id' => $bandaugiuongCategory->id]);
 
-        $bandaugiuongocastal = ['name' => 'Bàn đầu giường Coastal', 'size' => 'D580 - R430 - C555 mm', 'color' => 'yellow', 'price' => 6900000];
+        $bandaugiuongocastal = ['name' => 'Bàn đầu giường Coastal', 'size' => 'D580 - R430 - C555 mm', 'color' => 'yellow', 'quantity' => 3, 'price' => 6900000];
         $model = Product::updateOrCreate($bandaugiuongocastal);
         $model->Images()->create(['url' => 'Image/product/Ban-dau-giuong-Coastal-768x511.jpg']);
         $model->Images()->create(['url' => 'Image/product/Ban-dau-giuong-Coastal-1-768x511.jpg']);
@@ -279,7 +279,7 @@ class ProductSeeder extends Seeder
         $model->categories()->attach(['id' => $phongNguCategory->id]);
         $model->categories()->attach(['id' => $bandaugiuongCategory->id]);
 
-        $bandaugiuongpio = ['name' => 'Bàn đầu giường Pio', 'size' => 'D500- R400 - C550', 'color' => 'white', 'description' => 'Một sản phẩm cộng thêm cho phòng ngủ của bạn. Bàn đầu giường Pio giúp tạo điểm nhấn và công năng. Hoàn thiện với màu nâu xám và điểm xuyến với màu ghi tạo tổng thể hài hòa. PIO – Vẻ đẹp yên bình giữa lối sống đô thị Pha trộn giữa phong cách scandinavian và sự mới lạ trong chọn lựa màu sắc, bộ sưu tập PIO toát lên vẻ đẹp nhẹ nhàng, thanh lịch và cũng rất gần gũi với thiên nhiên. PIO thể hiện lối sống của những người trẻ, biết chiêm nghiệm và thưởng ngoạn sự trở về bình yên giữa nhịp sống hiện đại.Thiết kế bởi những đường cong, điểm xuyến các chi tiết nhấn nhá bên cạnh sử dụng các vật liệu như gỗ beech, melamine marble.. giúp PIO trở nên cá tính và thu hút trong không gian hiện đại. Sản phẩm được thiết kế bởi đội ngũ Nhà Xinh và sản xuất tại Việt Nam.', 'price' => 6900000];
+        $bandaugiuongpio = ['name' => 'Bàn đầu giường Pio', 'size' => 'D500- R400 - C550', 'color' => 'white', 'quantity' => 3, 'description' => 'Một sản phẩm cộng thêm cho phòng ngủ của bạn. Bàn đầu giường Pio giúp tạo điểm nhấn và công năng. Hoàn thiện với màu nâu xám và điểm xuyến với màu ghi tạo tổng thể hài hòa. PIO – Vẻ đẹp yên bình giữa lối sống đô thị Pha trộn giữa phong cách scandinavian và sự mới lạ trong chọn lựa màu sắc, bộ sưu tập PIO toát lên vẻ đẹp nhẹ nhàng, thanh lịch và cũng rất gần gũi với thiên nhiên. PIO thể hiện lối sống của những người trẻ, biết chiêm nghiệm và thưởng ngoạn sự trở về bình yên giữa nhịp sống hiện đại.Thiết kế bởi những đường cong, điểm xuyến các chi tiết nhấn nhá bên cạnh sử dụng các vật liệu như gỗ beech, melamine marble.. giúp PIO trở nên cá tính và thu hút trong không gian hiện đại. Sản phẩm được thiết kế bởi đội ngũ Nhà Xinh và sản xuất tại Việt Nam.', 'price' => 6900000];
         $model = Product::updateOrCreate($bandaugiuongpio);
         $model->Images()->create(['url' => 'Image/product/ban-dau-giuong-pio-768x511.jpg']);
         $model->Images()->create(['url' => 'Image/product/line_pio_bed_beside_table_c02-768x512.png']);
@@ -288,7 +288,7 @@ class ProductSeeder extends Seeder
         $model->categories()->attach(['id' => $phongNguCategory->id]);
         $model->categories()->attach(['id' => $bandaugiuongCategory->id]);
 
-        $bandaugiuongskagen = ['name' => 'Bàn đầu giường Skagen bên phải', 'size' => 'D400-R320-C507', 'color' => 'brown', 'price' => 4900000];
+        $bandaugiuongskagen = ['name' => 'Bàn đầu giường Skagen bên phải', 'size' => 'D400-R320-C507', 'color' => 'brown', 'quantity' => 3, 'price' => 4900000];
         $model = Product::updateOrCreate($bandaugiuongskagen);
         $model->Images()->create(['url' => 'Image/product/ban-dau-giuong-skagen-768x511.png']);
         $model->Images()->create(['url' => 'Image/product/1000-san-pham-nha-xinh74-4-768x511.jpg']);
@@ -304,7 +304,7 @@ class ProductSeeder extends Seeder
         $model->categories()->attach(['id' => $phongNguCategory->id]);
         $model->categories()->attach(['id' => $giuongCategory->id]);
 
-        $giuongleman = ['name' => 'Giường Leman 1m8 vải VACT10370', 'size' => 'D2000 - R1800 - C1070 mm', 'color' => 'grey', 'price' => 33650000];
+        $giuongleman = ['name' => 'Giường Leman 1m8 vải VACT10370', 'size' => 'D2000 - R1800 - C1070 mm', 'color' => 'grey', 'quantity' => 3, 'price' => 33650000];
         $model = Product::updateOrCreate($giuongleman);
         $model->Images()->create(['url' => 'Image/product/giuong-leman-1m8-vai-vact10370-768x511.jpg']);
 
@@ -319,7 +319,7 @@ class ProductSeeder extends Seeder
         $model->categories()->attach(['id' => $phongNguCategory->id]);
         $model->categories()->attach(['id' => $giuongCategory->id]);
 
-        $giuongOna = ['name' => 'Giường Ona Him 1m8 da nâu S3', 'size' => 'D2000 - R1800 - C940 mm', 'color' => 'brown', 'price' => 66900000];
+        $giuongOna = ['name' => 'Giường Ona Him 1m8 da nâu S3', 'size' => 'D2000 - R1800 - C940 mm', 'color' => 'brown', 'quantity' => 3, 'price' => 66900000];
         $model = Product::updateOrCreate($giuongOna);
         $model->Images()->create(['url' => 'Image/product/giuong-ona-him-1m8-da-nau-s3-1-768x511.jpg']);
         $model->Images()->create(['url' => 'Image/product/giuong-ona-him-1m8-da-nau-s3-768x511.jpg']);

@@ -1,11 +1,11 @@
 @extends('client.layouts.app')
 @section('slider')
 <div class="slider relative w-full h-[500px] bg-cover bg-no-repeat bg-center mt-4"
-    style="background-image: url(<?php echo asset($category->urlImageSlider)?>);">
+    style="background-image: url(<?php echo asset('Image/slider/banner-trang-danh-muc-sofa.jpg')?>);">
     <div class="bg-black opacity-20 h-full"></div>
     <div
         class="absolute bottom-1/4 left-1/2 -translate-x-1/4 lg:translate-x-0 lg:left-[10%] font-semibold text-5xl text-white">
-        {{$category->name}}
+        Hàng khuyến mãi
     </div>
 </div>
 @endsection
@@ -50,11 +50,7 @@
                 </div>
 
             @endforeach
-            <div class="w-full">{{$products->links()}}</div>
         </div>
     </div>
 </main>
-@endsection
-@section('scripts')
-
 @endsection

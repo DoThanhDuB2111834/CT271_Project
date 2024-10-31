@@ -94,3 +94,13 @@
     top: -15px;
     right: 0;
 }
+
+.discount-label::after {
+    content: "";
+    position: absolute;
+    border-color: #dc2626 #dc2626 transparent #dc2626;
+    border-width: 10px 23px;
+    border-style: solid;
+    top: calc(100%);
+    left: 0;
+}

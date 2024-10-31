@@ -15,7 +15,7 @@ class DiscountSeeder extends Seeder
     public function run(): void
     {
         $Discounts = [
-            ['description' => 'Sale đầu tháng', 'percentage' => 0.2, 'startedDate' => Carbon::now(), 'endedDate' => Carbon::createFromDate(2024, 11, 10)],
+            ['description' => 'Sale đầu tháng', 'percentage' => 10, 'startedDate' => Carbon::now(), 'endedDate' => Carbon::createFromDate(2024, 11, 10)],
         ];
 
         foreach ($Discounts as $discount) {

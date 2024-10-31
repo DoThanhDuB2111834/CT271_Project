@@ -36,7 +36,7 @@ class CartController extends Controller
         foreach ($cart->items()->with('product')->get() as $cartItem) {
             for ($i = 0; $i < count($items); $i++) {
                 if ($cartItem->product_id == $items[$i]['productId']) {
-                    if ($cartItem->quantity += $items[$i]['quantity'] > $cartItem->product->quantity) {
+                    if (($cartItem->quantity + $items[$i]['quantity']) > $cartItem->product->quantity) {
                         array_push($failMessage, "Sản phẩm " . $cartItem->product->name . " Không đủ số lượng mà bạn yêu cầu");
                         $cartItem->save();
                         unset($items[$i]); // Xóa phần tử khỏi mảng
@@ -82,7 +82,7 @@ class CartController extends Controller
 
         foreach ($cart->items()->with('product')->get() as $item) {
             if ($dataUpdate['productId'] == $item->product_id) {
-                if ($dataUpdate['quantity'] + $item->quantity > $item->product->quantity) {
+                if (($dataUpdate['quantity'] + $item->quantity) > $item->product->quantity) {
                     $failMessage = 'Sản phẩm ' . $dataUpdate['productName'] . ' Trong kho không đủ';
                     $isUpdate = true;
                     break;

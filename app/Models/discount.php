@@ -22,6 +22,6 @@ class discount extends Model
 
     public function products()
     {
-        return $this->belongsToMany(Product::class, 'product_discount');
+        return $this->belongsToMany(Product::class, 'product_discount', 'discount_id', 'product_id');
     }
 }
