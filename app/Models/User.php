@@ -60,4 +60,9 @@ class User extends Authenticatable implements MustVerifyEmail
         $adminRoles = Role::where('group', 'admin')->pluck('name')->toArray();
         return $this->hasAnyRole($adminRoles);
     }
+
+    public function cart()
+    {
+        return $this->hasOne(cart::class);
+    }
 }

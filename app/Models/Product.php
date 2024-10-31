@@ -47,4 +47,9 @@ class Product extends Model
     {
         return $this->BelongsToMany(goods_receipt::class, 'Goods_receipt_detail', 'product_id', 'Goods_receipt_id');
     }
+
+    public function items()
+    {
+        return $this->hasMany(item::class);
+    }
 }

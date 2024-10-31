@@ -19,7 +19,9 @@
                     <p>{{$item->formatedPrice()}}</p>
                     <div class="product-actions flex-row hidden justify-center mt-3 gap-4">
                         @if ($item->quantity > 0)
-                            <a class="basis-1/2 py-2 block uppercase text-center text-[#0A0A0B] border-[1px] border-[#0A0A0B]">Thêm
+                            <a class="btn-add-cart cursor-pointer basis-1/2 py-2 block uppercase text-center text-[#0A0A0B] border-[1px] border-[#0A0A0B]"
+                                data-id="{{$item->id}}" data-price="{{$item->price}}" data-name="{{$item->name}}"
+                                data-imageUrl="{{$item->getFirstImageUrl()->url}}" data-size="{{$item->size}}">Thêm
                                 vào
                                 giỏ</a>
                         @endif

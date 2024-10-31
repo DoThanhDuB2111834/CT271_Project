@@ -30,9 +30,10 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{asset('client/assets/base/JS/base.js')}}"></script>
+
     @if (session('message'))
         <script>
-            Swal.fire({
+            await Swal.fire({
                 title: "Thành công!",
                 text: <?php    echo "\"" . session('message') . "\"" ?>,
                 icon: <?php    echo "\"" . session('state') . "\"" ?? "success" ?>,
@@ -41,7 +42,7 @@
     @endif
     @yield('scripts')
     @if (auth()->check())
-
+        <script type="module" src="{{asset('client/assets/base/JS/handleCartForUser.js')}}"></script>
     @else
         <script type="module" src="{{asset('client/assets/base/JS/handlerCartForGuestUser.js')}}"></script>
     @endif

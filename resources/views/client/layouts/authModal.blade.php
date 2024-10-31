@@ -12,7 +12,7 @@
     <div id="auth-modal-signin" class="basis-1/2 pr-8 border-b-[1px] border-b-[#eaeaead9] lg:border-r-[1px] lg:border-r-[#eaeaead9] border-solid">
    
     <h1 class="uppercase text-2xl font-semibold text-[#0A0A0B] mb-4">Đăng nhập</h1>
-        <form action="{{route('login.store')}}" method="post">
+        <form action="{{route('login.store')}}" method="post" id="loginForm">
             @csrf
             <div class="form-control flex flex-col mb-8">
             <label for="email-signin" class="text-[#0A0A0B] font-medium mb-2">Tên đăng nhập hoặc địa chỉ email *</label>

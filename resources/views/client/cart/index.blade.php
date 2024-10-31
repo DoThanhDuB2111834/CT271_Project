@@ -99,7 +99,7 @@
 @endsection
 @section('scripts')
 @if (auth()->check())
-
+    <script type="module" src="{{asset('client/assets/base/JS/handleCartPageForUser.js')}}"></script>
 @else
     <script type="module" src="{{asset('client/assets/base/JS/handllerCartPageForGuestUser.js')}}"></script>
 @endif
