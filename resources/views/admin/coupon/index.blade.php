@@ -5,7 +5,7 @@
         <div class="page-header">
             <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
                 <div>
-                    <h3 class="fw-bold mb-3">Supplier</h3>
+                    <h3 class="fw-bold mb-3">Coupon</h3>
                 </div>
             </div>
         </div>
@@ -13,7 +13,7 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <h4 class="card-title">Basic</h4>
-                    <a href="{{route('supplier.create')}}" class="btn btn-success">Create</a>
+                    <a href="{{route('coupon.create')}}" class="btn btn-success">Create</a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -21,8 +21,9 @@
                             <thead>
                                 <tr>
                                     <th>id</th>
-                                    <th>name</th>
-                                    <th>address</th>
+                                    <th>value</th>
+                                    <th>startedDate</th>
+                                    <th>endedDate</th>
                                     <th colspan="3">Action</th>
                                 </tr>
                             </thead>
@@ -30,20 +31,22 @@
                                 <tr>
                                     <th>id</th>
                                     <th>name</th>
-                                    <th>address</th>
+                                    <th>startedDate</th>
+                                    <th>endedDate</th>
                                     <th colspan="3">Action</th>
                                 </tr>
                             </tfoot>
                             <tbody>
-                                @foreach ($suppliers as $item)
+                                @foreach ($coupons as $item)
                                     <tr>
                                         <td>{{$item->id}}</td>
-                                        <td>{{$item->name}}</td>
-                                        <td>{{$item->address}}</td>
-                                        <td><a href="{{route('supplier.edit', $item->id)}}" class="btn btn-warning">Edit</a>
+                                        <td>{{$item->value}}</td>
+                                        <td>{{$item->startedDate}}</td>
+                                        <td>{{$item->endedDate}}</td>
+                                        <td><a href="{{route('coupon.edit', $item->id)}}" class="btn btn-warning">Edit</a>
                                         </td>
                                         <td>
-                                            <form action="{{route('supplier.destroy', $item->id)}}" method="post"
+                                            <form action="{{route('coupon.destroy', $item->id)}}" method="post"
                                                 onsubmit="confirmDelete(event);" id="form-delete{{$item->id}}">
                                                 @csrf
                                                 @method('delete')
@@ -78,6 +81,6 @@
     <?php
         session()->forget('state');
         session()->forget('message');
-                                                                                                                                    ?>
+                                                                                                                                                ?>
 @endif
 @endsection

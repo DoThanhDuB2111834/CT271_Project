@@ -27,10 +27,15 @@ class CreateDiscount extends FormRequest
         return [
             'description' => 'required',
             'percentage' => 'required',
-            'startedDate' => 'required',
-            'endedDate' => 'required',
+            'startedDate' => 'required|date|before:endedDate',
+            'endedDate' => 'required|after:startedDate',
             'product_ids' => 'required',
         ];
+    }
+
+    public function messages()
+    {
+        return ['startedDate.before' => 'Ngày bắt đầu phải nhỏ hơn ngày kết thúc.', 'endedDate.after' => 'Ngày kết thúc phải lớn hơn ngày bắt đầu.',];
     }
 
     protected function failedValidation(Validator $validator)
@@ -38,7 +43,7 @@ class CreateDiscount extends FormRequest
         $description = $this->input('description');
         $percentage = $this->input('percentage');
         $startedDate = $this->input('startedDate');
-
+        $endedDate = $this->input('endedDate');
 
         $product_ids = $this->input('product_ids') ?? [];
 
@@ -56,7 +61,7 @@ class CreateDiscount extends FormRequest
         throw new HttpResponseException(
             redirect()->back()
                 ->withErrors($validator)
-                ->withInput(['description' => $description, 'percentage' => $percentage, 'startedDate' => $startedDate, 'product_infors' => $product_infors])
+                ->withInput(['description' => $description, 'percentage' => $percentage, 'startedDate' => $startedDate, 'endedDate' => $endedDate, 'product_infors' => $product_infors])
         );
     }
 }

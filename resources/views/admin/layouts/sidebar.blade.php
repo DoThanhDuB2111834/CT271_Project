@@ -72,6 +72,12 @@
                         <p>discount</p>
                     </a>
                 </li>
+                <li class="nav-item {{request()->url() == route('coupon.index') ? 'active' : ''}}">
+                    <a href="{{route('coupon.index')}}">
+                        <i class="fas fa-ticket-alt"></i>
+                        <p>coupon</p>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

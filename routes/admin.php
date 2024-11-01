@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\CategoryController;
+use App\Http\Controllers\admin\CouponController;
 use App\Http\Controllers\admin\DiscountController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ReceiptController;
@@ -63,4 +64,14 @@ Route::prefix('discount')->controller(DiscountController::class)->name('discount
     Route::put('/{discount}', 'update')->name('update')->middleware('permission:update-discount');
     Route::delete('/{discount}', 'destroy')->name('destroy')->middleware('permission:delete-discount');
     Route::get('/{discount}/edit', 'edit')->name('edit')->middleware('permission:show-discount');
+});
+
+Route::prefix('coupon')->controller(CouponController::class)->name('coupon.')->group(function () {
+    Route::get('/', 'index')->name('index')->middleware('permission:show-coupon');
+    Route::post('/', 'store')->name('store')->middleware('permission:create-coupon');
+    Route::get('/create', 'create')->name('create')->middleware('permission:create-coupon');
+    Route::get('/{coupon}', 'show')->name('show')->middleware('permission:show-coupon');
+    Route::put('/{coupon}', 'update')->name('update')->middleware('permission:update-coupon');
+    Route::delete('/{coupon}', 'destroy')->name('destroy')->middleware('permission:delete-coupon');
+    Route::get('/{coupon}/edit', 'edit')->name('edit')->middleware('permission:show-coupon');
 });

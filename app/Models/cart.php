@@ -25,6 +25,11 @@ class cart extends Model
         return $this->morphMany(item::class, 'Itemable');
     }
 
+    public function coupons()
+    {
+        return $this->belongsToMany(coupon::class, 'coupon_cart');
+    }
+
     public function getBy($userId)
     {
         // return Cart::whereUserId($userId)->first();
