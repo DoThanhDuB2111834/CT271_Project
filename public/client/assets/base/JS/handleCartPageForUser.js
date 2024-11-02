@@ -5,8 +5,8 @@ var cartItems = cart.items;
 
 var cartList = document.getElementById("cart-list");
 
-var cart_totalprice = document.getElementById("cart-totalprice");
-cart_totalprice.textContent = formatCurrency(cart.getTotalCartPrice());
+var cart_itemsprice = document.getElementById("cart-itemsprice");
+cart_itemsprice.textContent = formatCurrency(cart.getTotalCartPrice());
 
 cartItems.forEach((element) => {
     var html = `<div class="cart-item mt-10 flex flex-row" data-id="${

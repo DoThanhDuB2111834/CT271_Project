@@ -6,7 +6,7 @@ var cartList = document.getElementById("cart-list");
 const cart = new Cart();
 var cartItems = cart.items;
 
-var cart_totalprice = document.getElementById("cart-totalprice");
+var cart_totalprice = document.getElementById("cart-itemsprice");
 cart_totalprice.textContent = formatCurrency(cart.getTotalCartPrice());
 
 cartItems.forEach((element) => {

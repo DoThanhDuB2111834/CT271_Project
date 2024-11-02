@@ -19,8 +19,8 @@ class coupon extends Model
         'endedDate',
     ];
 
-    public function carts()
+    public function orders()
     {
-        return $this->belongsToMany(cart::class, 'coupon_cart');
+        return $this->belongsToMany(order::class, 'coupon_order');
     }
 }

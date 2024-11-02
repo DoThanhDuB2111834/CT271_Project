@@ -10,13 +10,12 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('coupon', function (Blueprint $table) {
-            $table->ulid('id')->primary();
-            $table->double('value');
-            $table->date('startedDate');
-            $table->date('endedDate');
+        Schema::create('order_status', function (Blueprint $table) {
+            $table->id();
+            $table->string('status');
+            $table->string('order_id');
+            $table->foreign('order_id')->references('id')->on('order')->onDelete('cascade');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -25,6 +24,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('coupon');
+        Schema::dropIfExists('order_status');
     }
 };

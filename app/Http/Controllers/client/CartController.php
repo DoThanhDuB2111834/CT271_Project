@@ -26,6 +26,13 @@ class CartController extends Controller
         return view('client.cart.index');
     }
 
+    public function checkout()
+    {
+        $user = Auth::user();
+
+        return view('client.cart.checkout', compact('user'));
+    }
+
     public function sync(Request $request)
     {
         $userId = $request->user()->id;
