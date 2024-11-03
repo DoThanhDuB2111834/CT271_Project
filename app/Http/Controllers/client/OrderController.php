@@ -19,9 +19,13 @@ class OrderController extends Controller
         $this->order = $order;
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        $userId = $request->user()->id;
 
+        $orders = $this->order->where('user_id', '=', $userId)->get();
+
+        return view('client.OrderOverviewPage', compact('orders'));
     }
 
     public function order(Request $request)

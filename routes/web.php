@@ -27,5 +27,5 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('cart-checkout', [CartController::class, 'checkout'])->name('cart-checkout.index');
     Route::post('cart-checkout', [OrderController::class, 'order'])->name('cart-checkout.store');
-    Route::get('order', [OrderController::class, 'index'])->name('order.index');
+    Route::get('order', [OrderController::class, 'index'])->name('clientOrder.index');
 });
