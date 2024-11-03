@@ -32,7 +32,7 @@ class OrderController extends Controller
             'phone_number' => 'required',
             'email' => 'required',
         ]);
-        $couponIds = $request->input('coupon_id') ?? [];
+        $couponIds = $request->input('couponIds') ?? [];
 
         $userId = $request->user()->id;
         $cart = $this->cart->firstOrCreateBy($userId);

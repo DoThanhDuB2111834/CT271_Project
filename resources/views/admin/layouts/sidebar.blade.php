@@ -78,6 +78,12 @@
                         <p>coupon</p>
                     </a>
                 </li>
+                <li class="nav-item {{request()->url() == route('order.index') ? 'active' : ''}}">
+                    <a href="{{route('order.index')}}">
+                        <i class="fas fa-box"></i>
+                        <p>Order</p>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

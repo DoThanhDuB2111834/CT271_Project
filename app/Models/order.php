@@ -18,6 +18,7 @@ class order extends Model
         'address',
         'description',
         'phone_number',
+        'email',
         'total_price',
         'user_id',
     ];
@@ -35,5 +36,22 @@ class order extends Model
     public function order_status()
     {
         return $this->hasMany(order_status::class, 'order_id');
+    }
+
+    public function getCurrentStatus()
+    {
+        $order_status = $this->order_status()->latest()->first();
+
+        return $order_status->status;
+    }
+
+    public function getTotalPriceAfterCoupon()
+    {
+        $decreasePrice = 0.0;
+        foreach ($this->coupons as $coupon) {
+            $decreasePrice += $coupon->value / 100 * $this->total_price;
+        }
+
+        return $this->total_price - $decreasePrice;
     }
 }

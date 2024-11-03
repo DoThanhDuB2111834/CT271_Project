@@ -70,6 +70,11 @@ class RoleDatabaseSeeder extends Seeder
             ['name' => 'update-coupon', 'group' => 'coupon'],
             ['name' => 'show-coupon', 'group' => 'coupon'],
             ['name' => 'delete-coupon', 'group' => 'coupon'],
+
+            ['name' => 'create-order', 'group' => 'order'],
+            ['name' => 'update-order', 'group' => 'order'],
+            ['name' => 'show-order', 'group' => 'order'],
+            ['name' => 'delete-order', 'group' => 'order'],
         ];
 
         $superAdmin = ModelsRole::find(2);

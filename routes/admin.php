@@ -3,6 +3,7 @@
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\CouponController;
 use App\Http\Controllers\admin\DiscountController;
+use App\Http\Controllers\admin\OrderController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ReceiptController;
 use App\Http\Controllers\admin\RoleController;
@@ -13,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/dashboard', function () {
     return view('admin.dashboard.index');
 })->name('dashboard.index');
+
+Route::get('api/findOrderWithState/{state}', [OrderController::class, 'findOrderWithState']);
 
 // Route::resource('product', ProductController::class);
 Route::prefix('product')->controller(ProductController::class)->name('product.')->group(function () {
@@ -75,3 +78,14 @@ Route::prefix('coupon')->controller(CouponController::class)->name('coupon.')->g
     Route::delete('/{coupon}', 'destroy')->name('destroy')->middleware('permission:delete-coupon');
     Route::get('/{coupon}/edit', 'edit')->name('edit')->middleware('permission:show-coupon');
 });
+
+Route::prefix('order')->controller(OrderController::class)->name('order.')->group(function () {
+    Route::get('/', 'index')->name('index')->middleware('permission:show-order');
+    // Route::post('/', 'store')->name('store')->middleware('permission:create-order');
+    // Route::get('/create', 'create')->name('create')->middleware('permission:create-order');
+    Route::get('/{order}', 'show')->name('show')->middleware('permission:show-order');
+    Route::put('/{order}', 'update')->name('update')->middleware('permission:update-order');
+    // Route::delete('/{order}', 'destroy')->name('destroy')->middleware('permission:delete-order');
+    // Route::get('/{order}/edit', 'edit')->name('edit')->middleware('permission:show-order');
+});
+

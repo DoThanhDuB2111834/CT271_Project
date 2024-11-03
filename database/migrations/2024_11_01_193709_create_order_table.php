@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->string('address');
             $table->string('description')->nullable();
             $table->string('phone_number');
+            $table->string('email');
             $table->double('total_price')->nullable();
             $table->string('user_id');
             $table->foreign('user_id')->references('id')->on('users');
