@@ -63,7 +63,9 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $product = $this->product->find($id);
+
+        return view('admin.product.show', compact('id', 'product'));
     }
 
     /**

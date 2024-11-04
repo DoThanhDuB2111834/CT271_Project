@@ -66,7 +66,7 @@ Route::prefix('discount')->controller(DiscountController::class)->name('discount
     Route::get('/{discount}', 'show')->name('show')->middleware('permission:show-discount');
     Route::put('/{discount}', 'update')->name('update')->middleware('permission:update-discount');
     Route::delete('/{discount}', 'destroy')->name('destroy')->middleware('permission:delete-discount');
-    Route::get('/{discount}/edit', 'edit')->name('edit')->middleware('permission:show-discount');
+    Route::get('/{discount}/edit', 'edit')->name('edit')->middleware('permission:update-discount');
 });
 
 Route::prefix('coupon')->controller(CouponController::class)->name('coupon.')->group(function () {
@@ -76,7 +76,7 @@ Route::prefix('coupon')->controller(CouponController::class)->name('coupon.')->g
     Route::get('/{coupon}', 'show')->name('show')->middleware('permission:show-coupon');
     Route::put('/{coupon}', 'update')->name('update')->middleware('permission:update-coupon');
     Route::delete('/{coupon}', 'destroy')->name('destroy')->middleware('permission:delete-coupon');
-    Route::get('/{coupon}/edit', 'edit')->name('edit')->middleware('permission:show-coupon');
+    Route::get('/{coupon}/edit', 'edit')->name('edit')->middleware('permission:update-coupon');
 });
 
 Route::prefix('order')->controller(OrderController::class)->name('order.')->group(function () {

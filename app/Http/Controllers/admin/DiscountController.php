@@ -62,7 +62,7 @@ class DiscountController extends Controller
             array_push($product_infors, collect(['id' => $item->id, 'name' => $item->name, 'size' => $item->size, 'color' => $item->color, 'price' => $item->price]));
         }
 
-        return view('admin.discount.edit', compact('discount', 'product_infors'));
+        return view('admin.discount.show', compact('discount', 'product_infors'));
     }
 
     /**

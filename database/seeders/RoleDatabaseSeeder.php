@@ -46,11 +46,6 @@ class RoleDatabaseSeeder extends Seeder
             ['name' => 'show-product', 'group' => 'product'],
             ['name' => 'delete-product', 'group' => 'product'],
 
-            ['name' => 'create-coupon', 'group' => 'coupon'],
-            ['name' => 'update-coupon', 'group' => 'coupon'],
-            ['name' => 'show-coupon', 'group' => 'coupon'],
-            ['name' => 'delete-coupon', 'group' => 'coupon'],
-
             ['name' => 'create-goods_receipt', 'group' => 'goods_receipt'],
             ['name' => 'update-goods_receipt', 'group' => 'goods_receipt'],
             ['name' => 'show-goods_receipt', 'group' => 'goods_receipt'],
@@ -82,5 +77,16 @@ class RoleDatabaseSeeder extends Seeder
             Permission::updateOrCreate($permission);
             $superAdmin->givePermissionTo($permission['name']);
         }
+
+        $admin = ModelsRole::find(1);
+        $admin->givePermissionTo('show-category');
+        $admin->givePermissionTo('show-product');
+        $admin->givePermissionTo('show-coupon');
+        $admin->givePermissionTo('show-goods_receipt');
+        $admin->givePermissionTo('create-goods_receipt');
+        $admin->givePermissionTo('show-supplier');
+        $admin->givePermissionTo('show-discount');
+        $admin->givePermissionTo('show-order');
+        $admin->givePermissionTo('update-order');
     }
 }

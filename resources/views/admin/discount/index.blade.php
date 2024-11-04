@@ -24,7 +24,7 @@
                                 <th>percentage</th>
                                 <th>startedDate</th>
                                 <th>endedDate</th>
-                                <th colspan="2" class="text-center">Action</th>
+                                <th colspan="3" class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tfoot>
@@ -33,7 +33,7 @@
                                 <th>percentage</th>
                                 <th>startedDate</th>
                                 <th>endedDate</th>
-                                <th colspan="2" class="text-center">Action</th>
+                                <th colspan="3" class="text-center">Action</th>
                             </tr>
                         </tfoot>
                         <tbody>
@@ -43,16 +43,23 @@
                                     <td>{{$item->percentage}}</td>
                                     <td>{{$item->startedDate}}</td>
                                     <td>{{$item->endedDate}}</td>
-                                    <td><a href="{{route('discount.edit', $item->id)}}" class="btn btn-warning">Edit</a>
-                                    </td>
+                                    @can('update-discount')
+                                        <td><a href="{{route('discount.edit', $item->id)}}" class="btn btn-warning">Edit</a>
+                                        </td>
+                                    @endcan
+                                    @can('delete-discount')
+                                        <td>
+                                            <form action="{{route('discount.destroy', $item->id)}}" method="post"
+                                                onsubmit="confirmDelete(event);" id="form-delete{{$item->id}}">
+                                                @csrf
+                                                @method('delete')
+                                                <button class="btn btn-danger" id="btn-delete" data-id="{{$item->id}}"
+                                                    type="submit">delete</button>
+                                            </form>
+                                        </td>
+                                    @endcan
                                     <td>
-                                        <form action="{{route('discount.destroy', $item->id)}}" method="post"
-                                            onsubmit="confirmDelete(event);" id="form-delete{{$item->id}}">
-                                            @csrf
-                                            @method('delete')
-                                            <button class="btn btn-danger" id="btn-delete" data-id="{{$item->id}}"
-                                                type="submit">delete</button>
-                                        </form>
+                                        <a href="{{route('discount.show', $item->id)}}" class="btn btn-info">Info</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -78,6 +85,6 @@
     <?php
         session()->forget('state');
         session()->forget('message');
-                                                                                                                            ?>
+                                                                                                                                        ?>
 @endif
 @endsection

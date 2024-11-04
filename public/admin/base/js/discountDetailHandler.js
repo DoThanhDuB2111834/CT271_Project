@@ -69,7 +69,7 @@ function appendProduct(product) {
     // quantityElement.appendChild(quantityInput);
 
     var priceElement = document.createElement("td");
-    priceElement.textContent = product.price;
+    priceElement.textContent = formatCurrency(product.price);
     // var priceInput = document.createElement("input");
     // priceInput.type = "number";
     // priceInput.value = 0;

@@ -1,4 +1,10 @@
 @extends('admin.layouts.app')
+@php
+    function formatedPrice($price)
+    {
+        return number_format($price, 0, ',', '.') . '₫';
+    }
+@endphp
 @section('content')
 <div class="container">
     <div class="page-inner">
@@ -12,8 +18,9 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
-                    <h4 class="card-title">Basic</h4>
-                    <a href="{{route('product.create')}}" class="btn btn-success">Create</a>
+                    @can('create-product')
+                        <a href="{{route('product.create')}}" class="btn btn-success">Create</a>
+                    @endcan
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -43,20 +50,24 @@
                                         <td>{{$item->id}}</td>
                                         <td>{{$item->name}}</td>
                                         <td>{{$item->quantity}}</td>
-                                        <td>{{$item->price}}</td>
-                                        <td><a href="{{route('product.edit', $item->id)}}" class="btn btn-warning">Edit</a>
-                                        </td>
+                                        <td>{{formatedPrice($item->price)}}</td>
+                                        @can('update-product')
+                                            <td> <a href="{{route('product.edit', $item->id)}}" class="btn btn-warning">Edit</a>
+                                            </td>
+                                        @endcan
+                                        @can('delete-product')
+                                            <td>
+                                                <form action="{{route('product.destroy', $item->id)}}" method="post"
+                                                    onsubmit="confirmDelete(event);" id="form-delete{{$item->id}}">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button class="btn btn-danger" id="btn-delete" data-id="{{$item->id}}"
+                                                        type="submit">delete</button>
+                                                </form>
+                                            </td>
+                                        @endcan
                                         <td>
-                                            <form action="{{route('product.destroy', $item->id)}}" method="post"
-                                                onsubmit="confirmDelete(event);" id="form-delete{{$item->id}}">
-                                                @csrf
-                                                @method('delete')
-                                                <button class="btn btn-danger" id="btn-delete" data-id="{{$item->id}}"
-                                                    type="submit">delete</button>
-                                            </form>
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-info">Info</button>
+                                            <a href="{{route('product.show', $item->id)}}" class="btn btn-info">Info</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -82,6 +93,6 @@
     <?php
         session()->forget('state');
         session()->forget('message');
-                                                                                                                    ?>
+                                                                                                                                                                ?>
 @endif
 @endsection

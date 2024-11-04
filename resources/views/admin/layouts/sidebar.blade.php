@@ -42,48 +42,62 @@
                     </a>
                 </li>
                 @endhasrole
-                <li class="nav-item {{request()->url() == route('product.index') ? 'active' : ''}}">
-                    <a href="{{route('product.index')}}">
-                        <i class="fab fa-product-hunt"></i>
-                        <p>Products</p>
-                    </a>
-                </li>
-                <li class="nav-item {{request()->url() == route('category.index') ? 'active' : ''}}">
-                    <a href="{{route('category.index')}}">
-                        <i class="fas fa-layer-group"></i>
-                        <p>Category</p>
-                    </a>
-                </li>
-                <li class="nav-item {{request()->url() == route('supplier.index') ? 'active' : ''}}">
-                    <a href="{{route('supplier.index')}}">
-                        <i class="fas fa-industry"></i>
-                        <p>Supplier</p>
-                    </a>
-                </li>
-                <li class="nav-item {{request()->url() == route('goods_receipt.index') ? 'active' : ''}}">
-                    <a href="{{route('goods_receipt.index')}}">
-                        <i class="fas fa-receipt"></i>
-                        <p>Receipt</p>
-                    </a>
-                </li>
-                <li class="nav-item {{request()->url() == route('discount.index') ? 'active' : ''}}">
-                    <a href="{{route('discount.index')}}">
-                        <i class="fas fa-arrow-alt-circle-down"></i>
-                        <p>discount</p>
-                    </a>
-                </li>
-                <li class="nav-item {{request()->url() == route('coupon.index') ? 'active' : ''}}">
-                    <a href="{{route('coupon.index')}}">
-                        <i class="fas fa-ticket-alt"></i>
-                        <p>coupon</p>
-                    </a>
-                </li>
-                <li class="nav-item {{request()->url() == route('order.index') ? 'active' : ''}}">
-                    <a href="{{route('order.index')}}">
-                        <i class="fas fa-box"></i>
-                        <p>Order</p>
-                    </a>
-                </li>
+                @can('show-product')
+                    <li class="nav-item {{request()->url() == route('product.index') ? 'active' : ''}}">
+                        <a href="{{route('product.index')}}">
+                            <i class="fab fa-product-hunt"></i>
+                            <p>Products</p>
+                        </a>
+                    </li>
+                @endcan
+                @can('show-category')
+                    <li class="nav-item {{request()->url() == route('category.index') ? 'active' : ''}}">
+                        <a href="{{route('category.index')}}">
+                            <i class="fas fa-layer-group"></i>
+                            <p>Category</p>
+                        </a>
+                    </li>
+                @endcan
+                @can('show-supplier')
+                    <li class="nav-item {{request()->url() == route('supplier.index') ? 'active' : ''}}">
+                        <a href="{{route('supplier.index')}}">
+                            <i class="fas fa-industry"></i>
+                            <p>Supplier</p>
+                        </a>
+                    </li>
+                @endcan
+                @can('show-goods_receipt')
+                    <li class="nav-item {{request()->url() == route('goods_receipt.index') ? 'active' : ''}}">
+                        <a href="{{route('goods_receipt.index')}}">
+                            <i class="fas fa-receipt"></i>
+                            <p>Receipt</p>
+                        </a>
+                    </li>
+                @endcan
+                @can('show-discount')
+                    <li class="nav-item {{request()->url() == route('discount.index') ? 'active' : ''}}">
+                        <a href="{{route('discount.index')}}">
+                            <i class="fas fa-arrow-alt-circle-down"></i>
+                            <p>discount</p>
+                        </a>
+                    </li>
+                @endcan
+                @can('show-coupon')
+                    <li class="nav-item {{request()->url() == route('coupon.index') ? 'active' : ''}}">
+                        <a href="{{route('coupon.index')}}">
+                            <i class="fas fa-ticket-alt"></i>
+                            <p>coupon</p>
+                        </a>
+                    </li>
+                @endcan
+                @can('show-order')
+                    <li class="nav-item {{request()->url() == route('order.index') ? 'active' : ''}}">
+                        <a href="{{route('order.index')}}">
+                            <i class="fas fa-box"></i>
+                            <p>Order</p>
+                        </a>
+                    </li>
+                @endcan
             </ul>
         </div>
     </div>

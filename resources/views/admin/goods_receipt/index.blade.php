@@ -37,20 +37,25 @@
                                     <tr>
                                         <td>{{$item->id}}</td>
                                         <td>{{$item->total_price}}</td>
-                                        <td><a href="{{route('goods_receipt.edit', $item->id)}}"
-                                                class="btn btn-warning">Edit</a>
-                                        </td>
+                                        @can('update-goods_receipt')
+                                            <td><a href="{{route('goods_receipt.edit', $item->id)}}"
+                                                    class="btn btn-warning">Edit</a>
+                                            </td>
+                                        @endcan
+                                        @can('delete-goods_receipt')
+                                            <td>
+                                                <form action="{{route('goods_receipt.destroy', $item->id)}}" method="post"
+                                                    onsubmit="confirmDelete(event);" id="form-delete{{$item->id}}">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button class="btn btn-danger" id="btn-delete" data-id="{{$item->id}}"
+                                                        type="submit">delete</button>
+                                                </form>
+                                            </td>
+                                        @endcan
                                         <td>
-                                            <form action="{{route('goods_receipt.destroy', $item->id)}}" method="post"
-                                                onsubmit="confirmDelete(event);" id="form-delete{{$item->id}}">
-                                                @csrf
-                                                @method('delete')
-                                                <button class="btn btn-danger" id="btn-delete" data-id="{{$item->id}}"
-                                                    type="submit">delete</button>
-                                            </form>
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-info">Info</button>
+                                            <a href="{{route('goods_receipt.show', $item->id)}}"
+                                                class="btn btn-info">Info</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -76,6 +81,6 @@
     <?php
         session()->forget('state');
         session()->forget('message');
-                                                                                                                ?>
+                                                                                                                                ?>
 @endif
 @endsection

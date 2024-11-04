@@ -76,7 +76,13 @@ class ReceiptController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $goods_receipt = $this->goods_receipt->find($id);
+        $suppliers = $this->suppliers->latest()->get();
+        $product_infors = [];
+        foreach ($goods_receipt->products()->get() as $item) {
+            array_push($product_infors, collect(['id' => $item->id, 'name' => $item->name, 'size' => $item->size, 'color' => $item->color, 'quantity' => $item->pivot->quantity, 'price' => $item->pivot->price]));
+        }
+        return view('admin.goods_receipt.show', compact('goods_receipt', 'suppliers', 'product_infors'));
     }
 
     /**

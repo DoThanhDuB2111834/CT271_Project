@@ -24,7 +24,7 @@
                                     aria-label="Name: activate to sort column descending" tabindex="0">Name</th>
                                 <th>Created at</th>
                                 <th>Updated at</th>
-                                <th colspan="2" class="text-center">Action</th>
+                                <th colspan="3" class="text-center">Action</th>
                             </tr>
                         </thead>
                         <tfoot>
@@ -32,7 +32,7 @@
                                 <th>Name</th>
                                 <th>Create at</th>
                                 <th>Update at</th>
-                                <th colspan="2" class="text-center">Action</th>
+                                <th colspan="3" class="text-center">Action</th>
                             </tr>
                         </tfoot>
                         <tbody>
@@ -41,16 +41,23 @@
                                     <td>{{$item->name}}</td>
                                     <td>{{$item->created_at}}</td>
                                     <td>{{$item->updated_at}}</td>
-                                    <td><a href="{{route('category.edit', $item->id)}}" class="btn btn-warning">Edit</a>
-                                    </td>
+                                    @can('update-category')
+                                        <td><a href="{{route('category.edit', $item->id)}}" class="btn btn-warning">Edit</a>
+                                        </td>
+                                    @endcan
+                                    @can('delete-category')
+                                        <td>
+                                            <form action="{{route('category.destroy', $item->id)}}" method="post"
+                                                onsubmit="confirmDelete(event);" id="form-delete{{$item->id}}">
+                                                @csrf
+                                                @method('delete')
+                                                <button class="btn btn-danger" id="btn-delete" data-id="{{$item->id}}"
+                                                    type="submit">delete</button>
+                                            </form>
+                                        </td>
+                                    @endcan
                                     <td>
-                                        <form action="{{route('category.destroy', $item->id)}}" method="post"
-                                            onsubmit="confirmDelete(event);" id="form-delete{{$item->id}}">
-                                            @csrf
-                                            @method('delete')
-                                            <button class="btn btn-danger" id="btn-delete" data-id="{{$item->id}}"
-                                                type="submit">delete</button>
-                                        </form>
+                                        <a href="{{route('category.show', $item->id)}}" class="btn btn-info">Info</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -76,6 +83,6 @@
     <?php
         session()->forget('state');
         session()->forget('message');
-                                                                                                        ?>
+                                                                                                                ?>
 @endif
 @endsection

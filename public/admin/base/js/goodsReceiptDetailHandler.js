@@ -31,7 +31,9 @@ function updateRecord(e) {
         record.querySelector('[name="product_price[]"]').value = 0;
         return;
     }
-    record.querySelector('[field="total"]').textContent = quantity * price;
+    record.querySelector('[field="total"]').textContent = formatCurrency(
+        quantity * price
+    );
 }
 
 function appendProduct(product) {

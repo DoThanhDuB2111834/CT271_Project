@@ -1,4 +1,10 @@
 @extends('admin.layouts.app')
+@php
+    function formatedPrice($price)
+    {
+        return number_format($price, 0, ',', '.') . '₫';
+    }
+@endphp
 @section('css')
 <link rel="stylesheet" href="{{ asset('admin/base/css/goods_receipt.css') }}" />
 @endsection
@@ -143,7 +149,7 @@
                                                             <td>{{$item->get('name')}}</td>
                                                             <td>{{$item->get('size')}}</td>
                                                             <td>{{$item->get('color')}}</td>
-                                                            <td>{{$item->get('price')}}
+                                                            <td>{{formatedPrice($item->get('price'))}}
                                                             </td>
                                                             <td><i class="fa fa-times" style="cursor: pointer;"
                                                                     onclick="removeRecord(event);"></i>
