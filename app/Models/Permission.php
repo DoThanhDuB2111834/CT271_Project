@@ -14,4 +14,9 @@ class Permission extends ModelsPermission
         'name',
         'group',
     ];
+
+    public function MyUsers()
+    {
+        return $this->morphedByMany(User::class, 'model', 'model_has_permissions', 'permission_id', 'model_id');
+    }
 }

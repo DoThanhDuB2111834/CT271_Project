@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="{{ asset('Image/logoweb.png') }}" sizes="16x16" />
+    <link rel="icon" href="{{ asset('logo_web_noi_that_favocon_icon.png') }}" sizes="16x16" type="image/x-icon" />
     <title>Nội thất 360</title>
     <link rel="stylesheet" href="{{asset('client/assets/base/CSS/homepage.css')}}">
     @yield('css')

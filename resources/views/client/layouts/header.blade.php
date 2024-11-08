@@ -53,7 +53,7 @@
         <hr>
         <div class="flex flex-row justify-between mt-2">
             <p>Thành tiền:</p>
-            <p id="cart-right-modal-footer-total-price">10000000d</p>
+            <p id="cart-right-modal-footer-total-price">0d</p>
         </div>
         <a href="{{route('cart.index')}}"
             class="block mt-4 p-2 uppercase bg-[#0a0a0b] text-white text-lg text-center font-semibold">Xem giỏ

@@ -16,4 +16,10 @@ class Role extends ModelsRole
         'group',
         'guard_name'
     ];
+
+    public function MyUsers()
+    {
+        return $this->morphedByMany(User::class, 'model', 'model_has_roles', 'role_id', 'model_id');
+    }
+
 }

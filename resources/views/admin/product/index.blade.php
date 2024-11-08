@@ -17,7 +17,8 @@
         </div>
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header d-flex justify-content-between">
+                <div class="card-header d-flex justify-content-end">
+
                     @can('create-product')
                         <a href="{{route('product.create')}}" class="btn btn-success">Create</a>
                     @endcan
@@ -93,6 +94,6 @@
     <?php
         session()->forget('state');
         session()->forget('message');
-                                                                                                                                                                ?>
+                                                                                                                                                                    ?>
 @endif
 @endsection

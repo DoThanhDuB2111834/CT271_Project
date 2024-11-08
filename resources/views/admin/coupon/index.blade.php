@@ -11,9 +11,10 @@
         </div>
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header d-flex justify-content-between">
-                    <h4 class="card-title">Basic</h4>
-                    <a href="{{route('coupon.create')}}" class="btn btn-success">Create</a>
+                <div class="card-header d-flex justify-content-end">
+                    @can('create-coupon')
+                        <a href="{{route('coupon.create')}}" class="btn btn-success">Create</a>
+                    @endcan
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -43,20 +44,21 @@
                                         <td>{{$item->value}}</td>
                                         <td>{{$item->startedDate}}</td>
                                         <td>{{$item->endedDate}}</td>
-                                        <td><a href="{{route('coupon.edit', $item->id)}}" class="btn btn-warning">Edit</a>
-                                        </td>
-                                        <td>
-                                            <form action="{{route('coupon.destroy', $item->id)}}" method="post"
-                                                onsubmit="confirmDelete(event);" id="form-delete{{$item->id}}">
-                                                @csrf
-                                                @method('delete')
-                                                <button class="btn btn-danger" id="btn-delete" data-id="{{$item->id}}"
-                                                    type="submit">delete</button>
-                                            </form>
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-info">Info</button>
-                                        </td>
+                                        @can('update-coupon')
+                                            <td><a href="{{route('coupon.edit', $item->id)}}" class="btn btn-warning">Edit</a>
+                                            </td>
+                                        @endcan
+                                        @can('delete-coupon')
+                                            <td>
+                                                <form action="{{route('coupon.destroy', $item->id)}}" method="post"
+                                                    onsubmit="confirmDelete(event);" id="form-delete{{$item->id}}">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button class="btn btn-danger" id="btn-delete" data-id="{{$item->id}}"
+                                                        type="submit">delete</button>
+                                                </form>
+                                            </td>
+                                        @endcan
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -81,6 +83,6 @@
     <?php
         session()->forget('state');
         session()->forget('message');
-                                                                                                                                                ?>
+                                                                                                                                                                ?>
 @endif
 @endsection

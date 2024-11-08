@@ -3,9 +3,9 @@
 
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Kaiadmin - Bootstrap 5 Admin Dashboard</title>
+  <title>admin</title>
+  <link rel="icon" href="{{ asset('logo_web_noi_that_favocon_icon.png') }}" type="image/x-icon" />
   <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
-  <link rel="icon" href="{{ asset('admin/assets/img/kaiadmin/favicon.ico') }}" type="image/x-icon" />
   @yield('css')
   <!-- Fonts and icons -->
   <script src="{{ asset('admin/assets/js/plugin/webfont/webfont.min.js') }}"></script>

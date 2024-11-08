@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\ReceiptController;
 use App\Http\Controllers\admin\RoleController;
 use App\Http\Controllers\admin\SupplierController;
+use App\Http\Controllers\admin\UserRoleController;
 use App\Models\discount;
 use Illuminate\Support\Facades\Route;
 
@@ -16,6 +17,8 @@ Route::get('/dashboard', function () {
 })->name('dashboard.index');
 
 Route::get('api/findOrderWithState/{state}', [OrderController::class, 'findOrderWithState']);
+
+Route::get('api/findUserWithRole/{role}', [UserRoleController::class, 'findUserWithRole'])->middleware('role:superadmin');
 
 // Route::resource('product', ProductController::class);
 Route::prefix('product')->controller(ProductController::class)->name('product.')->group(function () {
@@ -81,11 +84,15 @@ Route::prefix('coupon')->controller(CouponController::class)->name('coupon.')->g
 
 Route::prefix('order')->controller(OrderController::class)->name('order.')->group(function () {
     Route::get('/', 'index')->name('index')->middleware('permission:show-order');
-    // Route::post('/', 'store')->name('store')->middleware('permission:create-order');
-    // Route::get('/create', 'create')->name('create')->middleware('permission:create-order');
     Route::get('/{order}', 'show')->name('show')->middleware('permission:show-order');
     Route::put('/{order}', 'update')->name('update')->middleware('permission:update-order');
-    // Route::delete('/{order}', 'destroy')->name('destroy')->middleware('permission:delete-order');
-    // Route::get('/{order}/edit', 'edit')->name('edit')->middleware('permission:show-order');
+});
+
+Route::prefix('UserRole')->controller(UserRoleController::class)->name('UserRole.')->group(function () {
+    Route::get('/', 'index')->name('index')->middleware('role:superadmin');
+    Route::post('/', 'store')->name('store')->middleware('role:superadmin');
+    Route::get('/create', 'create')->name('create')->middleware('role:superadmin');
+    Route::put('/{user}', 'update')->name('update')->middleware('role:superadmin');
+    Route::get('/{user}/edit', 'edit')->name('edit')->middleware('role:superadmin');
 });
 

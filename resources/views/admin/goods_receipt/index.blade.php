@@ -1,4 +1,10 @@
 @extends('admin.layouts.app')
+@php
+    function formatedPrice($price)
+    {
+        return number_format($price, 0, ',', '.') . '₫';
+    }
+@endphp
 @section('content')
 <div class="container">
     <div class="page-inner">
@@ -36,7 +42,7 @@
                                 @foreach ($goods_receipts as $item)
                                     <tr>
                                         <td>{{$item->id}}</td>
-                                        <td>{{$item->total_price}}</td>
+                                        <td>{{formatedPrice($item->total_price)}}</td>
                                         @can('update-goods_receipt')
                                             <td><a href="{{route('goods_receipt.edit', $item->id)}}"
                                                     class="btn btn-warning">Edit</a>
@@ -81,6 +87,6 @@
     <?php
         session()->forget('state');
         session()->forget('message');
-                                                                                                                                ?>
+                                                                                                                                    ?>
 @endif
 @endsection

@@ -22,6 +22,7 @@ return new class extends Migration {
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
@@ -39,24 +40,6 @@ return new class extends Migration {
             $table->integer('last_activity')->index();
             $table->foreign('user_id')->references('id')->on('users')->index();
         });
-
-        // Schema::create('customer', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->string('address');
-        //     $table->unsignedBigInteger('user_id');
-        //     $table->timestamps();
-
-        //     $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-        // });
-
-        // Schema::create('admin', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->string('role');
-        //     $table->unsignedBigInteger('user_id');
-        //     $table->timestamps();
-
-        //     $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-        // });
     }
 
     /**

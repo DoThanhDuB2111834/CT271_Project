@@ -37,7 +37,7 @@
 @endphp
 <div class="max-w-screen-xl w-full mx-auto flex flex-row mt-3">
     <label for="toogle-product-categories"
-        class="cartegories-bar mr-3 basis-1/12 lg:basis-1/12 text-3xl flex justify-center lg:justify-start text-[#666666d9] cursor-pointer">
+        class="cartegories-bar mr-3 basis-1/12 lg:basis-1/12 text-3xl flex justify-center lg:justify-start text-[#666666d9] cursor-pointer items-center">
         <i class="fa-solid fa-bars"></i></label>
     <input type="checkbox" id="toogle-product-categories" class="hidden">
     <div class="product-categories-blurring z-40 hidden fixed left-0 top-0 bg-black opacity-40 w-[100%] h-[100%]">
@@ -52,12 +52,12 @@
                 </a>
             </li>
             <li class="mb-3 flex justify-between flex-wrap">
-                <a href="{{route('index')}}" class="basis-3/4 text-xl">
+                <a href="{{route('productClient.index')}}" class="basis-3/4 text-xl">
                     Sản phẩm
                 </a>
             </li>
             <li class="mb-3 flex justify-between flex-wrap">
-                <a href="{{route('index')}}" class="basis-3/4 text-xl">
+                <a href="{{route('showDiscountProduct')}}" class="basis-3/4 text-xl">
                     Hàng khuyến mãi
                 </a>
             </li>
@@ -75,13 +75,18 @@
     </div>
     <nav class="uppercase hidden basis-0/12 lg:basis-9/12 lg:flex lg:justify-start items-center">
         <a href="{{route('index')}}"
-            class="mr-3 {{request()->url() == route('index') ? 'active' : ''}} hover:lg:transition-all hover:lg:text-[#dd9933] hover:lg:duration-300">Trang
-            chủ</a>
+            class="mr-3  {{request()->url() == route('index') ? 'active' : ''}} hover:lg:transition-all hover:lg:text-[#dd9933] hover:lg:duration-300">
+            <!-- <img src="{{asset('website_logo_client.png')}}" alt="navbar brand"
+                class="navbar-brand w-[120px] h-[40px]" /> -->
+            <div class="w-[120px] h-[50px]"
+                style="background-image: url(<?php echo asset('website_logo_client.png') ?>); background-repeat: no-repeat; background-position: center; background-size: cover;">
+            </div>
+        </a>
         <a href="{{route('productClient.index')}}"
-            class="mr-3 {{request()->url() == route('productClient.index') ? 'active' : ''}} hover:lg:transition-all hover:lg:text-[#dd9933] hover:lg:duration-300">Sản
+            class="mr-3 mt-3 {{request()->url() == route('productClient.index') ? 'active' : ''}} hover:lg:transition-all hover:lg:text-[#dd9933] hover:lg:duration-300">Sản
             phẩm</a>
         <div
-            class="mr-3 relative room-toogle cursor-pointer hover:lg:transition-all hover:lg:text-[#dd9933] hover:lg:duration-300">
+            class="mr-3 mt-3 relative room-toogle cursor-pointer hover:lg:transition-all hover:lg:text-[#dd9933] hover:lg:duration-300">
             <span
                 class="{{strpos(request()->url(), 'http://127.0.0.1:8000/Shop/Ph%C3%B2ng') !== false ? 'active' : ''}}">Phòng</span>
             <span class="text-[10px]"><i class="fa-solid fa-chevron-down"></i></span>
@@ -107,11 +112,12 @@
             </div>
         </div>
         <a href="{{route('showDiscountProduct')}}"
-            class="mr-3 {{request()->url() == route('showDiscountProduct') ? 'active' : ''}} hover:lg:transition-all hover:lg:text-[#dd9933] hover:lg:duration-300">Hàng
+            class="mr-3 mt-3 {{request()->url() == route('showDiscountProduct') ? 'active' : ''}} hover:lg:transition-all hover:lg:text-[#dd9933] hover:lg:duration-300">Hàng
             khuyến mãi</a>
     </nav>
 
-    <div class="searchBar basis-8/12 lg:basis-3/12 px-5 py-1 border border-solid border-[#666666d9] rounded-full">
+    <div
+        class="searchBar basis-8/12 lg:basis-3/12 px-5 py-1 border border-solid border-[#666666d9] rounded-full flex flex-row items-center">
         <input type="text" placeholder="Tìm kiếm sản phẩm" class="w-11/12 outline-none">
         <button>
             <i class="fa-solid fa-magnifying-glass"></i>

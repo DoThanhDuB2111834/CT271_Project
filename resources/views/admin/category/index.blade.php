@@ -10,9 +10,11 @@
     </div>
     <div class="col-md-12">
         <div class="card">
-            <div class="card-header d-flex justify-content-between">
-                <h4 class="card-title">Basic</h4>
-                <a href="{{route('category.create')}}" class="btn btn-success">Create</a>
+            <div class="card-header d-flex justify-content-end">
+
+                @can('create-category')
+                    <a href="{{route('category.create')}}" class="btn btn-success">Create</a>
+                @endcan
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -83,6 +85,6 @@
     <?php
         session()->forget('state');
         session()->forget('message');
-                                                                                                                ?>
+                                                                                                                    ?>
 @endif
 @endsection
