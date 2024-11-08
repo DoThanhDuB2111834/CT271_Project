@@ -104,3 +104,14 @@
     top: calc(100%);
     left: 0;
 }
+
+#topbar-search-result {
+    z-index: 50;
+    position: absolute;
+    top: calc(100% + 6px);
+    width: 90%;
+    max-height: 500px;
+    overflow: auto;
+    background-color: #fff;
+    box-shadow: 0 1px 3.125rem 0 rgba(0, 0, 0, 1);
+}

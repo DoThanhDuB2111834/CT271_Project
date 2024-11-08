@@ -87,3 +87,53 @@ buttonsDecrease.forEach((button) => {
         }
     });
 });
+
+var topbar_search_result = document.getElementById("topbar-search-result");
+
+document
+    .getElementById("topbar-search")
+    .addEventListener("keyup", async function (event) {
+        value = event.target.value;
+
+        const key = event.key;
+
+        if (value == "") {
+            topbar_search_result.innerHTML = "";
+        } else if (
+            value != "" &&
+            (/^[A-Za-z]$/.test(key) || key === "Backspace")
+        ) {
+            const response = await fetch(`${baseUrl}api/product/${value}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
+            const ApiData = await response.json();
+
+            topbar_search_result.innerHTML = "";
+
+            const products = ApiData.products;
+
+            products.forEach((product) => {
+                console.log(product);
+                var html = `<li >
+                <a href="product/${product.id}" class="flex flex-row p-3">
+                <div class="topbar-search-result-image basis-1/4 bg-no-repeat bg-cover bg-center h-[50px]"
+                    style="background-image: url(${baseUrl}${
+                    product.imageUrl
+                });"></div>
+                <div class="topbar-search-result-name text-center">
+                    ${product.name}
+                </div>
+                <div class="topbar-search-result-price">
+                    ${formatCurrency(product.price)}
+                </div>
+                </a>
+            </li>
+            <hr class="my-3"></hr>`;
+                topbar_search_result.innerHTML += html;
+            });
+        }
+    });

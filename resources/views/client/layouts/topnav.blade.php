@@ -117,11 +117,25 @@
     </nav>
 
     <div
-        class="searchBar basis-8/12 lg:basis-3/12 px-5 py-1 border border-solid border-[#666666d9] rounded-full flex flex-row items-center">
-        <input type="text" placeholder="Tìm kiếm sản phẩm" class="w-11/12 outline-none">
+        class="relative searchBar basis-8/12 lg:basis-3/12 px-5 py-1 border border-solid border-[#666666d9] rounded-full flex flex-row items-center">
+        <input type="text" id="topbar-search" placeholder="Tìm kiếm sản phẩm" class="w-11/12 outline-none">
         <button>
             <i class="fa-solid fa-magnifying-glass"></i>
         </button>
+        <ul id="topbar-search-result" class="">
+            <!-- <li class="flex flex-row p-3">
+                <div class="topbar-search-result-image basis-1/4 bg-no-repeat bg-cover bg-center h-[50px]"
+                    style="background-image: url('Image/product/1000-ghe-roma-768x511.jpg');"></div>
+                <div class="topbar-search-result-name text-center">
+                    Bộ bàn ghế roma
+                </div>
+                <div class="topbar-search-result-price">
+                    10000000d
+                </div>
+
+            </li>
+            <hr class="my-3"> -->
+        </ul>
     </div>
 
     <div class="basis-2/12 lg:basis-0/12 flex lg:hidden justify-center items-center text-[#666666d9] text-sm">
