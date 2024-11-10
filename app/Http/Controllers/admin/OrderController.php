@@ -57,7 +57,7 @@ class OrderController extends Controller
         }
         $order->order_status()->create(['status' => $status]);
 
-        return back()->with(['message' => 'Cập nhật trạng thái đươn hàng thành công']);
+        return back()->with(['message' => 'Cập nhật trạng thái đơn hàng thành công']);
     }
 
     public function findOrderWithState(string $state)

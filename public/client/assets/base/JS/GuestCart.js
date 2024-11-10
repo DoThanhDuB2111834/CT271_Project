@@ -17,12 +17,10 @@ export class Cart {
 
     async addOrUpdateItem(item) {
         var hasAlreadyAdd = false;
+        var quantityInShop = await this.getQuantityProduct(item.productId);
         for (var i = 0; i < this.items.length; i++) {
             if (this.items[i].productId == item.productId) {
-                if (
-                    (await this.getQuantityProduct(item.productId)) <
-                    item.quantity + this.items[i].quantity
-                ) {
+                if (quantityInShop >= item.quantity + this.items[i].quantity) {
                     return false;
                 }
                 this.items[i].quantity += item.quantity;
@@ -30,8 +28,10 @@ export class Cart {
                 break;
             }
         }
-        if (!hasAlreadyAdd) {
+        if (item.quantity <= quantityInShop && !hasAlreadyAdd) {
             this.items.push(item);
+        } else {
+            return false;
         }
         this.saveCart();
         return true;

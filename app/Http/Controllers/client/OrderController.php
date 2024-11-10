@@ -5,6 +5,7 @@ namespace App\Http\Controllers\client;
 use App\Http\Controllers\Controller;
 use App\Models\cart;
 use App\Models\order;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -51,6 +52,9 @@ class OrderController extends Controller
 
         $total_price = 0.0;
         foreach ($cart->items as $item) {
+            $product = Product::find($item->product_id);
+            $product->quantity -= $item->quantity;
+            $product->save();
             $order->items()->create(['quantity' => $item->quantity, 'price' => $item->price, 'product_id' => $item->product_id]);
             $total_price += $item->price * $item->quantity;
             $item->delete();

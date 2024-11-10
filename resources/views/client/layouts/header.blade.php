@@ -58,8 +58,10 @@
         <a href="{{route('cart.index')}}"
             class="block mt-4 p-2 uppercase bg-[#0a0a0b] text-white text-lg text-center font-semibold">Xem giỏ
             hàng</a>
-        <a href=""
-            class="block mt-4 p-2 uppercase border-[1px] border-[#0a0a0b] text-[#0a0a0b] text-lg text-center font-semibold">Check
-            out</a>
+        @if (Auth::check())
+            <a href="{{route('cart-checkout.index')}}"
+                class="block mt-4 p-2 uppercase border-[1px] border-[#0a0a0b] text-[#0a0a0b] text-lg text-center font-semibold">Check
+                out</a>
+        @endif
     </div>
 </div>

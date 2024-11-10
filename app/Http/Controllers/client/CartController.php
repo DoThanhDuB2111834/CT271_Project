@@ -102,7 +102,12 @@ class CartController extends Controller
         }
 
         if (!$isUpdate) {
-            $cart->items()->create(['quantity' => $dataUpdate['quantity'], 'price' => $dataUpdate['price'], 'product_id' => $dataUpdate['productId']]);
+            $product = $this->product->find($dataUpdate['productId']);
+            if ($product->quantity < $dataUpdate['quantity']) {
+                $failMessage = 'Sản phẩm ' . $dataUpdate['productName'] . ' Trong kho không đủ';
+            } else {
+                $cart->items()->create(['quantity' => $dataUpdate['quantity'], 'price' => $dataUpdate['price'], 'product_id' => $dataUpdate['productId']]);
+            }
         }
 
         return response()->json(['success' => empty($failMessage), 'message' => empty($failMessage) ? 'Items update successfully' : $failMessage], Response::HTTP_OK);

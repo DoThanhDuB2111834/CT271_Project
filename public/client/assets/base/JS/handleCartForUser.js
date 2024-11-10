@@ -52,6 +52,9 @@ const buttonsAddCart = document.querySelectorAll(".btn-add-cart");
 
 buttonsAddCart.forEach((button) => {
     button.addEventListener("click", async function (event) {
+        if (this.tagName === "A") {
+            event.preventDefault();
+        }
         const productId = event.target.dataset.id;
         const name = event.target.dataset.name;
         const price = event.target.dataset.price;
@@ -84,7 +87,11 @@ buttonsAddCart.forEach((button) => {
                 text: "Sản phẩm đã được thêm vào giỏ hàng",
                 icon: "success",
             });
-            location.reload();
+            if (this.tagName === "A") {
+                window.location.href = this.href;
+            } else {
+                location.reload();
+            }
         }
         cart.displayCart();
     });

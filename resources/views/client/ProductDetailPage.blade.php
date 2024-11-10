@@ -53,16 +53,22 @@
                 @endforeach
             </p>
 
-            <div class="mt-8 flex flex-col lg:flex-row">
+            <div class="mt-8 flex flex-col lg:flex-row gap-2">
                 @if ($product->quantity > 0)
                     <div class="quantity-control">
                         <button class="btn-decrease" data-id="{{$product->id}}">-</button>
                         <input type="number" id="quantityOfProduct{{$product->id}}" value="1" min="1">
                         <button class="btn-increase" data-id="{{$product->id}}">+</button>
                     </div>
-                    <a href=""
-                        class="uppercase block bg-[#0a0a0b] text-white text-lg text-center font-medium px-4 py-2 my-4 lg:my-0 lg:mx-4">Mua
-                        ngay</a>
+                    @if (Auth::check())
+                        <a href="{{route('cart-checkout.index')}}"
+                            class="btn-add-cart uppercase block bg-[#0a0a0b] text-white text-lg text-center font-medium px-4 py-2 my-4 lg:my-0"
+                            data-id="{{$product->id}}"
+                            data-price="{{$product->price * ((100 - $product->getDiscountAmouts()) / 100)}}"
+                            data-name="{{$product->name}}" data-imageUrl="{{$product->getFirstImageUrl()->url}}"
+                            data-size="{{$product->size}}">Mua
+                            ngay</a>
+                    @endif
                     <button
                         class="btn-add-cart uppercase bg-white border-[#7d7d7d] border-[1px] px-4 py-2 text-lg text-[#7d7d7d]"
                         data-id="{{$product->id}}"
