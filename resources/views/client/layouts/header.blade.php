@@ -18,7 +18,7 @@
                         </li>
                         <li
                             class="border-b-[1px] border-[#c1c1c1d9] py-3 hover:text-[#0A0A0B] transition-colors duration-300">
-                            <a href="">Đơn hàng</a>
+                            <a href="{{route('clientOrder.index')}}">Đơn hàng</a>
                         </li>
                         <li class="pt-3 hover:text-[#0A0A0B] transition-colors duration-300">
                             <form action="{{route('logout')}}" method="post">

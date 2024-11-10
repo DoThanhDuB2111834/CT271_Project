@@ -24,22 +24,22 @@
                         <i class="fa fa-ellipsis-h"></i>
                     </span>
                 </li>
-                @hasrole('superadmin')
-                <li class="nav-item {{request()->url() == route('UserRole.index') ? 'active' : ''}}">
-                    <a href="{{route('UserRole.index')}}">
-                        <i class="fas fa-user"></i>
-                        <p>User</p>
-                    </a>
-                </li>
-                @endhasrole
-                @hasrole('superadmin')
-                <li class="nav-item {{request()->url() == route('role.index') ? 'active' : ''}}">
-                    <a href="{{route('role.index')}}">
-                        <i class="fas fa-user-shield"></i>
-                        <p>Role</p>
-                    </a>
-                </li>
-                @endhasrole
+                @can('show-user')
+                    <li class="nav-item {{request()->url() == route('UserRole.index') ? 'active' : ''}}">
+                        <a href="{{route('UserRole.index')}}">
+                            <i class="fas fa-user"></i>
+                            <p>User</p>
+                        </a>
+                    </li>
+                @endcan
+                @can('show-role')
+                    <li class="nav-item {{request()->url() == route('role.index') ? 'active' : ''}}">
+                        <a href="{{route('role.index')}}">
+                            <i class="fas fa-user-shield"></i>
+                            <p>Role</p>
+                        </a>
+                    </li>
+                @endcan
                 @can('show-product')
                     <li class="nav-item {{request()->url() == route('product.index') ? 'active' : ''}}">
                         <a href="{{route('product.index')}}">

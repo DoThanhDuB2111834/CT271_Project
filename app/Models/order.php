@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -53,5 +54,24 @@ class order extends Model
         }
 
         return $this->total_price - $decreasePrice;
+    }
+
+    static public function getTotalPriceInThisWeek()
+    {
+        $startOfWeek = Carbon::now()->startOfWeek();
+        $endOfWeek = Carbon::now()->endOfWeek();
+
+        $ordersThisWeek = Order::whereBetween('created_at', [$startOfWeek, $endOfWeek])->get();
+
+        $total_price = 0.0;
+
+        foreach ($ordersThisWeek as $order) {
+            if ($order->order_status()->latest()->first()->status == 'Đã hoàn thành') {
+                $total_price += $order->total_price;
+            }
+        }
+
+        return $total_price;
+
     }
 }

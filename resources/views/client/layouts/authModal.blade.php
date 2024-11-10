@@ -36,7 +36,7 @@
         <a href="{{route('password.request')}}" class="text-[#0a0a0b] block mt-2 text-lg">Quên mật khẩu?</a>
     </div>
     <div id="auth-modal-signup" class="basis-1/2">
-        <h1 class="uppercase text-2xl font-semibold text-[#0A0A0B] mb-4">Đăng nhập</h1>
+        <h1 class="uppercase text-2xl font-semibold text-[#0A0A0B] mb-4">Đăng ký</h1>
         <form action="{{route('register.store')}}" method="post">
             @csrf
             <div class="form-control flex flex-col mb-4">

@@ -6,8 +6,15 @@
         return number_format($price, 0, ',', '.') . '₫';
     }
 
-    $statuses = $order->order_status()->pluck('status')->toArray();
-    $statusesWithoutLast = array_slice($statuses, 0, -1);
+    $statuesOptions = [
+        'Chờ xác nhận',
+        'Đang xử lý',
+        'Đang giao hàng',
+        'Đã hoàn thành',
+        'Đã hủy'
+    ];
+
+    $curentStatusIndex = array_search($order->order_status->last()->status, $statuesOptions);
   @endphp
 <div class="container">
     <div class="page-inner">
@@ -34,16 +41,10 @@
                         <div class="form-group">
                             <label for="status">Trạng thái</label>
                             <select name="status" id="status" class="form-select form-control-lg">
-                                <option value="Chờ xác nhận" {{end($statuses) == 'Chờ xác nhận' ? 'selected' : ''}} {{ in_array("Chờ xác nhận", $statusesWithoutLast) ? 'disabled' : '' }}>Chờ xác
-                                    nhận</option>
-                                <option value="Đang xử lý" {{end($statuses) == 'Đang xử lý' ? 'selected' : ''}} {{ in_array("Đang xử lý", $statusesWithoutLast) ? 'disabled' : '' }}>Đang xử lý
-                                </option>
-                                <option value="Đang giao hàng" {{end($statuses) == 'Đang giao hàng' ? 'selected' : ''}} {{ in_array("Đang giao hàng", $statusesWithoutLast) ? 'disabled' : '' }}>Đang giao hàng
-                                </option>
-                                <option value="Đã hoàn thành" {{end($statuses) == 'Đã hoàn thành' ? 'selected' : ''}} {{ in_array("Đã hoàn thành", $statusesWithoutLast) ? 'disabled' : '' }}>Đã hoàn thành
-                                </option>
-                                <option value="Đã hủy" {{end($statuses) == 'Đã hủy' ? 'selected' : ''}} {{ in_array("Đã hủy", $statusesWithoutLast) ? 'disabled' : '' }}>
-                                    Đã hủy</option>
+                                @foreach ($statuesOptions as $status)
+                                    <option value="{{$status}}" {{$loop->index < $curentStatusIndex ? 'disabled' : ''}}
+                                        {{$loop->index == $curentStatusIndex ? 'selected' : ''}}>{{$status}}</option>
+                                @endforeach
 
                             </select>
                         </div>
@@ -94,6 +95,6 @@
     <?php
         session()->forget('state');
         session()->forget('message');
-                                                                                                                                                    ?>
+                                                                                                                                                                    ?>
 @endif
 @endsection

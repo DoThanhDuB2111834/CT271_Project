@@ -94,6 +94,11 @@ class UserRoleController extends Controller
         $users = $this->user->all();
 
         if ($role == 'all') {
+            foreach ($users as $user) {
+                if ($user->hasRole($role) || true) {
+                    array_push($result, $user);
+                }
+            }
             return response()->json(['success' => true, 'users' => $users], 200);
         }
 

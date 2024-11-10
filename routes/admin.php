@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\CouponController;
+use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\DiscountController;
 use App\Http\Controllers\admin\OrderController;
 use App\Http\Controllers\admin\ProductController;
@@ -12,13 +13,11 @@ use App\Http\Controllers\admin\UserRoleController;
 use App\Models\discount;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/dashboard', function () {
-    return view('admin.dashboard.index');
-})->name('dashboard.index');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
 Route::get('api/findOrderWithState/{state}', [OrderController::class, 'findOrderWithState']);
 
-Route::get('api/findUserWithRole/{role}', [UserRoleController::class, 'findUserWithRole'])->middleware('role:superadmin');
+Route::get('api/findUserWithRole/{role}', [UserRoleController::class, 'findUserWithRole'])->middleware('permission:show-role');
 
 // Route::resource('product', ProductController::class);
 Route::prefix('product')->controller(ProductController::class)->name('product.')->group(function () {
@@ -40,7 +39,17 @@ Route::prefix('category')->controller(CategoryController::class)->name('category
     Route::delete('/{category}', 'destroy')->name('destroy')->middleware('permission:delete-category');
     Route::get('/{category}/edit', 'edit')->name('edit')->middleware('permission:update-category');
 });
-Route::resource('role', RoleController::class)->middleware('role:superadmin');
+
+Route::prefix('role')->controller(RoleController::class)->name('role.')->group(function () {
+    Route::get('/', 'index')->name('index')->middleware('permission:show-role');
+    Route::post('/', 'store')->name('store')->middleware('permission:create-role');
+    Route::get('/create', 'create')->name('create')->middleware('permission:create-role');
+    Route::get('/{role}', 'show')->name('show')->middleware('permission:show-role');
+    Route::put('/{role}', 'update')->name('update')->middleware('permission:update-role');
+    Route::delete('/{role}', 'destroy')->name('destroy')->middleware('permission:delete-role');
+    Route::get('/{role}/edit', 'edit')->name('edit')->middleware('permission:update-role');
+});
+// Route::resource('role', RoleController::class)->middleware('role:superadmin');
 
 Route::prefix('supplier')->controller(SupplierController::class)->name('supplier.')->group(function () {
     Route::get('/', 'index')->name('index')->middleware('permission:show-supplier');
@@ -89,10 +98,10 @@ Route::prefix('order')->controller(OrderController::class)->name('order.')->grou
 });
 
 Route::prefix('UserRole')->controller(UserRoleController::class)->name('UserRole.')->group(function () {
-    Route::get('/', 'index')->name('index')->middleware('role:superadmin');
-    Route::post('/', 'store')->name('store')->middleware('role:superadmin');
-    Route::get('/create', 'create')->name('create')->middleware('role:superadmin');
-    Route::put('/{user}', 'update')->name('update')->middleware('role:superadmin');
-    Route::get('/{user}/edit', 'edit')->name('edit')->middleware('role:superadmin');
+    Route::get('/', 'index')->name('index')->middleware('permission:show-user');
+    Route::post('/', 'store')->name('store')->middleware('permission:create-user');
+    Route::get('/create', 'create')->name('create')->middleware('permission:create-user');
+    Route::put('/{user}', 'update')->name('update')->middleware('permission:update-user');
+    Route::get('/{user}/edit', 'edit')->name('edit')->middleware('permission:update-user');
 });
 
