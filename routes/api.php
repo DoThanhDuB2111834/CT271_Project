@@ -11,8 +11,11 @@ Route::get('api/getQuantityProduct/{id}', [ProductController::class, 'getProduct
 
 Route::get('api/getCoupon/{id}', [CouponController::class, 'getCoupon']);
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('api/sync-cart', [CartController::class, 'sync']);
+});
+
+Route::middleware(['auth'])->group(function () {
     Route::get('api/getCartItems', [CartController::class, 'getCartItems']);
     Route::post('api/addOrUpdateCart', [CartController::class, 'addOrUpdate']);
     Route::put('api/syncItem', [CartController::class, 'syncItem']);

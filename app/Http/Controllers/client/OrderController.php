@@ -68,6 +68,6 @@ class OrderController extends Controller
 
         $cart->delete();
 
-        return redirect()->route('profile.edit')->with(['message' => 'Đặt hàng thành công']);
+        return redirect()->route('clientOrder.index')->with(['message' => 'Đặt hàng thành công']);
     }
 }

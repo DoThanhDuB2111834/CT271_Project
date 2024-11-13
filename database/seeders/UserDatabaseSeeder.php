@@ -15,36 +15,36 @@ class UserDatabaseSeeder extends Seeder
     public function run(): void
     {
         $user1 = User::updateOrCreate([
-            'name' => 'Du do',
+            'name' => 'admin',
             'gender' => 'male',
             'birth_date' => Carbon::createFromDate(2003, 11, 11),
             'phone_number' => '0357663765',
             'email_verified_at' => Carbon::now(),
-            'email' => 'test@example.com',
+            'email' => 'admin@gmail.com',
             'password' => '123456789',
         ]);
 
         $user1->assignRole('admin');
 
         $user2 = User::updateOrCreate([
-            'name' => 'IU - lee ji eun',
+            'name' => 'lee ji eun',
             'gender' => 'female',
             'birth_date' => Carbon::createFromDate(1993, 5, 16),
             'phone_number' => '0357663765',
             'email_verified_at' => Carbon::now(),
-            'email' => 'mywife@gmail.com',
+            'email' => 'jiun@gmail.com',
             'password' => '123456789',
         ]);
 
         $user2->assignRole('customer');
 
         $user3 = User::updateOrCreate([
-            'name' => 'President',
+            'name' => 'superadmin',
             'gender' => 'male',
             'birth_date' => Carbon::createFromDate(2003, 11, 11),
             'phone_number' => '0357663765',
             'email_verified_at' => Carbon::now(),
-            'email' => 'president@example.com',
+            'email' => 'superadmin@gmail.com',
             'password' => '123456789',
         ]);
 

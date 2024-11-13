@@ -15,14 +15,14 @@
                 <span class="text-red-400"> {{ $errors->updatePassword->first('current_password') ?? '' }}</span>
             </div>
             <div class="form-control w-full pr-6 flex flex-col mt-8">
-                <label for="password" class="text-sm mb-2">Mật khẩu hiện tại *</label>
+                <label for="password" class="text-sm mb-2">Mật khẩu mới *</label>
                 <input type="password" id="password"
                     class="outline-none p-2 border-[#eaeaead9] border-[1px] shadow-sm shadow-gray-400" name="password"
                     value="">
                 <span class="text-red-400"> {{ $errors->updatePassword->first('password') ?? '' }}</span>
             </div>
             <div class="form-control w-full pr-6 flex flex-col mt-8">
-                <label for="password_confirmation" class="text-sm mb-2">Mật khẩu hiện tại *</label>
+                <label for="password_confirmation" class="text-sm mb-2">Nhập lại Mật khẩu mới *</label>
                 <input type="password" id="password_confirmation"
                     class="outline-none p-2 border-[#eaeaead9] border-[1px] shadow-sm shadow-gray-400"
                     name="password_confirmation">

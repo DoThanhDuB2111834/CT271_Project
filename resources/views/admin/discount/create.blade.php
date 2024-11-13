@@ -54,7 +54,7 @@
                                     <label for="startedDate">startedDate:</label>
                                     <input type="date" class="form-control" id="startedDate" name="startedDate"
                                         placeholder="Enter startedDate" value="{{old('startedDate') ?? ''}}" />
-                                    @error('startedDate ')
+                                    @error('startedDate')
                                         <span class="text-danger"> {{ $message }}</span>
                                     @enderror
                                 </div>
@@ -64,7 +64,7 @@
                                     <label for="endedDate">endedDate:</label>
                                     <input type="date" class="form-control" id="endedDate" name="endedDate"
                                         placeholder="Enter endedDate" value="{{old('endedDate') ?? ''}}" />
-                                    @error('endedDate ')
+                                    @error('endedDate')
                                         <span class="text-danger"> {{ $message }}</span>
                                     @enderror
                                 </div>

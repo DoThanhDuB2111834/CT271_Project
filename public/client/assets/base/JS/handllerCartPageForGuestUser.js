@@ -10,7 +10,7 @@ var cart_totalprice = document.getElementById("cart-itemsprice");
 cart_totalprice.textContent = formatCurrency(cart.getTotalCartPrice());
 
 cartItems.forEach((element) => {
-    var html = `<div class="cart-item mt-10 flex flex-row" data-id="${
+    var html = `<div class="cart-item mt-5 flex flex-row" data-id="${
         element.productId
     }" data-name="${element.productName}">
                     <div class="cart-item-image basis-1/4 h-[110px] bg-cover bg-no-repeat bg-center"
@@ -30,7 +30,7 @@ cartItems.forEach((element) => {
                                 element.price
                             )}</p>
                         </div>
-                        <div class="cart-item-action basis-1/4 flex flex-col justify-around">
+                        <div class="cart-item-action basis-1/4 flex flex-col justify-between items-center">
                             <button class="remove-cartItem" data-id="${
                                 element.productId
                             }">
@@ -49,7 +49,7 @@ cartItems.forEach((element) => {
                             </div>
                         </div>
                     </div>
-                </div>`;
+                </div><hr class="my-4">`;
     cartList.innerHTML += html;
 });
 

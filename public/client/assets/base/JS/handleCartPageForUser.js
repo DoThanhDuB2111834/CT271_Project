@@ -29,7 +29,7 @@ cartItems.forEach((element) => {
                                 element.price
                             )}</p>
                         </div>
-                        <div class="cart-item-action basis-1/4 flex flex-col justify-around">
+                        <div class="cart-item-action basis-1/4 flex flex-col justify-between items-center">
                             <button class="remove-cartItem" data-id="${
                                 element.productId
                             }">

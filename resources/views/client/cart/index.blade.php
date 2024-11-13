@@ -11,9 +11,9 @@
         <div class="cart-body flex flex-col lg:flex-row gap-1">
             <div class="basis-7/12">
                 <div id="cart-list"></div>
-                <hr>
+
                 <button id="update-cart-button"
-                    class="mt-3 uppercase text-center bg-[#0A0A0B] text-white text-base font-semibold p-3">Cập
+                    class="mt-5 uppercase text-center bg-[#0A0A0B] text-white text-base font-semibold p-3">Cập
                     nhật giỏ hàng</button>
             </div>
             <div class="cart-order basis-5/12 border-[#7d7d7d] p-8 border-2">
@@ -36,13 +36,14 @@
 
                 @if (!auth()->check())
                     <div class="flex flex-row justify-center w-full">
-                        <a href=""
-                            class=" basis-1/2 uppercase text-center bg-[#0A0A0B] text-white text-base font-semibold p-3">
-                            Đăng nhập</a>
+                        <button
+                            class="toogle-auth-modal basis-1/2 uppercase text-center bg-[#0A0A0B] text-white text-base font-semibold p-3">
+                            Đăng nhập</button>
                     </div>
                     <p class="mt-2 text-sm text-center w-full">Vui lòng đăng nhập trước khi đặt hàng</p>
-                    <p class=" text-sm text-center w-full">Chưa có tài khoản? <a href=""
-                            class="text-blue-500 underline">Đăng ký</a>
+                    <p class=" text-sm text-center w-full">Chưa có tài khoản? <button
+                            class="toogle-auth-modal text-blue-500 underline">Đăng
+                            ký</button>
                     </p>
                 @else
                     <div class="flex flex-row gap-2">

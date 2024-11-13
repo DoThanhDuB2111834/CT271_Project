@@ -19,7 +19,7 @@ function confirmDelete(event) {
         if (Delete) {
             swal({
                 title: "Deleted!",
-                text: "Category has been deleted!",
+                text: "item has been deleted!",
                 type: "success",
                 buttons: {
                     confirm: {

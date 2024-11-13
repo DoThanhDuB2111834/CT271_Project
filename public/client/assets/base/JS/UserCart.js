@@ -43,6 +43,9 @@ export class Cart {
                 text: "Sản phẩm trong giỏ hàng khách đã được đồng bộ vào csdl",
                 icon: "success",
             });
+            localStorage.removeItem("cartItems");
+        } else if (response.status == 403) {
+            return;
         } else {
             await Swal.fire({
                 title: "Thất bại!",
@@ -50,7 +53,6 @@ export class Cart {
                 icon: "error",
             });
         }
-        localStorage.removeItem("cartItems");
     }
 
     getAmountItems() {

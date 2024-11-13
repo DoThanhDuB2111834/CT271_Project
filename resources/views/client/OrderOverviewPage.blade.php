@@ -51,7 +51,10 @@
                     <div class="order-item my-10">
                         <div class="order-item-title w-full py-2 px-4 flex flex-row justify-between bg-[#efefef]">
                             <h2>Mã đơn hàng: {{$order->id}}</h2>
-                            <p>Trạng thái: {{$order->getCurrentStatus()}}</p>
+                            <div>
+                                <p>Trạng thái: {{$order->getCurrentStatus()}}</p>
+                                <p class="text-gray-500">Ngày đặt: {{$order->created_at}}</p>
+                            </div>
                         </div>
                         <div class="order-item-body mt-2">
                             <div class="infor basis-5/12">
@@ -112,8 +115,9 @@
                 @foreach ($orders as $order)
                     @if ($order->getCurrentStatus() == 'Chờ xác nhận')
                         <div class="order-item my-10">
-                            <div class="order-item-title w-full py-2 px-4 bg-[#efefef]">
-                                Mã đơn hàng: {{$order->id}}
+                            <div class="order-item-title w-full py-2 px-4 bg-[#efefef] flex flex-row justify-between">
+                                <p>Mã đơn hàng: {{$order->id}}</p>
+                                <p class="text-gray-500">Ngày đặt: {{$order->created_at}}</p>
                             </div>
                             <div class="order-item-body mt-2">
                                 <div class="infor basis-5/12">
@@ -176,8 +180,9 @@
                 @foreach ($orders as $order)
                     @if ($order->getCurrentStatus() == 'Đang xử lý')
                         <div class="order-item my-10">
-                            <div class="order-item-title w-full py-2 px-4 bg-[#efefef]">
-                                Mã đơn hàng: {{$order->id}}
+                            <div class="order-item-title w-full py-2 px-4 bg-[#efefef] flex flex-row justify-between">
+                                <p>Mã đơn hàng: {{$order->id}}</p>
+                                <p class="text-gray-500">Ngày đặt: {{$order->created_at}}</p>
                             </div>
                             <div class="order-item-body mt-2">
                                 <div class="infor basis-5/12">
@@ -239,8 +244,9 @@
                 @foreach ($orders as $order)
                     @if ($order->getCurrentStatus() == 'Đang giao')
                         <div class="order-item my-10">
-                            <div class="order-item-title w-full py-2 px-4 bg-[#efefef]">
-                                Mã đơn hàng: {{$order->id}}
+                            <div class="order-item-title w-full py-2 px-4 bg-[#efefef] flex flex-row justify-between">
+                                <p>Mã đơn hàng: {{$order->id}}</p>
+                                <p class="text-gray-500">Ngày đặt: {{$order->created_at}}</p>
                             </div>
                             <div class="order-item-body mt-2">
                                 <div class="infor basis-5/12">
@@ -302,8 +308,9 @@
                 @foreach ($orders as $order)
                     @if ($order->getCurrentStatus() == 'Đã hoàn thành')
                         <div class="order-item my-10">
-                            <div class="order-item-title w-full py-2 px-4 bg-[#efefef]">
-                                Mã đơn hàng: {{$order->id}}
+                            <div class="order-item-title w-full py-2 px-4 bg-[#efefef] flex flex-row justify-between">
+                                <p>Mã đơn hàng: {{$order->id}}</p>
+                                <p class="text-gray-500">Ngày đặt: {{$order->created_at}}</p>
                             </div>
                             <div class="order-item-body mt-2">
                                 <div class="infor basis-5/12">
@@ -365,8 +372,9 @@
                 @foreach ($orders as $order)
                     @if ($order->getCurrentStatus() == 'Đã hủy')
                         <div class="order-item my-10">
-                            <div class="order-item-title w-full py-2 px-4 bg-[#efefef]">
-                                Mã đơn hàng: {{$order->id}}
+                            <div class="order-item-title w-full py-2 px-4 bg-[#efefef] flex flex-row justify-between">
+                                <p>Mã đơn hàng: {{$order->id}}</p>
+                                <p class="text-gray-500">Ngày đặt: {{$order->created_at}}</p>
                             </div>
                             <div class="order-item-body mt-2">
                                 <div class="infor basis-5/12">
